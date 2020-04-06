@@ -9,23 +9,21 @@
 import UIKit
 
 class TitleView: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(tasksCount)
-        self.addSubview(tasksTitle)
+        addSubViews()
         setConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.addSubview(tasksCount)
-        self.addSubview(tasksTitle)
+        addSubViews()
         setConstraints()
     }
-
+    
     private var tasksCount: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = .black
         label.backgroundColor = .white
         label.clipsToBounds = true
@@ -43,6 +41,13 @@ class TitleView: UIView {
         return label
     }()
     
+    private var addButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
     func setConstraints() {
         tasksCount.translatesAutoresizingMaskIntoConstraints = false
         tasksCount.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
@@ -54,6 +59,15 @@ class TitleView: UIView {
         tasksTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
         tasksTitle.leadingAnchor.constraint(equalTo: tasksCount.trailingAnchor, constant: 15).isActive = true
         
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
+        addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+    }
+    
+    func addSubViews() {
+        self.addSubview(tasksCount)
+        self.addSubview(tasksTitle)
+        self.addSubview(addButton)
     }
     
     func setTasksCount() {
