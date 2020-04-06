@@ -36,7 +36,7 @@ class TitleView: UIView {
     private var tasksTitle: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.text = "to do"
         return label
     }()
@@ -48,7 +48,7 @@ class TitleView: UIView {
         return button
     }()
     
-    func setConstraints() {
+    private func setConstraints() {
         tasksCount.translatesAutoresizingMaskIntoConstraints = false
         tasksCount.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
         tasksCount.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
@@ -64,7 +64,7 @@ class TitleView: UIView {
         addButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
     }
     
-    func addSubViews() {
+    private func addSubViews() {
         self.addSubview(tasksCount)
         self.addSubview(tasksTitle)
         self.addSubview(addButton)
