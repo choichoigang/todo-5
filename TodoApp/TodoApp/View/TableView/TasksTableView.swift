@@ -10,12 +10,19 @@ import UIKit
 
 class TasksTableView: UITableView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    let tasksDataSource = TasksTableViewDataSource()
+    let tasksDelegate = TasksTableViewDelegate()
+    
+    override init(frame: CGRect, style: UITableView.Style) {
+        super.init(frame: frame, style: .plain)
+        self.dataSource = tasksDataSource
+        self.delegate = tasksDelegate
     }
-    */
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.dataSource = tasksDataSource
+        self.delegate = tasksDelegate
+    }
 
 }

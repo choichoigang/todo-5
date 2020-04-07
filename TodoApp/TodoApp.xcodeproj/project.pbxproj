@@ -17,6 +17,8 @@
 		306240FA243B45B500491A44 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306240F9243B45B500491A44 /* TitleView.swift */; };
 		306240FC243B45DA00491A44 /* TasksTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306240FB243B45DA00491A44 /* TasksTableView.swift */; };
 		306240FF243B466F00491A44 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306240FE243B466F00491A44 /* TasksTableViewCell.swift */; };
+		30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624100243B65C100491A44 /* TasksTableViewDelegate.swift */; };
+		30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624102243B66A300491A44 /* TasksTableViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		306240F9243B45B500491A44 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		306240FB243B45DA00491A44 /* TasksTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableView.swift; sourceTree = "<group>"; };
 		306240FE243B466F00491A44 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
+		30624100243B65C100491A44 /* TasksTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDelegate.swift; sourceTree = "<group>"; };
+		30624102243B66A300491A44 /* TasksTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 		306240F6243B429500491A44 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				30624100243B65C100491A44 /* TasksTableViewDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 		306240FD243B45DF00491A44 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				30624102243B66A300491A44 /* TasksTableViewDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -201,6 +207,8 @@
 				306240FC243B45DA00491A44 /* TasksTableView.swift in Sources */,
 				306240E2243AD5D100491A44 /* ViewController.swift in Sources */,
 				306240F8243B455C00491A44 /* TasksViewController.swift in Sources */,
+				30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */,
+				30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */,
 				306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */,
 				306240E0243AD5D100491A44 /* SceneDelegate.swift in Sources */,
 				306240FA243B45B500491A44 /* TitleView.swift in Sources */,
