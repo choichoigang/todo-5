@@ -23,24 +23,33 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addChild()
+        configureViews()
+        addSubViews()
+        setConstraints()
+
+        firstViewController.setTasksCount { 30 }
+        firstViewController.setTitle{ "할 일" }
+    }
+    
+    func addChild() {
         self.addChild(firstViewController)
         self.addChild(secondViewController)
         self.addChild(thirdViewController)
-        
+    }
+    
+    func configureViews() {
         firstView = firstViewController.view
         secondView = secondViewController.view
         thirdView = thirdViewController.view
-        
+    }
+    
+    func addSubViews() {
         self.view.addSubview(firstView!)
         self.view.addSubview(secondView!)
         self.view.addSubview(thirdView!)
-        
-        setConstraints()
-        firstViewController.setTitle(title: "할 일")
-        secondViewController.setTitle(title: "하는 중")
-        thirdViewController.setTitle(title: "다 함")
     }
-
+    
     func setConstraints() {
         firstView?.translatesAutoresizingMaskIntoConstraints = false
         firstView?.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 0).isActive = true
@@ -53,7 +62,7 @@ class ViewController: UIViewController {
         secondView?.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
         secondView?.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         secondView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
-
+        
         thirdView?.translatesAutoresizingMaskIntoConstraints = false
         thirdView?.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 0).isActive = true
         thirdView?.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
@@ -61,6 +70,6 @@ class ViewController: UIViewController {
         thirdView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
     }
     
-
+    
 }
 
