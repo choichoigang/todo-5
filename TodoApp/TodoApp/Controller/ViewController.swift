@@ -27,9 +27,6 @@ class ViewController: UIViewController {
         configureViews()
         addSubViews()
         setConstraints()
-
-        firstViewController.setTasksCount { 30 }
-        firstViewController.setTitle{ "할 일" }
     }
     
     func addChild() {
