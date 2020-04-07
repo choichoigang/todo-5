@@ -14,12 +14,14 @@ class TitleView: UIView {
         super.init(frame: frame)
         addSubViews()
         setConstraints()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addSubViews()
         setConstraints()
+        configure()
     }
     
     private var tasksCount: UILabel = {
@@ -29,7 +31,6 @@ class TitleView: UIView {
         label.clipsToBounds = true
         label.layer.cornerRadius = label.font.pointSize * 0.80
         label.textAlignment = .center
-        label.text = "22"
         return label
     }()
     
@@ -37,7 +38,6 @@ class TitleView: UIView {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.text = "to do"
         return label
     }()
     
@@ -70,7 +70,15 @@ class TitleView: UIView {
         self.addSubview(addButton)
     }
     
-    func setTasksCount() {
-        
+    private func configure() {
+        self.backgroundColor = .gray
+    }
+    
+    func setTasksCount(count: Int) {
+        tasksCount.text = "\(count)"
+    }
+    
+    func setTitle(title: String) {
+        tasksTitle.text = title
     }
 }

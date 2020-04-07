@@ -84,10 +84,10 @@ class TasksTableViewCell: UITableViewCell {
     
     func setConstraints() {
         stackWithButton.translatesAutoresizingMaskIntoConstraints = false
-        stackWithButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0).isActive = true
+        stackWithButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 15).isActive = true
         stackWithButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0).isActive = true
         stackWithButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0).isActive = true
-        stackWithButton.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, constant: -10).isActive = true
+        stackWithButton.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, constant: -30).isActive = true
         stackWithButton.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: 0).isActive = true
     }
     
