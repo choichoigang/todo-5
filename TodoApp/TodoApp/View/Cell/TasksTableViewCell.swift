@@ -30,7 +30,6 @@ class TasksTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "UI 만들기"
         return label
     }()
     
@@ -38,15 +37,13 @@ class TasksTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16)
-        label.text = "1. 컨스트레인트 설정"
         return label
     }()
     
-    private var author: UILabel = {
+    private var authorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 12)
-        label.text = "author from iOS"
         return label
     }()
     
@@ -59,7 +56,7 @@ class TasksTableViewCell: UITableViewCell {
         
         stackView.addArrangedSubview(taskTitle)
         stackView.addArrangedSubview(taskContents)
-        stackView.addArrangedSubview(author)
+        stackView.addArrangedSubview(authorLabel)
         return stackView
     }()
     
@@ -91,4 +88,10 @@ class TasksTableViewCell: UITableViewCell {
         stackWithButton.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: 0).isActive = true
     }
     
+    func configure(title: String, contents: String, author: String) {
+        taskTitle.text = title
+        taskContents.text = contents
+        authorLabel.text = author
+    }
+   
 }

@@ -35,11 +35,11 @@ class TasksViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
 
-    func setTasksCount(count: Int) {
+    func configureTasksCount(count: Int) {
         titleView.setTasksCount(count: count)
     }
     
-    func setTitle(title: String) {
+    func configureTitle(title: String) {
         titleView.setTitle(title: title)
     }
     
