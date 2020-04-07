@@ -26,7 +26,7 @@ class TasksViewController: UIViewController {
         titleView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
         titleView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         titleView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 0).isActive = true
-        titleView.heightAnchor.constraint(equalToConstant: 65).isActive = true
+        titleView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 0).isActive = true

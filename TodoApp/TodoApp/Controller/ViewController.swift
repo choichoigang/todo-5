@@ -24,17 +24,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addChild(firstViewController)
-//        self.addChild(secondViewController)
-//        self.addChild(thirdViewController)
-//        thirdViewController.setTitle(title: "할 일")
+        self.addChild(secondViewController)
+        self.addChild(thirdViewController)
         
         firstView = firstViewController.view
+        secondView = secondViewController.view
+        thirdView = thirdViewController.view
+        
         self.view.addSubview(firstView!)
-//        secondView = secondViewController.view
-//        thirdView = thirdViewController.view
+        self.view.addSubview(secondView!)
+        self.view.addSubview(thirdView!)
         
         setConstraints()
         firstViewController.setTitle(title: "할 일")
+        secondViewController.setTitle(title: "하는 중")
+        thirdViewController.setTitle(title: "다 함")
     }
 
     func setConstraints() {
@@ -42,7 +46,19 @@ class ViewController: UIViewController {
         firstView?.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 0).isActive = true
         firstView?.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         firstView?.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        firstView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.3, constant: -30).isActive = true
+        firstView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
+        
+        secondView?.translatesAutoresizingMaskIntoConstraints = false
+        secondView?.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 0).isActive = true
+        secondView?.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
+        secondView?.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        secondView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
+
+        thirdView?.translatesAutoresizingMaskIntoConstraints = false
+        thirdView?.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 0).isActive = true
+        thirdView?.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        thirdView?.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+        thirdView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
     }
     
 
