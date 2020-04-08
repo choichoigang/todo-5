@@ -11,6 +11,7 @@ import UIKit
 class NewCardView: UIView, UITextViewDelegate {
     
     let titlePlaceholder = "제목을 입력해주세요"
+    let contentsPlaceholder = "내용을 입력해주세요"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +35,7 @@ class NewCardView: UIView, UITextViewDelegate {
         let button = UIButton()
         button.setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         button.tintColor = .red
         return button
     }()
@@ -42,7 +44,8 @@ class NewCardView: UIView, UITextViewDelegate {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        button.tintColor = .blue
+        button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+        button.tintColor = .init(red: 0, green: 0.4, blue: 1, alpha: 1)
         button.isEnabled = false
         return button
     }()
@@ -58,15 +61,18 @@ class NewCardView: UIView, UITextViewDelegate {
         return textView
     }()
     
-    private var contentsView: UITextView = {
+    private lazy var contentsView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 20)
+        textView.text = contentsPlaceholder
+        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.textColor = .lightGray
         return textView
     }()
     
     private var authorView: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
+        label.text = "Author by App"
         return label
     }()
     
@@ -102,15 +108,15 @@ class NewCardView: UIView, UITextViewDelegate {
         titleView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         contentsView.translatesAutoresizingMaskIntoConstraints = false
-        contentsView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 8).isActive = true
+        contentsView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 20).isActive = true
         contentsView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
         contentsView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
-        contentsView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        contentsView.heightAnchor.constraint(equalToConstant: 400).isActive = true
         
         authorView.translatesAutoresizingMaskIntoConstraints = false
         authorView.topAnchor.constraint(equalTo: contentsView.bottomAnchor, constant: 8).isActive = true
         authorView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
-        authorView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        authorView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         authorView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
     }
@@ -122,12 +128,25 @@ class NewCardView: UIView, UITextViewDelegate {
         } else if titleView.text == "" {
             titleView.text = titlePlaceholder
             titleView.textColor = .lightGray
-            
+        }
+    }
+    
+    private func contentsViewConfigure() {
+        if contentsView.text == contentsPlaceholder {
+            contentsView.text = ""
+            contentsView.textColor = .black
+        }else if contentsView.text == "" {
+            contentsView.text = contentsPlaceholder
+            contentsView.textColor = .lightGray
         }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView == titleView { titleViewConfigure() }
+        if textView == titleView {
+            titleViewConfigure()
+        } else if textView == contentsView {
+            contentsViewConfigure()
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
