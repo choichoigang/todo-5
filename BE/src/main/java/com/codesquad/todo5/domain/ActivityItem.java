@@ -16,18 +16,18 @@ public class ActivityItem {
 
   @Id
   private int id;
-  private User user;
+  private UserItem userItem;
   private String createdDate;
   private ActionItem actionItem;
 
-  private ActivityItem(User user, ActionItem actionItem) {
-    this.user = user;
+  private ActivityItem(UserItem userItem, ActionItem actionItem) {
+    this.userItem = userItem;
     this.createdDate = LocalDateTime.now().format(formatter);
     this.actionItem = actionItem;
   }
 
-  public static ActivityItem create(User user, ActionItem actionItem) {
-    return new ActivityItem(user, actionItem);
+  public static ActivityItem create(UserItem userItem, ActionItem actionItem) {
+    return new ActivityItem(userItem, actionItem);
   }
 
 }

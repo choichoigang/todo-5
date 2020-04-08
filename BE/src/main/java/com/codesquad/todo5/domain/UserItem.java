@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class UserItem {
 
   @Id
   private Long id;
@@ -18,13 +18,13 @@ public class User {
   private String password;
   private List<TaskItem> task = new ArrayList<>();
 
-  User(String name, String password) {
+  UserItem(String name, String password) {
     this.name = name;
     this.password = password;
   }
 
-  private static User create(String name, String password) {
-    return new User(name, password);
+  private static UserItem create(String name, String password) {
+    return new UserItem(name, password);
   }
 
 }
