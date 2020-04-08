@@ -1,5 +1,7 @@
 package com.codesquad.todo5.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +15,7 @@ public class Category {
   @Id
   private Long id;
   private String name;
+  private List<TaskItem> task = new ArrayList<>();
 
   private Category(String name) {
     this.name = name;

@@ -16,7 +16,7 @@ public class User {
   private Long id;
   private String name;
   private String password;
-  private List<ActionItem> Activity = new ArrayList<>();
+  private List<TaskItem> task = new ArrayList<>();
 
   User(String name, String password) {
     this.name = name;

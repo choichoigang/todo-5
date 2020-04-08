@@ -1,5 +1,7 @@
 package com.codesquad.todo5.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,7 +10,7 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Task {
+public class TaskItem {
 
   @Id
   private Long id;
@@ -16,14 +18,15 @@ public class Task {
   private String content;
   private boolean isDeleted;
   private int priority;
+  private List<ActivityItem> Activity = new ArrayList<>();
 
-  private Task(String title, String content) {
+  private TaskItem(String title, String content) {
     this.title = title;
     this.content = content;
     this.isDeleted = false;
   }
 
-  public static Task create(String title, String content) {
-    return new Task(title, content);
+  public static TaskItem create(String title, String content) {
+    return new TaskItem(title, content);
   }
 }
