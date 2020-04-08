@@ -14,3 +14,11 @@ const dropHanlder = (event) => {
     event.target.appendChild(document.getElementById(getID));
   }
 };
+
+const initDragDropEvent = () => {
+  DOM.dropTarget.addEventListener("dragstart", dragStartHandler);
+  DOM.dropTarget.addEventListener("dragover", dragOverHandler);
+  DOM.dropTarget.addEventListener("drop", dropHanlder);
+};
+
+export default initDragDropEvent;
