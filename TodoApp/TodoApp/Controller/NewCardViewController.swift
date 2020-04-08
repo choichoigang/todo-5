@@ -35,5 +35,10 @@ class NewCardViewController: UIViewController, NewCardViewDelegate {
     func dismissNewCardView() {
         self.dismiss(animated: true)
      }
+    
+    func addNewCard() {
+        //모델에 데이터 추가하는 기능
+        self.dismiss(animated: true)
+    }
      
 }

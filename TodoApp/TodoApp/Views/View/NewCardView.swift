@@ -52,6 +52,7 @@ class NewCardView: UIView, UITextViewDelegate {
         button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         button.tintColor = .lightGray
         button.isEnabled = false
+        button.addTarget(self, action: #selector(addNewCard), for: .touchUpInside)
         return button
     }()
     
@@ -197,4 +198,7 @@ class NewCardView: UIView, UITextViewDelegate {
         delegate?.dismissNewCardView()
     }
     
+    @objc func addNewCard() {
+        delegate?.addNewCard()
+    }
 }
