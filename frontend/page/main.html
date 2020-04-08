@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script
+      src="https://kit.fontawesome.com/649591e722.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>todo service</title>
+  </head>
+  <body>
+    <div class="nav">
+      <span class="page_title">TODO SERVICE</span>
+      <span class="menu_tag">MENU</span>
+    </div>
+
+    <div class="wrapper">
+      <div class="box" id="todo">
+        <div class="todo_nav">
+          <span class="text_line">
+            <span class="todo_counter">-</span>
+            <span>TODO</span>
+          </span>
+
+          <span>
+            <button class="todo_plus"><i class="fas fa-plus"></i></button>
+            <button class=""><i class="fas fa-wrench"></i></button>
+          </span>
+        </div>
+
+        <div class="add_area" id="todo_add_area">
+          <textarea name="" id="" cols="20" rows="10"></textarea>
+          <div class="add_btns">
+            <button class="todo_add_btn" disabled="true">Add</button>
+            <button class="todo_cancel_btn">Cancel</button>
+          </div>
+        </div>
+        <div>
+          <div id="task1" class="todo_task" draggable="true">
+            <div class="title">
+              <span>BUG FIX AND UPLOAD</span>
+              <button><i class="fas fa-trash-alt"></i></button>
+            </div>
+            <div class="writer">
+              <span>Added by</span>
+              <span> hoi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box" id="doing">
+        <div class="doing_nav">
+          <span class="text_line">
+            <span class="doing_counter">-</span>
+            <span>DOING</span>
+          </span>
+          <span>
+            <button class="doing_plus"><i class="fas fa-plus"></i></button>
+            <button><i class="fas fa-wrench"></i></button>
+          </span>
+        </div>
+
+        <div class="add_area">
+          <textarea name="" id="" cols="20" rows="10"></textarea>
+          <div class="add_btns">
+            <button class="doing_add_btn" disabled>Add</button>
+            <button class="doing_cancel_btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="box" id="done">
+        <div class="done_nav">
+          <span class="text_line">
+            <span class="done_counter">-</span>
+            <span>DONE</span>
+          </span>
+
+          <span>
+            <button class="done_plus"><i class="fas fa-plus"></i></button>
+            <button><i class="fas fa-wrench"></i></button>
+          </span>
+        </div>
+
+        <div class="add_area">
+          <textarea name="" id="" cols="20" rows="10"></textarea>
+          <div class="add_btns">
+            <button class="done_add_btn" disabled>Add</button>
+            <button class="done_cancel_btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu_box">SIDE BAR AREA</div>
+    </div>
+  </body>
+</html>
