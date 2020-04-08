@@ -17,8 +17,7 @@ public class Task {
   private String title;
   private String content;
   private boolean isDeleted;
-  private int previousCard;
-  private int nextCard;
+  private int priority;
 
   private Task(String title, String content) {
     this.title = title;
