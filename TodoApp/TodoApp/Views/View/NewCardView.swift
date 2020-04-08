@@ -10,6 +10,8 @@ import UIKit
 
 class NewCardView: UIView, UITextViewDelegate {
     
+    var delegate: NewCardViewDelegate?
+    
     let titlePlaceholder = "제목을 입력해주세요"
     let contentsPlaceholder = "내용을 입력해주세요"
     private var titleFlag = false
@@ -39,6 +41,7 @@ class NewCardView: UIView, UITextViewDelegate {
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
         button.tintColor = #colorLiteral(red: 1, green: 0.4334390675, blue: 0.4346824666, alpha: 1)
+        button.addTarget(self, action: #selector(dismissNewCardView), for: .touchUpInside)
         return button
     }()
     
@@ -68,6 +71,7 @@ class NewCardView: UIView, UITextViewDelegate {
         textView.text = contentsPlaceholder
         textView.font = UIFont.systemFont(ofSize: 18)
         textView.textColor = .lightGray
+        textView.flashScrollIndicators()
         return textView
     }()
     
@@ -187,6 +191,10 @@ class NewCardView: UIView, UITextViewDelegate {
         judgeValuesConfigured()
         
         return true
+    }
+    
+    @objc func dismissNewCardView() {
+        delegate?.dismissNewCardView()
     }
     
 }

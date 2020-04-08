@@ -8,8 +8,8 @@
 
 import UIKit
 
-class NewCardViewController: UIViewController {
-
+class NewCardViewController: UIViewController, NewCardViewDelegate {
+ 
     let newCardView = NewCardView()
     
     override func viewDidLoad() {
@@ -17,6 +17,7 @@ class NewCardViewController: UIViewController {
         self.view.addSubview(newCardView)
         configureConstraint()
         configure()
+        newCardView.delegate = self
     }
     
     private func configure() {
@@ -31,4 +32,8 @@ class NewCardViewController: UIViewController {
         newCardView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 8).isActive = true
     }
 
+    func dismissNewCardView() {
+        self.dismiss(animated: true)
+     }
+     
 }

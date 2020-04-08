@@ -22,6 +22,7 @@
 		30AA420F243D6B8D008CAA86 /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */; };
 		30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA4210243D6C87008CAA86 /* NewCardView.swift */; };
 		30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E38243D9C4800325035 /* TitleViewDelegate.swift */; };
+		30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		30AA4210243D6C87008CAA86 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		30D53E38243D9C4800325035 /* TitleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewDelegate.swift; sourceTree = "<group>"; };
+		30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				306240DF243AD5D100491A44 /* SceneDelegate.swift */,
 				306240DD243AD5D100491A44 /* AppDelegate.swift */,
 				30D53E38243D9C4800325035 /* TitleViewDelegate.swift */,
+				30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */,
 				30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */,
 				30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */,
+				30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */,
 				306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */,
 				306240E0243AD5D100491A44 /* SceneDelegate.swift in Sources */,
 				306240FA243B45B500491A44 /* TitleView.swift in Sources */,
