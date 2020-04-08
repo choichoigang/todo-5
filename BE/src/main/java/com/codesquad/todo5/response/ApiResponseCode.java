@@ -20,7 +20,7 @@ public enum ApiResponseCode implements EnumType {
   }
 
   @Override
-  public String getText() {
+  public String getAction() {
     return message;
   }
 }

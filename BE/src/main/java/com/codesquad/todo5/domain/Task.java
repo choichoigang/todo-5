@@ -2,14 +2,12 @@ package com.codesquad.todo5.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Task {
 
   @Id
@@ -25,7 +23,7 @@ public class Task {
     this.isDeleted = false;
   }
 
-  public static Task create(String title, String content, boolean isDeleted) {
+  public static Task create(String title, String content) {
     return new Task(title, content);
   }
 }
