@@ -12,6 +12,8 @@ class NewCardView: UIView, UITextViewDelegate {
     
     let titlePlaceholder = "제목을 입력해주세요"
     let contentsPlaceholder = "내용을 입력해주세요"
+    private var titleFlag = false
+    private var contentsFlag = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,7 +38,7 @@ class NewCardView: UIView, UITextViewDelegate {
         button.setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        button.tintColor = .red
+        button.tintColor = #colorLiteral(red: 1, green: 0.4334390675, blue: 0.4346824666, alpha: 1)
         return button
     }()
     
@@ -45,7 +47,7 @@ class NewCardView: UIView, UITextViewDelegate {
         button.setImage(UIImage(systemName: "arrow.up.circle.fill"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        button.tintColor = .init(red: 0, green: 0.4, blue: 1, alpha: 1)
+        button.tintColor = .lightGray
         button.isEnabled = false
         return button
     }()
@@ -141,29 +143,50 @@ class NewCardView: UIView, UITextViewDelegate {
         }
     }
     
+    func judgeValuesConfigured() {
+        if titleFlag, contentsFlag {
+            sendButton.tintColor = #colorLiteral(red: 0.2161633072, green: 0.4459061551, blue: 1, alpha: 1)
+            sendButton.isEnabled = true
+        }else {
+            sendButton.tintColor = .lightGray
+            sendButton.isEnabled = false
+        }
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView == titleView {
+        if textView == titleView, titleView.text != "" {
+            titleFlag = true
             titleViewConfigure()
-        } else if textView == contentsView {
+        } else if textView == contentsView, contentsView.text != "" {
+            contentsFlag = true
             contentsViewConfigure()
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if titleView.text == "" {
+        if textView == titleView, titleView.text == "" {
+            titleFlag = false
             titleViewConfigure()
+        }else if textView == contentsView, contentsView.text == "" {
+            contentsFlag = false
+            contentsViewConfigure()
         }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        //글자 입력시 완료버튼 활성화..
         if textView == titleView, text == "\n" {
             titleView.resignFirstResponder()
             return true
         }
-        guard textView == contentsView, let str = textView.text else { return true }
-        let newLength = str.count + text.count - range.length
-        return newLength <= 500
+        
+        if textView == contentsView, let str = textView.text {
+          judgeValuesConfigured()
+            let newLength = str.count + text.count - range.length
+            return newLength <= 500
+        }
+        judgeValuesConfigured()
+        
+        return true
     }
     
 }
