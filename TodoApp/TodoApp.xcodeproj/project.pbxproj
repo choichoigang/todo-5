@@ -23,6 +23,7 @@
 		30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA4210243D6C87008CAA86 /* NewCardView.swift */; };
 		30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E38243D9C4800325035 /* TitleViewDelegate.swift */; };
 		30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */; };
+		30D53E3E243E089D00325035 /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E3D243E089D00325035 /* Tasks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		30AA4210243D6C87008CAA86 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		30D53E38243D9C4800325035 /* TitleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewDelegate.swift; sourceTree = "<group>"; };
 		30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewDelegate.swift; sourceTree = "<group>"; };
+		30D53E3D243E089D00325035 /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +78,10 @@
 		306240DC243AD5D100491A44 /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				30D53E3C243E087700325035 /* Models */,
 				306240FD243B45DF00491A44 /* DataSource */,
 				306240F6243B429500491A44 /* Delegate */,
-				306240F5243B428B00491A44 /* Controller */,
+				306240F5243B428B00491A44 /* Controllers */,
 				306240F1243B426400491A44 /* Views */,
 				306240E3243AD5D100491A44 /* Main.storyboard */,
 				306240E6243AD5D600491A44 /* Assets.xcassets */,
@@ -114,14 +117,14 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
-		306240F5243B428B00491A44 /* Controller */ = {
+		306240F5243B428B00491A44 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				306240E1243AD5D100491A44 /* ViewController.swift */,
 				306240F7243B455C00491A44 /* TasksViewController.swift */,
 				30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */,
 			);
-			path = Controller;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		306240F6243B429500491A44 /* Delegate */ = {
@@ -151,6 +154,14 @@
 				30AA4210243D6C87008CAA86 /* NewCardView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		30D53E3C243E087700325035 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30D53E3D243E089D00325035 /* Tasks.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +242,7 @@
 				306240F8243B455C00491A44 /* TasksViewController.swift in Sources */,
 				30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */,
 				30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */,
+				30D53E3E243E089D00325035 /* Tasks.swift in Sources */,
 				30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */,
 				30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */,
 				306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */,
