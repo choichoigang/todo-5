@@ -19,6 +19,10 @@
 		306240FF243B466F00491A44 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306240FE243B466F00491A44 /* TasksTableViewCell.swift */; };
 		30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624100243B65C100491A44 /* TasksTableViewDelegate.swift */; };
 		30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624102243B66A300491A44 /* TasksTableViewDataSource.swift */; };
+		30AA420F243D6B8D008CAA86 /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */; };
+		30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA4210243D6C87008CAA86 /* NewCardView.swift */; };
+		30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E38243D9C4800325035 /* TitleViewDelegate.swift */; };
+		30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		306240FE243B466F00491A44 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		30624100243B65C100491A44 /* TasksTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDelegate.swift; sourceTree = "<group>"; };
 		30624102243B66A300491A44 /* TasksTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDataSource.swift; sourceTree = "<group>"; };
+		30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
+		30AA4210243D6C87008CAA86 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
+		30D53E38243D9C4800325035 /* TitleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewDelegate.swift; sourceTree = "<group>"; };
+		30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +79,7 @@
 				306240FD243B45DF00491A44 /* DataSource */,
 				306240F6243B429500491A44 /* Delegate */,
 				306240F5243B428B00491A44 /* Controller */,
-				306240F1243B426400491A44 /* View */,
-				306240DD243AD5D100491A44 /* AppDelegate.swift */,
-				306240DF243AD5D100491A44 /* SceneDelegate.swift */,
+				306240F1243B426400491A44 /* Views */,
 				306240E3243AD5D100491A44 /* Main.storyboard */,
 				306240E6243AD5D600491A44 /* Assets.xcassets */,
 				306240E8243AD5D600491A44 /* LaunchScreen.storyboard */,
@@ -82,14 +88,14 @@
 			path = TodoApp;
 			sourceTree = "<group>";
 		};
-		306240F1243B426400491A44 /* View */ = {
+		306240F1243B426400491A44 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				30AA4212243D6C9F008CAA86 /* View */,
 				306240F3243B427500491A44 /* TableView */,
 				306240F2243B426E00491A44 /* Cell */,
-				306240F9243B45B500491A44 /* TitleView.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		306240F2243B426E00491A44 /* Cell */ = {
@@ -113,6 +119,7 @@
 			children = (
 				306240E1243AD5D100491A44 /* ViewController.swift */,
 				306240F7243B455C00491A44 /* TasksViewController.swift */,
+				30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -121,6 +128,10 @@
 			isa = PBXGroup;
 			children = (
 				30624100243B65C100491A44 /* TasksTableViewDelegate.swift */,
+				306240DF243AD5D100491A44 /* SceneDelegate.swift */,
+				306240DD243AD5D100491A44 /* AppDelegate.swift */,
+				30D53E38243D9C4800325035 /* TitleViewDelegate.swift */,
+				30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -131,6 +142,15 @@
 				30624102243B66A300491A44 /* TasksTableViewDataSource.swift */,
 			);
 			path = DataSource;
+			sourceTree = "<group>";
+		};
+		30AA4212243D6C9F008CAA86 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				306240F9243B45B500491A44 /* TitleView.swift */,
+				30AA4210243D6C87008CAA86 /* NewCardView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,10 +225,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				306240FC243B45DA00491A44 /* TasksTableView.swift in Sources */,
+				30AA420F243D6B8D008CAA86 /* NewCardViewController.swift in Sources */,
 				306240E2243AD5D100491A44 /* ViewController.swift in Sources */,
+				30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */,
 				306240F8243B455C00491A44 /* TasksViewController.swift in Sources */,
 				30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */,
+				30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */,
 				30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */,
+				30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */,
 				306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */,
 				306240E0243AD5D100491A44 /* SceneDelegate.swift in Sources */,
 				306240FA243B45B500491A44 /* TitleView.swift in Sources */,

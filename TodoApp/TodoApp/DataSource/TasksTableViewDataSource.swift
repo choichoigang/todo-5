@@ -18,7 +18,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TasksTableViewDataSource.identifier, for: indexPath) as! TasksTableViewCell
-//        cell.configure(title: <#T##String#>, contents: <#T##String#>, author: <#T##String#>)
+        cell.configure(title: "입력 화면 만들기", contents: "할거 많음 짱 많음ㅋ", author: "아오스 델마")
         return cell
     }
 

@@ -62,7 +62,7 @@ class TasksTableViewCell: UITableViewCell {
     
     private var dragButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "equal.square"), for: .normal)
+        button.setImage(UIImage(systemName: "text.justify"), for: .normal)
         button.tintColor = .gray
         return button
     }()

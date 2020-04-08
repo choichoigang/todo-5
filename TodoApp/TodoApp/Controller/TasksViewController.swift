@@ -8,13 +8,15 @@
 
 import UIKit
 
-class TasksViewController: UIViewController {
-
+class TasksViewController: UIViewController, TitleViewDelegate {
+    
     let titleView = TitleView()
     let tableView = TasksTableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleView.delegate = self
+        
         self.view.addSubview(titleView)
         self.view.addSubview(tableView)
         self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
@@ -34,7 +36,7 @@ class TasksViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
-
+    
     func configureTasksCount(count: Int) {
         titleView.setTasksCount(count: count)
     }
@@ -43,4 +45,8 @@ class TasksViewController: UIViewController {
         titleView.setTitle(title: title)
     }
     
+    func popNewCardView() {
+        let newCardViewController = NewCardViewController()
+        self.present(newCardViewController, animated: true, completion: nil)
+    }
 }

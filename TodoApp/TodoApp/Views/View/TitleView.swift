@@ -10,6 +10,8 @@ import UIKit
 
 class TitleView: UIView {
     
+    var delegate: TitleViewDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubViews()
@@ -31,6 +33,7 @@ class TitleView: UIView {
         label.clipsToBounds = true
         label.layer.cornerRadius = label.font.pointSize * 0.80
         label.textAlignment = .center
+        label.text = "0"
         return label
     }()
     
@@ -41,10 +44,11 @@ class TitleView: UIView {
         return label
     }()
     
-    private var addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.tintColor = .black
+        button.addTarget(self, action:  #selector(popNewCardView), for: .touchUpInside)
         return button
     }()
     
@@ -80,5 +84,9 @@ class TitleView: UIView {
     
     func setTitle(title: String) {
         tasksTitle.text = title
+    }
+    
+    @objc private func popNewCardView() {
+        delegate?.popNewCardView()
     }
 }
