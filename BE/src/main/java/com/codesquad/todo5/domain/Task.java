@@ -2,14 +2,12 @@ package com.codesquad.todo5.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Task {
 
   @Id
@@ -17,8 +15,7 @@ public class Task {
   private String title;
   private String content;
   private boolean isDeleted;
-  private int previousCard;
-  private int nextCard;
+  private int priority;
 
   private Task(String title, String content) {
     this.title = title;
@@ -26,7 +23,7 @@ public class Task {
     this.isDeleted = false;
   }
 
-  public static Task create(String title, String content, boolean isDeleted) {
+  public static Task create(String title, String content) {
     return new Task(title, content);
   }
 }

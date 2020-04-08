@@ -4,7 +4,6 @@ import com.codesquad.todo5.utils.EnumType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Getter
 @RequiredArgsConstructor
 public enum ActionItem implements EnumType {
   ADD("ADD"),
@@ -12,7 +11,11 @@ public enum ActionItem implements EnumType {
   UPDATE("UPDATE"),
   MOVE("MOVE");
 
-  private final String text;
+  private final String action;
+
+  public String getAction() {
+    return action;
+  }
 
   @Override
   public String getId() {

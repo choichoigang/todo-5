@@ -1,7 +1,6 @@
 package com.codesquad.todo5.domain;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,7 @@ public class User {
   private Long id;
   private String name;
   private String password;
-  private List<ActionItem> Activity = new LinkedList<>();
+  private List<ActionItem> Activity = new ArrayList<>();
 
   User(String name, String password) {
     this.name = name;
