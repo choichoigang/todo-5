@@ -22,6 +22,14 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //해당 셀 데이터 삭제 기능 들어갈곳
+        }
+    }
 
 }
