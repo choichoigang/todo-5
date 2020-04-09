@@ -16,3 +16,13 @@ const addBtnHandler = (textareaDom, className) => {
   const inputValue = textareaDom.value;
   return itemTemplate(inputValue, className);
 };
+
+const registerClickEvent = (ColumnName) => {
+  cerateColumnDom(`${ColumnName}`).addEventListener("click", (event) => {
+    ClickEventHandler(
+      event,
+      classNameObj(`${ColumnName}`),
+      createDOM(`${ColumnName}`)
+    );
+  });
+};
