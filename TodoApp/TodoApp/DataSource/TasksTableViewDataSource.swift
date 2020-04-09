@@ -12,7 +12,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
 
     static let identifier = "tasksCell"
     var mockData = [(title: "1", contents: "aaaaa", author: "nnn"),
-    (title: "2", contents: "wwww", author: "nnn"),
+    (title: "2", contents: "wwww.......2차기능ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ", author: "nnn"),
     (title: "3", contents: "qqqq", author: "nnn"),
     (title: "4", contents: "ssss", author: "nnn"),
     (title: "5", contents: "dddd", author: "nnn"),
@@ -39,6 +39,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //해당 셀 데이터 삭제 기능 들어갈곳
+            tableView.beginUpdates()
             mockData.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
