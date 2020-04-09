@@ -12,12 +12,14 @@ public class TaskItemDto {
   private String title;
   private String content;
   private String userName;
-  private String priority;
+  private int priority;
+  private Long id;
 
   public TaskItemDto(TaskItem item) {
+    this.id = item.getId();
     this.title = item.getTitle();
     this.content = item.getContent();
     this.userName = item.getUserName();
-    this.priority = String.valueOf(item.getPriority());
+    this.priority = item.getPriority();
   }
 }
