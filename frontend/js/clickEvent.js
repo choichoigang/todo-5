@@ -11,3 +11,8 @@ const activatingHandler = (addBoxDom) => {
     addBoxDom.style.display = "";
   }
 };
+
+const addBtnHandler = (textareaDom, className) => {
+  const inputValue = textareaDom.value;
+  return itemTemplate(inputValue, className);
+};
