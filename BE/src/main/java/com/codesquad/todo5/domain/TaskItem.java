@@ -19,7 +19,7 @@ public class TaskItem {
   private String userName;
   private boolean isDeleted;
   private int priority;
-  private List<ActivityItem> Activity = new ArrayList<>();
+  // private List<ActivityItem> Activity = new ArrayList<>();
 
   private TaskItem(String title, String content, String userName, int priority) {
     this.title = title;

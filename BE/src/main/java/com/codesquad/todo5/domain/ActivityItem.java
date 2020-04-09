@@ -19,8 +19,8 @@ public class ActivityItem {
   private UserItem userItem;
   private String createdDate;
   private ActionItem actionItem;
-  private String categoryFrom;
-  private String categoryTo;
+  private Long categoryFrom;
+  private Long categoryTo;
   private String taskTitle;
 
   private ActivityItem(UserItem userItem, ActionItem actionItem) {
