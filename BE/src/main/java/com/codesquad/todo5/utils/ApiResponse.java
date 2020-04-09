@@ -1,10 +1,17 @@
 package com.codesquad.todo5.utils;
 
-public class ApiResponse {
-  private String status;
-  private String data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-  public ApiResponse(String status, String data) {
+@Getter
+@Setter
+@NoArgsConstructor
+public class ApiResponse {
+  private Object status;
+  private Object data;
+
+  public ApiResponse(Object status, Object data) {
     this.status = status;
     this.data = data;
   }
