@@ -1,6 +1,7 @@
 package com.codesquad.todo5.controller;
 
-import com.codesquad.todo5.utils.ApiResponse;
+import com.codesquad.todo5.domain.TaskItem;
+import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,33 +19,35 @@ public class TaskController {
 
   //handling with existing card
   @GetMapping("/task/{num}/show")
-  public ResponseEntity<ApiResponse> showCard(@PathVariable int tasknum) {
-    logger.debug("Number of a task: {} ", tasknum);
+  public ResponseEntity<ApiResponse> showCard(@PathVariable int num) {
+    logger.debug("Number of a task: {} ", num);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
+    TaskItem taskItem = TaskItem.create("github 공부하기", "호눅스 짱짱맨이에요.", "crongro", 1);
+    taskItem.setId(1L);
+    response.setData(taskItem);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   @GetMapping("/task/{num}/edit")
-  public ResponseEntity<ApiResponse> editCard(@PathVariable int tasknum) {
-    logger.debug("Number of a task: {} ", tasknum);
+  public ResponseEntity<ApiResponse> editCard(@PathVariable int num) {
+    logger.debug("Number of a task: {} ", num);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   @GetMapping("/task/{num}/delete")
-  public ResponseEntity<ApiResponse> deleteCard(@PathVariable int tasknum) {
-    logger.debug("Number of a task: {} ", tasknum);
+  public ResponseEntity<ApiResponse> deleteCard(@PathVariable int num) {
+    logger.debug("Number of a task: {} ", num);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   //handling with newly created card
-  @GetMapping("/task/{num}/add")
-  public ResponseEntity<ApiResponse> addCard(@PathVariable int tasknum) {
-    logger.debug("Number of a task: {} ", tasknum);
+  @GetMapping("/task/add")
+  public ResponseEntity<ApiResponse> addCard() {
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
