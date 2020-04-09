@@ -19,6 +19,7 @@
 		306240FF243B466F00491A44 /* TasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306240FE243B466F00491A44 /* TasksTableViewCell.swift */; };
 		30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624100243B65C100491A44 /* TasksTableViewDelegate.swift */; };
 		30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624102243B66A300491A44 /* TasksTableViewDataSource.swift */; };
+		3072CD35243EB7050045D048 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072CD34243EB7050045D048 /* NetworkManager.swift */; };
 		30AA420F243D6B8D008CAA86 /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */; };
 		30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA4210243D6C87008CAA86 /* NewCardView.swift */; };
 		30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E38243D9C4800325035 /* TitleViewDelegate.swift */; };
@@ -41,6 +42,7 @@
 		306240FE243B466F00491A44 /* TasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewCell.swift; sourceTree = "<group>"; };
 		30624100243B65C100491A44 /* TasksTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDelegate.swift; sourceTree = "<group>"; };
 		30624102243B66A300491A44 /* TasksTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDataSource.swift; sourceTree = "<group>"; };
+		3072CD34243EB7050045D048 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		30AA4210243D6C87008CAA86 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		30D53E38243D9C4800325035 /* TitleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 		306240DC243AD5D100491A44 /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				3072CD33243EB6F60045D048 /* Network */,
 				30D53E3C243E087700325035 /* Models */,
 				306240FD243B45DF00491A44 /* DataSource */,
 				306240F6243B429500491A44 /* Delegate */,
@@ -145,6 +148,14 @@
 				30624102243B66A300491A44 /* TasksTableViewDataSource.swift */,
 			);
 			path = DataSource;
+			sourceTree = "<group>";
+		};
+		3072CD33243EB6F60045D048 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3072CD34243EB7050045D048 /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		30AA4212243D6C9F008CAA86 /* View */ = {
@@ -247,6 +258,7 @@
 				30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */,
 				306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */,
 				306240E0243AD5D100491A44 /* SceneDelegate.swift in Sources */,
+				3072CD35243EB7050045D048 /* NetworkManager.swift in Sources */,
 				306240FA243B45B500491A44 /* TitleView.swift in Sources */,
 				306240FF243B466F00491A44 /* TasksTableViewCell.swift in Sources */,
 			);
