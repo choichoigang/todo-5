@@ -22,7 +22,7 @@ enum HTTPMethod: String {
 
 struct NetworkManager {
     enum EndPoints {
-        static let AllData = NSURL(string: "")
+        static let AllData = URL(string: "http://13.209.180.92:8080/api/category/1/all")
     }
     
     func getResource(url: URL, methodType: HTTPMethod, body: Data? = nil, completion: @escaping(Result<Any, NetworkErrorCase>) -> Void) {
@@ -37,7 +37,13 @@ struct NetworkManager {
                 if let error = error as NSError?, error.domain == NSURLErrorDomain { completion(.failure(.InvalidURL)) }
                 return
             }
-            completion(.success(data))
+            self.decode(data: data) { completion($0) }
         }.resume()
+    }
+    
+    func decode(data: Data, completion: @escaping (Result<Any, NetworkErrorCase>) -> Void) {
+        let decoder = JSONDecoder()
+        guard let anyData = try? decoder.decode(Tasks.self, from: data) else { completion(.failure(.DecodeError)); return }
+        completion(.success(anyData))
     }
 }

@@ -20,9 +20,8 @@ class ViewController: UIViewController {
     private var secondView: UIView?
     private var thirdView: UIView?
     
-    private var firstTask: Tasks?
-    private var secondTask: Tasks?
-    private var thirdTask: Tasks?
+    let networkManager = NetworkManager()
+    var tasks: Tasks?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +29,8 @@ class ViewController: UIViewController {
         configureViews()
         addSubViews()
         setConstraints()
+        
+        requestAllData()
     }
     
     func addChild() {
@@ -48,7 +49,7 @@ class ViewController: UIViewController {
         self.view.addSubview(firstView!)
         self.view.addSubview(secondView!)
         self.view.addSubview(thirdView!)
-
+        
     }
     
     func setConstraints() {
@@ -71,6 +72,18 @@ class ViewController: UIViewController {
         thirdView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
     }
     
+    func requestAllData() {
+        networkManager.getResource(url: NetworkManager.EndPoints.AllData!, methodType: .get) { result in
+            switch result {
+                case .success(let anyData):
+                    self.tasks = anyData as! Tasks
+                    print(anyData)
+                case .failure(let error):
+                    //네트워크 오류 알림 알럿창 생성
+                    print(error.localizedDescription)
+            }
+        }
+    }
     
 }
 

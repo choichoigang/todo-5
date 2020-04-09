@@ -9,15 +9,13 @@
 import Foundation
 
 struct Tasks: Codable {
-    var categoryName: String
-    var categoryId: Int
-    var content: [Contents]
+    var status: Bool
+    var data: [Contents]
     
     struct Contents: Codable {
-        var taskId: Int
         var title: String
         var content: String
-        var username: String
-        var priority: Int
+        var userName: String
+        var priority: String
     }
 }
