@@ -11,16 +11,7 @@ import UIKit
 class TasksTableViewDataSource: NSObject, UITableViewDataSource {
 
     static let identifier = "tasksCell"
-    var mockData = [(title: "1", contents: "aaaaa", author: "nnn"),
-    (title: "2", contents: "wwww.......2차기능ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ", author: "nnn"),
-    (title: "3", contents: "qqqq", author: "nnn"),
-    (title: "4", contents: "ssss", author: "nnn"),
-    (title: "5", contents: "dddd", author: "nnn"),
-    (title: "6", contents: "ffff", author: "nnn"),
-    (title: "7", contents: "ccccc", author: "nnn"),
-    (title: "8", contents: "xxxx", author: "nnn"),
-    (title: "9", contents: "zzzz", author: "nnn"),
-    (title: "10", contents: "vvvvv", author: "nnn"),]
+    var mockData = MockData().mockData
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mockData.count
@@ -38,7 +29,6 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //해당 셀 데이터 삭제 기능 들어갈곳
             tableView.beginUpdates()
             mockData.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)

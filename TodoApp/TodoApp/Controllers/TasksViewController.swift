@@ -9,7 +9,6 @@
 import UIKit
 
 class TasksViewController: UIViewController, TitleViewDelegate {
-    
     let titleView = TitleView()
     let tableView = TasksTableView()
     

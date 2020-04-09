@@ -24,8 +24,9 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
         }
 
         let delete = UIAction(title: "delete", attributes: [.destructive]) { action in
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//            tableView.endUpdates()
+            let dataSource = tableView.dataSource as! TasksTableViewDataSource
+            dataSource.mockData.remove(at: indexPath.row)
+            tableView.reloadData()
          }
 
          return UIContextMenuConfiguration(identifier: indexPath as NSCopying,
