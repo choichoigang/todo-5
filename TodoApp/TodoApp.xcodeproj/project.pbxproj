@@ -20,6 +20,7 @@
 		30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624100243B65C100491A44 /* TasksTableViewDelegate.swift */; };
 		30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30624102243B66A300491A44 /* TasksTableViewDataSource.swift */; };
 		3072CD35243EB7050045D048 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072CD34243EB7050045D048 /* NetworkManager.swift */; };
+		3072CD37243ECD650045D048 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3072CD36243ECD650045D048 /* RequestManager.swift */; };
 		30AA420F243D6B8D008CAA86 /* NewCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */; };
 		30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA4210243D6C87008CAA86 /* NewCardView.swift */; };
 		30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E38243D9C4800325035 /* TitleViewDelegate.swift */; };
@@ -43,6 +44,7 @@
 		30624100243B65C100491A44 /* TasksTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDelegate.swift; sourceTree = "<group>"; };
 		30624102243B66A300491A44 /* TasksTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTableViewDataSource.swift; sourceTree = "<group>"; };
 		3072CD34243EB7050045D048 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3072CD36243ECD650045D048 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewController.swift; sourceTree = "<group>"; };
 		30AA4210243D6C87008CAA86 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		30D53E38243D9C4800325035 /* TitleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				3072CD34243EB7050045D048 /* NetworkManager.swift */,
+				3072CD36243ECD650045D048 /* RequestManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				306240FC243B45DA00491A44 /* TasksTableView.swift in Sources */,
 				30AA420F243D6B8D008CAA86 /* NewCardViewController.swift in Sources */,
 				306240E2243AD5D100491A44 /* ViewController.swift in Sources */,
+				3072CD37243ECD650045D048 /* RequestManager.swift in Sources */,
 				30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */,
 				306240F8243B455C00491A44 /* TasksViewController.swift in Sources */,
 				30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */,

@@ -11,14 +11,24 @@ import UIKit
 class TasksTableViewDataSource: NSObject, UITableViewDataSource {
 
     static let identifier = "tasksCell"
+    let mockData = [(title: "1", contents: "aaaaa", author: "nnn"),
+    (title: "2", contents: "wwww", author: "nnn"),
+    (title: "3", contents: "qqqq", author: "nnn"),
+    (title: "4", contents: "ssss", author: "nnn"),
+    (title: "5", contents: "dddd", author: "nnn"),
+    (title: "6", contents: "ffff", author: "nnn"),
+    (title: "7", contents: "ccccc", author: "nnn"),
+    (title: "8", contents: "xxxx", author: "nnn"),
+    (title: "9", contents: "zzzz", author: "nnn"),
+    (title: "10", contents: "vvvvv", author: "nnn"),]
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return mockData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TasksTableViewDataSource.identifier, for: indexPath) as! TasksTableViewCell
-        cell.configure(title: "입력 화면 만들기", contents: "할거 많음 짱 많음ㅋ", author: "아오스 델마")
+        cell.configure(title: mockData[indexPath.row].title, contents: mockData[indexPath.row].contents ,author: mockData[indexPath.row].author)
         return cell
     }
 

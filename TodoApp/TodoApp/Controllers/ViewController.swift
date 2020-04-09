@@ -16,10 +16,13 @@ class ViewController: UIViewController {
     let secondViewController = TasksViewController()
     let thirdViewController = TasksViewController()
     
-    
     private var firstView: UIView?
     private var secondView: UIView?
     private var thirdView: UIView?
+    
+    private var firstTask: Tasks?
+    private var secondTask: Tasks?
+    private var thirdTask: Tasks?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -22,7 +22,7 @@ enum HTTPMethod: String {
 
 struct NetworkManager {
     enum EndPoints {
-        static let AllData = ""
+        static let AllData = NSURL(string: "")
     }
     
     func getResource(url: URL, methodType: HTTPMethod, body: Data? = nil, completion: @escaping(Result<Any, NetworkErrorCase>) -> Void) {
