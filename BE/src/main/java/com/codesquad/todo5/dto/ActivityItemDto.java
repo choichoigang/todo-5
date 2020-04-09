@@ -14,8 +14,8 @@ import lombok.Setter;
 public class ActivityItemDto {
   private String userName;
   private String actionName;
-  private String categoryFrom;
-  private String categoryTo;
+  private Long categoryFrom;
+  private Long categoryTo;
   private String createdTime;
   private String taskTitle;
 
