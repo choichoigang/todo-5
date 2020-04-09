@@ -16,12 +16,10 @@ class ViewController: UIViewController {
     let secondViewController = TasksViewController()
     let thirdViewController = TasksViewController()
     
-//    let newCardViewController = NewCardViewController()
     
     private var firstView: UIView?
     private var secondView: UIView?
     private var thirdView: UIView?
-//    private var newCardView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +33,12 @@ class ViewController: UIViewController {
         self.addChild(firstViewController)
         self.addChild(secondViewController)
         self.addChild(thirdViewController)
-//        self.addChild(newCardViewController)
     }
     
     func configureViews() {
         firstView = firstViewController.view
         secondView = secondViewController.view
         thirdView = thirdViewController.view
-//        newCardView = newCardViewController.view
     }
     
     func addSubViews() {
