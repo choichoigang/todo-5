@@ -46,6 +46,9 @@ class TasksTableViewCell: UITableViewCell {
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .left
+        label.numberOfLines = 3
+        label.lineBreakMode = .byWordWrapping
+        label.sizeToFit()
         return label
     }()
     
