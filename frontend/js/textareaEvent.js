@@ -16,3 +16,11 @@ const registerTextareaEvent = (textareaDom) => {
     textareaHandler(event, textareaDom.addButton);
   });
 };
+
+const initTextareaEvent = () => {
+  registerTextareaEvent(createTextareaDOM("todo"));
+  registerTextareaEvent(createTextareaDOM("doing"));
+  registerTextareaEvent(createTextareaDOM("done"));
+};
+
+export default initTextareaEvent;
