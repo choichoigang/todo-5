@@ -25,8 +25,8 @@ i {
   padding: 2px;
 }
 .add_area {
-  animation: ease-in;
   display: none;
+  animation: ease-in;
   animation: stack 2s 1;
   flex-direction: column;
   margin: 3px;
@@ -76,7 +76,9 @@ i {
   font-size: 8px;
   pointer-events: none;
 }
-.todo_task {
+.todo_task,
+.doing_tesk,
+.done_tesk {
   display: flex;
   flex-direction: column;
 }
