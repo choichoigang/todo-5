@@ -15,10 +15,13 @@ public class ActivityItem {
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
   @Id
-  private int id;
+  private Long id;
   private UserItem userItem;
   private String createdDate;
   private ActionItem actionItem;
+  private String categoryFrom;
+  private String categoryTo;
+  private String taskTitle;
 
   private ActivityItem(UserItem userItem, ActionItem actionItem) {
     this.userItem = userItem;

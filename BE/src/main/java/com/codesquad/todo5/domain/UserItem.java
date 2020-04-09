@@ -14,17 +14,15 @@ public class UserItem {
 
   @Id
   private Long id;
-  private String name;
-  private String password;
+  private String userName;
   private List<TaskItem> task = new ArrayList<>();
 
-  UserItem(String name, String password) {
-    this.name = name;
-    this.password = password;
+  private UserItem(String userName) {
+    this.userName = userName;
   }
 
-  private static UserItem create(String name, String password) {
-    return new UserItem(name, password);
+  public static UserItem create(String userName) {
+    return new UserItem(userName);
   }
 
 }

@@ -16,17 +16,20 @@ public class TaskItem {
   private Long id;
   private String title;
   private String content;
+  private String userName;
   private boolean isDeleted;
   private int priority;
   private List<ActivityItem> Activity = new ArrayList<>();
 
-  private TaskItem(String title, String content) {
+  private TaskItem(String title, String content, String userName, int priority) {
     this.title = title;
     this.content = content;
     this.isDeleted = false;
+    this.userName = userName;
+    this.priority = priority;
   }
 
-  public static TaskItem create(String title, String content) {
-    return new TaskItem(title, content);
+  public static TaskItem create(String title, String content, String userName, int priority) {
+    return new TaskItem(title, content, userName, priority);
   }
 }
