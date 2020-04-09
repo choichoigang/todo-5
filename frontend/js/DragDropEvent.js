@@ -1,4 +1,4 @@
-import DOM from "../options/DOM.js";
+import { DOM } from "../options/DOM.js";
 
 const dragStartHandler = (event) => {
   event.dataTransfer.setData("ID", event.target.id);
