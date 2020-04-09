@@ -1,4 +1,4 @@
-package com.codesquad.todo5.utils;
+package com.codesquad.todo5.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
