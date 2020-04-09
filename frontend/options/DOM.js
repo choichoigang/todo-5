@@ -5,3 +5,7 @@ const DOM = {
   doingBox: document.querySelector("#doing"),
   doneBox: document.querySelector("#done"),
 };
+
+const cerateColumnDom = (columnName) => {
+  return document.querySelector(`#${columnName}`);
+};
