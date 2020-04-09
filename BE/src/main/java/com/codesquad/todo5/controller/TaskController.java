@@ -17,7 +17,7 @@ public class TaskController {
   private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
   //handling with existing card
-  @GetMapping("/{tasknum}/show")
+  @GetMapping("/task/{num}/show")
   public ResponseEntity<ApiResponse> showCard(@PathVariable int tasknum) {
     logger.debug("Number of a task: {} ", tasknum);
     ApiResponse response = new ApiResponse();
@@ -25,7 +25,7 @@ public class TaskController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @GetMapping("/{tasknum}/edit")
+  @GetMapping("/task/{num}/edit")
   public ResponseEntity<ApiResponse> editCard(@PathVariable int tasknum) {
     logger.debug("Number of a task: {} ", tasknum);
     ApiResponse response = new ApiResponse();
@@ -33,7 +33,7 @@ public class TaskController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @GetMapping("/{tasknum}/delete")
+  @GetMapping("/task/{num}/delete")
   public ResponseEntity<ApiResponse> deleteCard(@PathVariable int tasknum) {
     logger.debug("Number of a task: {} ", tasknum);
     ApiResponse response = new ApiResponse();
@@ -42,7 +42,7 @@ public class TaskController {
   }
 
   //handling with newly created card
-  @GetMapping("/{tasknum}/add")
+  @GetMapping("/task/{num}/add")
   public ResponseEntity<ApiResponse> addCard(@PathVariable int tasknum) {
     logger.debug("Number of a task: {} ", tasknum);
     ApiResponse response = new ApiResponse();
