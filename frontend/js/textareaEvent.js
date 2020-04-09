@@ -10,3 +10,9 @@ const textareaHandler = (event, todoAddButton) => {
     todoAddButton.disabled = false;
   }
 };
+
+const registerTextareaEvent = (textareaDom) => {
+  textareaDom.textarea.addEventListener("input", (event) => {
+    textareaHandler(event, textareaDom.addButton);
+  });
+};
