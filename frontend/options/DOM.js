@@ -20,3 +20,12 @@ const createDOM = (columnName) => {
     cancelButton: document.querySelector(`.${columnName}_cancel_btn`),
   };
 };
+
+const createTextareaDOM = (columnName) => {
+  return {
+    textarea: document.querySelector(`#${columnName}_add_area textarea`),
+    addButton: document.querySelector(`.${columnName}_add_btn`),
+  };
+};
+
+export { DOM, createDOM, createTextareaDOM, cerateColumnDom };
