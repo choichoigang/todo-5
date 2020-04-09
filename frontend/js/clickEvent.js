@@ -37,3 +37,11 @@ const registerClickEvent = (ColumnName) => {
     );
   });
 };
+
+export function testEvent() {
+  registerClickEvent("todo");
+  registerClickEvent("doing");
+  registerClickEvent("done");
+}
+
+export default testEvent;
