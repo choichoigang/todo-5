@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActivityController {
   private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
-  @GetMapping("/{membernum}/activity")
+  @GetMapping("/member/{num}/activity")
   public ResponseEntity<ApiResponse> showUserActivity(@RequestParam String membernum) {
     logger.debug("Number of a member: {} ", membernum);
     ActivityItemDto userActivityDto = new ActivityItemDto();
