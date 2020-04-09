@@ -1,4 +1,5 @@
 const itemTemplate = (inputValue, className) => {
+  console.log(className);
   return ` <div>
     <div id="task1" class="${className}_task" draggable="true">
       <div class="title">

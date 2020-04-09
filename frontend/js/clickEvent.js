@@ -7,7 +7,7 @@ const ClickEventHandler = (event, className, DOM) => {
   if (targetClassName === className.plusButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === className.addButton) {
-    DOM.column.innerHTML += addBtnHandler(DOM.textArea);
+    DOM.column.innerHTML += addBtnHandler(DOM.textArea, DOM.columnName);
   } else if (targetClassName === className.cancelButton) {
     activatingHandler(DOM.addBox);
   }
