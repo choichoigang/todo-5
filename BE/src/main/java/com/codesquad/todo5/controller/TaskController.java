@@ -1,7 +1,7 @@
 package com.codesquad.todo5.controller;
 
 import com.codesquad.todo5.domain.TaskItem;
-import com.codesquad.todo5.utils.ApiResponse;
+import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
