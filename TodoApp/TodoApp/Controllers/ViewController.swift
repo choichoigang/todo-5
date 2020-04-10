@@ -76,8 +76,7 @@ class ViewController: UIViewController {
         networkManager.getResource(url: NetworkManager.EndPoints.AllData!, methodType: .get) { result in
             switch result {
                 case .success(let anyData):
-                    self.tasks = anyData as! Tasks
-                    print(anyData)
+                    self.tasks = anyData as? Tasks
                 case .failure(let error):
                     //네트워크 오류 알림 알럿창 생성
                     print(error.localizedDescription)
