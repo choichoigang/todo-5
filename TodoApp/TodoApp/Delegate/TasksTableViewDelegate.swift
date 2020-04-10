@@ -25,7 +25,7 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
 
         let delete = UIAction(title: "delete", attributes: [.destructive]) { action in
             let dataSource = tableView.dataSource as! TasksTableViewDataSource
-            dataSource.mockData.remove(at: indexPath.row)
+            dataSource.tasks.remove(at: indexPath.row)
             tableView.reloadData()
          }
 

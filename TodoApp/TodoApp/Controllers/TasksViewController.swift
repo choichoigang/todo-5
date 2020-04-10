@@ -12,15 +12,20 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     let titleView = TitleView()
     let tableView = TasksTableView()
     
+    var tasksDataSource: TasksTableViewDataSource!
+    var tasksDelegate = TasksTableViewDelegate()
+    
     var category: Category? {
         didSet {
             configureData()
+            configureDataSource()
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         titleView.delegate = self
-        
+        tableView.delegate = tasksDelegate
+
         self.view.addSubview(titleView)
         self.view.addSubview(tableView)
         self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
@@ -46,7 +51,13 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         titleView.setTasksCount(count: category.tasks.count)
         titleView.setTitle(title: category.name)
     }
-   
+    
+    func configureDataSource() {
+        guard let category = category else { return }
+        tasksDataSource = TasksTableViewDataSource(tasks: category.tasks)
+        tableView.dataSource = tasksDataSource
+        tableView.reloadData()
+    }
     
     func popNewCardView() {
         let newCardViewController = NewCardViewController()
