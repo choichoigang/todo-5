@@ -15,6 +15,7 @@ public class CategoryItem {
   @Id
   private Long id;
   private String name;
+  private boolean isDeleted;
   private List<TaskItem> task = new ArrayList<>();
 
   private CategoryItem(String name) {

@@ -6,6 +6,7 @@ import com.codesquad.todo5.domain.UserItem;
 import com.codesquad.todo5.dto.TaskItemDto;
 import com.codesquad.todo5.dto.CategoryWithTasksDto;
 import com.codesquad.todo5.response.ApiResponse;
+import com.codesquad.todo5.service.CategoryService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,11 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class CategoryController {
+  private final CategoryService categoryService;
+
+  public CategoryController(CategoryService categoryService) {
+    this.categoryService = categoryService;
+  }
 
   private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
   @GetMapping("/category/all")
   public ResponseEntity<ApiResponse> showAllCategoryItem() {
+
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
