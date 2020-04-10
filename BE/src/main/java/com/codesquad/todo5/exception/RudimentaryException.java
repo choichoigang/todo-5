@@ -1,6 +1,6 @@
 package com.codesquad.todo5.exception;
 
-import com.codesquad.todo5.response.ApiResponse;
+import com.codesquad.todo5.utils.ApiResponse;
 import com.codesquad.todo5.utils.ErrorMessagesCollection;
 
 public class RudimentaryException extends RuntimeException {
