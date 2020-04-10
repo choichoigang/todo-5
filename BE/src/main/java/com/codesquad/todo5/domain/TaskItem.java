@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 
 @Getter
@@ -15,11 +16,12 @@ public class TaskItem {
   @Id
   private Long id;
   private String title;
+  @Length(max=500)
   private String content;
   private String userName;
   private boolean isDeleted;
   private int priority;
-  // private List<ActivityItem> Activity = new ArrayList<>();
+  private List<ActivityItem> Activity = new ArrayList<>();
 
   private TaskItem(String title, String content, String userName, int priority) {
     this.title = title;
