@@ -4,7 +4,7 @@ import com.codesquad.todo5.domain.ActionItem;
 import com.codesquad.todo5.domain.ActivityItem;
 import com.codesquad.todo5.domain.UserItem;
 import com.codesquad.todo5.dto.ActivityItemDto;
-import com.codesquad.todo5.response.ApiResponse;
+import com.codesquad.todo5.utils.ApiResponse;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
