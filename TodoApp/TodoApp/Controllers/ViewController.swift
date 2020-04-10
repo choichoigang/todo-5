@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     private var thirdView: UIView?
     
     let networkManager = NetworkManager()
-    var tasks: Tasks?
+    private var tasks: Tasks?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,14 +75,21 @@ class ViewController: UIViewController {
     func requestAllData() {
         networkManager.getResource(url: NetworkManager.EndPoints.AllData!, methodType: .get) { result in
             switch result {
-                case .success(let anyData):
-                    self.tasks = anyData as? Tasks
-                case .failure(let error):
-                    //네트워크 오류 알림 알럿창 생성
-                    print(error.localizedDescription)
+            case .success(let anyData):
+                self.tasks = anyData as? Tasks
+                guard let allData = self.tasks else { return }
+                DispatchQueue.main.async {
+                    self.firstViewController.category = allData.data[0]
+                    self.secondViewController.category = allData.data[1]
+                    self.thirdViewController.category = allData.data[2]
+                }
+            case .failure(let error):
+                //네트워크 오류 알림 알럿창 생성
+                print(error.localizedDescription)
             }
         }
     }
+    
     
 }
 

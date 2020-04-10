@@ -12,6 +12,11 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     let titleView = TitleView()
     let tableView = TasksTableView()
     
+    var category: Category? {
+        didSet {
+            configureData()
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         titleView.delegate = self
@@ -36,13 +41,12 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     
-    func configureTasksCount(count: Int) {
-        titleView.setTasksCount(count: count)
+    func configureData() {
+        guard let category = category else { return }
+        titleView.setTasksCount(count: category.tasks.count)
+        titleView.setTitle(title: category.name)
     }
-    
-    func configureTitle(title: String) {
-        titleView.setTitle(title: title)
-    }
+   
     
     func popNewCardView() {
         let newCardViewController = NewCardViewController()
