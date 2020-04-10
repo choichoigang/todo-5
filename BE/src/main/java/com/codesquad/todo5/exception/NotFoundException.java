@@ -1,7 +1,7 @@
 package com.codesquad.todo5.exception;
 
-public class NotFoundException extends RuntimeException {
+public class NotFoundException extends RudimentaryException {
   public NotFoundException() {
-    super("리소스를 찾지 못했습니다.");
+    super("잘못된 접근입니다.");
   }
 }
