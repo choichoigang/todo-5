@@ -85,7 +85,7 @@ class TitleView: UIView {
     func setTitle(title: String) {
         tasksTitle.text = title
     }
-    
+
     @objc private func popNewCardView() {
         delegate?.popNewCardView()
     }

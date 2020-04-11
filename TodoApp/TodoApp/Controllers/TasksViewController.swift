@@ -15,17 +15,29 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     var tasksDataSource: TasksTableViewDataSource!
     var tasksDelegate = TasksTableViewDelegate()
     
+    let childID: Int
+    
     var category: Category? {
         didSet {
             configureData()
             configureDataSource()
         }
     }
+    
+    init(childID: Int, nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.childID = childID
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         titleView.delegate = self
         tableView.delegate = tasksDelegate
-
+        
         self.view.addSubview(titleView)
         self.view.addSubview(tableView)
         self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
@@ -54,9 +66,11 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     
     func configureDataSource() {
         guard let category = category else { return }
-        tasksDataSource = TasksTableViewDataSource(tasks: category.tasks)
-        tableView.dataSource = tasksDataSource
-        tableView.reloadData()
+
+            tasksDataSource = TasksTableViewDataSource(tasksID: childID, tasks: category.tasks)
+                       tableView.dataSource = tasksDataSource
+                       tableView.reloadData()
+        
     }
     
     func popNewCardView() {
@@ -64,3 +78,4 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         self.present(newCardViewController, animated: true, completion: nil)
     }
 }
+
