@@ -1,6 +1,6 @@
-package com.codesquad.todo5.dto;
+package com.codesquad.todo5.dto.task;
 
-import com.codesquad.todo5.domain.Task;
+import com.codesquad.todo5.domain.task.Task;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

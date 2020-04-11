@@ -1,6 +1,6 @@
-package com.codesquad.todo5.dto;
+package com.codesquad.todo5.dto.category;
 
-import com.codesquad.todo5.domain.Category;
+import com.codesquad.todo5.domain.category.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,6 +1,7 @@
-package com.codesquad.todo5.dto;
+package com.codesquad.todo5.dto.category;
 
-import com.codesquad.todo5.domain.Category;
+import com.codesquad.todo5.domain.category.Category;
+import com.codesquad.todo5.dto.task.TaskResponseDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;

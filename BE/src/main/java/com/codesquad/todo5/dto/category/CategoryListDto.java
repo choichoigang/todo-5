@@ -1,4 +1,4 @@
-package com.codesquad.todo5.dto;
+package com.codesquad.todo5.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
