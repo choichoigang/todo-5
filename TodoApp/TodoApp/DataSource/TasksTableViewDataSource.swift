@@ -29,7 +29,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TasksTableViewDataSource.identifier, for: indexPath) as! TasksTableViewCell
-        cell.configure(title: tasks[indexPath.row].title, contents: tasks[indexPath.row].content ,author: tasks[indexPath.row].userName)
+        cell.configure(title: tasks[indexPath.row].title ?? "", contents: tasks[indexPath.row].content ?? "" ,author: tasks[indexPath.row].userName ?? "")
         return cell
     }
 

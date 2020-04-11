@@ -20,9 +20,9 @@ struct Category: Codable {
 }
 
 struct Contents: Codable {
-    var title: String
-    var content: String
-    var userName: String
-    var priority: Int
-    var id: Int
+    var title: String?
+    var content: String?
+    var userName: String?
+    var priority: Int?
+    var id: Int?
 }

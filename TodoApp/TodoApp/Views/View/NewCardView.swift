@@ -16,6 +16,7 @@ class NewCardView: UIView, UITextViewDelegate {
     let contentsPlaceholder = "내용을 입력해주세요"
     private var titleFlag = false
     private var contentsFlag = false
+    private var newTask: Contents?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -199,6 +200,8 @@ class NewCardView: UIView, UITextViewDelegate {
     }
     
     @objc func addNewCard() {
-        delegate?.addNewCard()
+        newTask = Contents(title: titleView.text, content: contentsView.text, userName: "")
+        guard let newTask = newTask else { return }
+        delegate?.addNewCard(content: newTask)
     }
 }
