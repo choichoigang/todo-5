@@ -11,9 +11,15 @@ import UIKit
 class TasksTableViewDataSource: NSObject, UITableViewDataSource {
 
     static let identifier = "tasksCell"
-    var tasks: [Contents]
+    let tasksID: Int
+    var tasks: [Contents] {
+        didSet {
+            NotificationCenter.default.post(name: .updateCount , object: tasks, userInfo: ["updateInfo":(count: tasks.count, tasksID: tasksID)])
+        }
+    }
     
-    init(tasks: [Contents]) {
+    init(tasksID: Int, tasks: [Contents]) {
+        self.tasksID = tasksID
         self.tasks = tasks
     }
 
@@ -38,6 +44,10 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }
+    }
+    
+    func updateTasksCount(handler: (Int) -> ()) {
+        
     }
 
 }

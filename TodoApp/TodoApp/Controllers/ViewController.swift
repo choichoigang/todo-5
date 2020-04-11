@@ -9,12 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    
     @IBOutlet var navigationBar: UINavigationBar!
-    let firstViewController = TasksViewController()
-    let secondViewController = TasksViewController()
-    let thirdViewController = TasksViewController()
+    let firstViewController = TasksViewController(childID: 0, nibName: nil, bundle: nil)
+    let secondViewController = TasksViewController(childID: 1, nibName: nil, bundle: nil)
+    let thirdViewController = TasksViewController(childID: 2, nibName: nil, bundle: nil)
+    
+    lazy var controllers = [firstViewController, secondViewController, thirdViewController]
     
     private var firstView: UIView?
     private var secondView: UIView?
@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         setConstraints()
         
         requestAllData()
+        addNotification()
     }
     
     func addChild() {
@@ -90,6 +91,21 @@ class ViewController: UIViewController {
         }
     }
     
+    func addNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
+    }
     
+    @objc func updateData(_ notification: Notification) {
+        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, tasksID: Int) else { return }
+        for controller in controllers {
+            if controller.childID == updateInfo.tasksID {
+                controller.titleView.setTasksCount(count: updateInfo.count)
+            }
+        }
+        
+    }
 }
 
+extension Notification.Name {
+    static let updateCount = Notification.Name(rawValue: "updateTitle")
+}

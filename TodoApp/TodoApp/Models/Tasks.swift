@@ -11,16 +11,14 @@ import Foundation
 struct Tasks: Codable {
     var status: Bool
     var data: [Category]
-    
-   
 }
+
 struct Category: Codable {
        var id: Int
        var name: String
        var tasks: [Contents]
-       
-       
-   }
+}
+
 struct Contents: Codable {
     var title: String
     var content: String
