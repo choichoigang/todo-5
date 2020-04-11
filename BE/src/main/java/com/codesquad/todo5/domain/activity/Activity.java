@@ -10,27 +10,27 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ActivityItem {
+public class Activity {
 
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
   @Id
   private Long id;
-  private UserItem userItem;
+  private User user;
   private String createdDate;
-  private ActionItem actionItem;
+  private Action action;
   private Long categoryFrom;
   private Long categoryTo;
   private String taskTitle;
 
-  private ActivityItem(UserItem userItem, ActionItem actionItem) {
-    this.userItem = userItem;
+  private Activity(User user, Action action) {
+    this.user = user;
     this.createdDate = LocalDateTime.now().format(formatter);
-    this.actionItem = actionItem;
+    this.action = action;
   }
 
-  public static ActivityItem create(UserItem userItem, ActionItem actionItem) {
-    return new ActivityItem(userItem, actionItem);
+  public static Activity create(User user, Action action) {
+    return new Activity(user, action);
   }
 
 }

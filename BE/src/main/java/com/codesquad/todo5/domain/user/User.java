@@ -10,19 +10,19 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserItem {
+public class User {
 
   @Id
   private Long id;
   private String userName;
-  private List<TaskItem> task = new ArrayList<>();
+  private List<Task> task = new ArrayList<>();
 
-  private UserItem(String userName) {
+  private User(String userName) {
     this.userName = userName;
   }
 
-  public static UserItem create(String userName) {
-    return new UserItem(userName);
+  public static User create(String userName) {
+    return new User(userName);
   }
 
 }

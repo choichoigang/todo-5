@@ -6,8 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository extends CrudRepository<CategoryItem, Long> {
+public interface CategoryRepository extends CrudRepository<Category, Long> {
 
   @Query("SELECT c.id, c.name, c.created_date_time FROM category c")
-  List<CategoryItem> findAllCategoryItems();
+  List<Category> findAllCategoryItems();
+
+  @Query("SELECT count(*) FROM CATEGORY c")
+  int countNumber();
 }

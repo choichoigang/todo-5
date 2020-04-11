@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryItemListDto {
+public class CategoryListDto {
   private Object data;
   private Object status;
 }

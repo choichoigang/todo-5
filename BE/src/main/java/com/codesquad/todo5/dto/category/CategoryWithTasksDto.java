@@ -1,6 +1,6 @@
 package com.codesquad.todo5.dto;
 
-import com.codesquad.todo5.domain.CategoryItem;
+import com.codesquad.todo5.domain.Category;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -13,13 +13,13 @@ import lombok.Setter;
 public class CategoryWithTasksDto {
   private Long id;
   private String name;
-  private List<TaskItemDto> taskItemDtoList;
+  private List<TaskResponseDto> taskResponseDtoList;
 
-  public CategoryWithTasksDto(CategoryItem item) {
+  public CategoryWithTasksDto(Category item) {
     this.id = item.getId();
     this.name = item.getName();
-    this.taskItemDtoList = item.getTask().stream()
-        .map(taskitem -> new TaskItemDto(taskitem))
+    this.taskResponseDtoList = item.getTask().stream()
+        .map(taskitem -> new TaskResponseDto(taskitem))
         .collect(Collectors.toList());
   }
 

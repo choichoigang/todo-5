@@ -1,7 +1,6 @@
 package com.codesquad.todo5.dto;
 
-import com.codesquad.todo5.domain.CategoryItem;
-import lombok.AllArgsConstructor;
+import com.codesquad.todo5.domain.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,11 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CategoryItemDto {
+public class CategoryDto {
   private Long id;
   private String name;
 
-  public CategoryItemDto(CategoryItem item) {
+  public CategoryDto(Category item) {
     this.id = item.getId();
     this.name = item.getName();
   }

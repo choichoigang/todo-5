@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum ActionItem implements EnumType {
+public enum Action implements EnumType {
   ADD("ADD"),
   REMOVE("REMOVE"),
   UPDATE("UPDATE"),
