@@ -1,6 +1,6 @@
 package com.codesquad.todo5.controller;
 
-import com.codesquad.todo5.domain.TaskItem;
+import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +23,9 @@ public class TaskController {
     logger.debug("Number of a task: {} ", num);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
-    TaskItem taskItem = TaskItem.create("github 공부하기", "호눅스 짱짱맨이에요.", "crongro", 1);
-    taskItem.setId(1L);
-    response.setData(taskItem);
+    Task task = Task.create("github 공부하기", "호눅스 짱짱맨이에요.", "crongro", 1);
+    task.setId(1L);
+    response.setData(task);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
