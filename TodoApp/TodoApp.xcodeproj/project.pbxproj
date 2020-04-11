@@ -85,8 +85,8 @@
 				3072CD33243EB6F60045D048 /* Network */,
 				30D53E3C243E087700325035 /* Models */,
 				306240FD243B45DF00491A44 /* DataSource */,
-				306240F6243B429500491A44 /* Delegate */,
-				306240F5243B428B00491A44 /* Controllers */,
+				306240F6243B429500491A44 /* Delegates */,
+				306240F5243B428B00491A44 /* ViewControllers */,
 				306240F1243B426400491A44 /* Views */,
 				306240E3243AD5D100491A44 /* Main.storyboard */,
 				306240E6243AD5D600491A44 /* Assets.xcassets */,
@@ -122,17 +122,17 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
-		306240F5243B428B00491A44 /* Controllers */ = {
+		306240F5243B428B00491A44 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				306240E1243AD5D100491A44 /* ViewController.swift */,
 				306240F7243B455C00491A44 /* TasksViewController.swift */,
 				30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		306240F6243B429500491A44 /* Delegate */ = {
+		306240F6243B429500491A44 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
 				30624100243B65C100491A44 /* TasksTableViewDelegate.swift */,
@@ -141,7 +141,7 @@
 				30D53E38243D9C4800325035 /* TitleViewDelegate.swift */,
 				30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */,
 			);
-			path = Delegate;
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		306240FD243B45DF00491A44 /* DataSource */ = {
