@@ -1,5 +1,6 @@
-package com.codesquad.todo5.domain;
+package com.codesquad.todo5.domain.category;
 
+import com.codesquad.todo5.domain.task.Task;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @Setter
@@ -18,7 +20,7 @@ public class Category {
   private String name;
   private boolean isDeleted;
 
-  @MappedCollection(idColumn = "category_id", keyColumn = "category_key")
+  //@MappedCollection(idColumn = "category_id", keyColumn = "category_key")
   private List<Task> task = new ArrayList<>();
 
   private Category(String name) {

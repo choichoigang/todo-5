@@ -1,4 +1,4 @@
-package com.codesquad.todo5.domain;
+package com.codesquad.todo5.domain.user;
 
 import java.util.Optional;
 import org.springframework.data.jdbc.repository.query.Query;

@@ -1,4 +1,4 @@
-package com.codesquad.todo5.domain;
+package com.codesquad.todo5.domain.activity;
 
 import com.codesquad.todo5.utils.EnumType;
 import lombok.Getter;

@@ -1,31 +1,30 @@
-package com.codesquad.todo5.domain;
+package com.codesquad.todo5.domain.activity;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import com.codesquad.todo5.domain.task.Task;
+import com.codesquad.todo5.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Table("activity")
 public class Activity {
-
-  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
   @Id
   private Long id;
   private User user;
+  private Task task;
   private String createdDate;
   private Action action;
   private Long categoryFrom;
   private Long categoryTo;
-  private String taskTitle;
 
   private Activity(User user, Action action) {
     this.user = user;
-    this.createdDate = LocalDateTime.now().format(formatter);
     this.action = action;
   }
 

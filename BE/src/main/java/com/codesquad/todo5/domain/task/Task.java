@@ -1,6 +1,7 @@
-package com.codesquad.todo5.domain;
+package com.codesquad.todo5.domain.task;
 
-import com.codesquad.todo5.dto.TaskEditDto;
+import com.codesquad.todo5.domain.activity.Activity;
+import com.codesquad.todo5.dto.task.TaskEditDto;
 import com.codesquad.todo5.exception.RudimentaryException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +10,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.util.ObjectUtils;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@Table("task")
 public class Task {
 
   @Id
@@ -25,7 +28,6 @@ public class Task {
   private String userName;
   private boolean isDeleted;
   private int priority;
-  private List<Activity> Activity = new ArrayList<>();
 
   private Task(String title, String content, String userName, int priority) {
     this.title = title;
