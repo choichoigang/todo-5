@@ -26,6 +26,7 @@
 		30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AA4210243D6C87008CAA86 /* NewCardView.swift */; };
 		30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E38243D9C4800325035 /* TitleViewDelegate.swift */; };
 		30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */; };
+		30E446AB2442E53600EDFC92 /* Tasks+Rearranging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E446AA2442E53600EDFC92 /* Tasks+Rearranging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		30AA4210243D6C87008CAA86 /* NewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardView.swift; sourceTree = "<group>"; };
 		30D53E38243D9C4800325035 /* TitleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewDelegate.swift; sourceTree = "<group>"; };
 		30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewDelegate.swift; sourceTree = "<group>"; };
+		30E446AA2442E53600EDFC92 /* Tasks+Rearranging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tasks+Rearranging.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				3047A5C12440133F00ABF88C /* Tasks.swift */,
+				30E446AA2442E53600EDFC92 /* Tasks+Rearranging.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				3047A5C42440281300ABF88C /* DecodeManager.swift in Sources */,
 				3072CD35243EB7050045D048 /* NetworkManager.swift in Sources */,
 				306240FA243B45B500491A44 /* TitleView.swift in Sources */,
+				30E446AB2442E53600EDFC92 /* Tasks+Rearranging.swift in Sources */,
 				306240FF243B466F00491A44 /* TasksTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

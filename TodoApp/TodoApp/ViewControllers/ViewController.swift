@@ -102,8 +102,9 @@ class ViewController: UIViewController {
                 controller.titleView.setTasksCount(count: updateInfo.count)
             }
         }
-        
     }
+    
+    
 }
 
 extension Notification.Name {
