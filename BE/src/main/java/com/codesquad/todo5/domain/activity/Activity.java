@@ -2,10 +2,12 @@ package com.codesquad.todo5.domain.activity;
 
 import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.user.User;
+import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
@@ -18,9 +20,11 @@ public class Activity {
   private Long id;
   private User user;
   private Task task;
-  private String createdDate;
+  private Timestamp createdDate;
   private Action action;
+  @Column("category_from")
   private Long categoryFrom;
+  @Column("category_to")
   private Long categoryTo;
 
   private Activity(User user, Action action) {
