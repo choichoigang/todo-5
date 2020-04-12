@@ -9,8 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskEditDto {
+public class TaskEditRequestDto {
   private String title;
   private String content;
   private int priority;
+  private int categoryFrom;
+  private int categoryTo;
 }
