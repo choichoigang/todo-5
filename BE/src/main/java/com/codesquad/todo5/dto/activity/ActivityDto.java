@@ -19,7 +19,7 @@ public class ActivityDto {
   private String taskTitle;
 
   public ActivityDto(Activity item) {
-    User user = item.getUser();
+//    User user = item.getUser();
     Action action = item.getAction();
     this.categoryFrom = item.getCategoryFrom();
     this.categoryTo = item.getCategoryTo();

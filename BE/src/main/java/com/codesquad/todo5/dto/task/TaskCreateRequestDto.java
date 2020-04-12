@@ -14,5 +14,4 @@ public class TaskCreateRequestDto {
   private String content;
   private String userName;
   private Long categoryNum;
-  private int priority;
 }
