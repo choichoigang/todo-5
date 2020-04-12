@@ -37,6 +37,9 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         super.viewDidLoad()
         titleView.delegate = self
         tableView.delegate = tasksDelegate
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self as? UITableViewDragDelegate
+        tableView.dropDelegate = self as? UITableViewDropDelegate
         
         self.view.addSubview(titleView)
         self.view.addSubview(tableView)
