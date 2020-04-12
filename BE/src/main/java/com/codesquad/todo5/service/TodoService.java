@@ -11,9 +11,11 @@ import com.codesquad.todo5.dto.category.CategoryDeleteRequest;
 import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
+import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
 import com.codesquad.todo5.exception.UserNotFoundException;
+import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -80,6 +82,16 @@ public class TodoService {
     taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
 //    userRepository.save(user);
 //    categoryRepository.save(category);
+  }
+
+  @Transactional(readOnly = true)
+  public TaskShowResponseDto showTask(Long taskId) {
+    Task task = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
+    String userName = taskRepository.findUserNameByTaskId(taskId);
+    logger.debug("userName : {}", userName);
+
+    return new TaskShowResponseDto(task.getTitle(), task.getContent(), userName, task.getPriority());
+
   }
 
   @Transactional

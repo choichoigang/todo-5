@@ -30,4 +30,6 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
   @Query("UPDATE task t SET t.category = :categoryTo, t.priority = :priority WHERE t.id = :id")
   void updateTaskCategoryById(int categoryTo, int priority, Long id);
 
+  @Query("SELECT u.name FROM task t LEFT OUTER JOIN user u ON t.user = u.id WHERE t.id = :id")
+  String findUserNameByTaskId(Long id);
 }

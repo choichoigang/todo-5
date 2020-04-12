@@ -5,6 +5,7 @@ import com.codesquad.todo5.domain.task.TaskRepository;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
 import com.codesquad.todo5.dto.task.TaskMoveRequestDto;
+import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
 import com.codesquad.todo5.response.ApiResponse;
 import com.codesquad.todo5.service.TodoService;
@@ -44,7 +45,10 @@ public class TaskController {
   @GetMapping("/task/{id}/show")
   public ResponseEntity<ApiResponse> showTask(@PathVariable Long id) {
     //TODO 작업해야함: TaskService 참고
+    TaskShowResponseDto taskShowResponseDto = todoService.showTask(id);
     ApiResponse response = new ApiResponse();
+    response.setStatus(true);
+    response.setData(taskShowResponseDto);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
