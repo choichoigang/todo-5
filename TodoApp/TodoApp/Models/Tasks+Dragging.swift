@@ -6,8 +6,8 @@
 //  Copyright © 2020 delma. All rights reserved.
 //
 
-import MobileCoreServices
 import UIKit
+import MobileCoreServices
 
 extension Category {
     func canHandle(_ session: UIDropSession) -> Bool {

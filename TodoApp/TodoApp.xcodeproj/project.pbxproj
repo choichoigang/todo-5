@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		301DACFA24433ADF00D760F0 /* TasksTableView+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301DACF924433ADF00D760F0 /* TasksTableView+Drag.swift */; };
 		3047A5C22440133F00ABF88C /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3047A5C12440133F00ABF88C /* Tasks.swift */; };
 		3047A5C42440281300ABF88C /* DecodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3047A5C32440281300ABF88C /* DecodeManager.swift */; };
 		306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306240DD243AD5D100491A44 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		301DACF924433ADF00D760F0 /* TasksTableView+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TasksTableView+Drag.swift"; sourceTree = "<group>"; };
 		3047A5C12440133F00ABF88C /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
 		3047A5C32440281300ABF88C /* DecodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeManager.swift; sourceTree = "<group>"; };
 		306240DA243AD5D100491A44 /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				306240FB243B45DA00491A44 /* TasksTableView.swift */,
+				301DACF924433ADF00D760F0 /* TasksTableView+Drag.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				30E446AD2442E65900EDFC92 /* Tasks+Dragging.swift in Sources */,
 				3047A5C22440133F00ABF88C /* Tasks.swift in Sources */,
 				3047A5C42440281300ABF88C /* DecodeManager.swift in Sources */,
+				301DACFA24433ADF00D760F0 /* TasksTableView+Drag.swift in Sources */,
 				3072CD35243EB7050045D048 /* NetworkManager.swift in Sources */,
 				306240FA243B45B500491A44 /* TitleView.swift in Sources */,
 				30E446AB2442E53600EDFC92 /* Tasks+Rearranging.swift in Sources */,
