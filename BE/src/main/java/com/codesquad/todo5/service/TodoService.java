@@ -5,12 +5,17 @@ import com.codesquad.todo5.domain.category.Category;
 import com.codesquad.todo5.domain.category.CategoryRepository;
 import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.task.TaskRepository;
+import com.codesquad.todo5.domain.user.User;
+import com.codesquad.todo5.domain.user.UserRepository;
 import com.codesquad.todo5.dto.category.CategoryDeleteRequest;
 import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
+import com.codesquad.todo5.exception.UserNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,17 +23,21 @@ import java.util.Optional;
 
 @Service
 public class TodoService {
+  Logger logger = LoggerFactory.getLogger(TodoService.class);
+
   private final CategoryRepository categoryRepository;
   private final ActivityRepository activityRepository;
   private final TaskRepository taskRepository;
+  private final UserRepository userRepository;
   private final UserService userService;
 
   public TodoService(CategoryRepository categoryRepository,
       ActivityRepository activityRepository,
-      TaskRepository taskRepository, UserService userService) {
+      TaskRepository taskRepository, UserRepository userRepository, UserService userService) {
     this.categoryRepository = categoryRepository;
     this.activityRepository = activityRepository;
     this.taskRepository = taskRepository;
+    this.userRepository = userRepository;
     this.userService = userService;
   }
 
@@ -62,12 +71,15 @@ public class TodoService {
   }
 
   @Transactional
-  public Task addTask(TaskCreateRequestDto dto) {
+  public void addTask(TaskCreateRequestDto dto) {
     //TODO 작업해야 함
     Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
-    Task newTask = Task.create(dto.getTitle(), dto.getContent(), category.getTask().size());
-    category.addTask(newTask);
-    return newTask;
+    User user = userRepository.findByName(dto.getUserName()).orElseThrow(UserNotFoundException::new);
+    Long userId = userRepository.findIdByUserName(dto.getUserName());
+    logger.debug("User : {}", user);
+    taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+//    userRepository.save(user);
+//    categoryRepository.save(category);
   }
 
   @Transactional
