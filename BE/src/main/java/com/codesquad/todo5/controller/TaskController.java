@@ -1,7 +1,10 @@
 package com.codesquad.todo5.controller;
 
 import com.codesquad.todo5.domain.task.Task;
+import com.codesquad.todo5.domain.user.User;
 import com.codesquad.todo5.response.ApiResponse;
+import com.codesquad.todo5.service.UserService;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskController {
 
   private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+  private final UserService userService;
+
+  public TaskController(UserService userService) {
+    this.userService = userService;
+  }
 
   //handling with existing card
   @GetMapping("/task/{num}/show")
@@ -23,6 +31,7 @@ public class TaskController {
     logger.debug("Number of a task: {} ", num);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
+    User testUser = userService.getUserByName("jypthemiracle");
     Task task = Task.create("github 공부하기", "호눅스 짱짱맨이에요.", "crongro", 1);
     task.setId(1L);
     response.setData(task);

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,9 +60,10 @@ public class CategoryController {
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
-  @GetMapping("/category/{id}/delete")
-  public ResponseEntity<ApiResponse> deleteCategoryItem(@PathVariable int id) {
-    Category deleteCategory = todoService.deleteCategory((long) id);
+  @PostMapping("/category/{id}/delete")
+  public ResponseEntity<ApiResponse> deleteCategoryItem(@PathVariable Long id, @RequestBody
+      CategoryEditRequestDto dto) {
+    Category deleteCategory = todoService.deleteCategory(id, dto);
     ApiResponse response = new ApiResponse();
     response.setData(deleteCategory);
     response.setStatus(true);
