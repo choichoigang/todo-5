@@ -5,6 +5,7 @@ import com.codesquad.todo5.domain.category.Category;
 import com.codesquad.todo5.domain.category.CategoryRepository;
 import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.task.TaskRepository;
+import com.codesquad.todo5.domain.user.User;
 import com.codesquad.todo5.dto.category.CategoryEditRequestDto;
 import com.codesquad.todo5.dto.task.TaskCreateDto;
 import com.codesquad.todo5.dto.task.TaskEditDto;
@@ -18,18 +19,20 @@ public class TodoService {
   private final CategoryRepository categoryRepository;
   private final ActivityRepository activityRepository;
   private final TaskRepository taskRepository;
+  private final UserService userService;
 
   public TodoService(CategoryRepository categoryRepository,
       ActivityRepository activityRepository,
-      TaskRepository taskRepository) {
+      TaskRepository taskRepository, UserService userService) {
     this.categoryRepository = categoryRepository;
     this.activityRepository = activityRepository;
     this.taskRepository = taskRepository;
+    this.userService = userService;
   }
 
   @Transactional
   public Category addCategory() {
-    int categoryNum = categoryRepository.countNumber();
+    int categoryNum = categoryRepository.countNumber() - 1;
     Category newCategory = Category.create("새로운 카테고리 " + categoryNum);
     categoryRepository.save(newCategory);
     return newCategory;
@@ -44,9 +47,9 @@ public class TodoService {
   }
 
   @Transactional
-  public Category deleteCategory(Long categoryId) {
+  public Category deleteCategory(Long categoryId, CategoryEditRequestDto dto) {
     Category deletedCategory = categoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
-    //deletedCategory.setDeleted(true);
+    deletedCategory.setDeleted(dto.isDeleted);
     categoryRepository.save(deletedCategory);
     return deletedCategory;
   }
@@ -60,7 +63,8 @@ public class TodoService {
   @Transactional
   public Task addTask(TaskCreateDto dto) {
     Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
-    Task newTask = Task.create(dto.getTitle(), dto.getContent(), dto.getUserName(), category.getTask().size() + 1);
+    //User testUser = userService.getUserByName("jypthemiracle");
+    Task newTask = Task.create(dto.getTitle(), dto.getContent(), dto.getUserName(), category.getTask().size());
     category.addTask(newTask);
     return newTask;
   }
