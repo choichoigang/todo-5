@@ -11,4 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CategoryEditRequestDto {
   private String name;
+  public boolean isDeleted;
+
+  public boolean isDeleted() {
+    return isDeleted;
+  }
 }
