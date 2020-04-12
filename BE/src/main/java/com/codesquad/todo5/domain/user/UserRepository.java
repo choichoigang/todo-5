@@ -9,4 +9,11 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User, Long> {
   @Query("SELECT * FROM USER where name = :name")
   Optional<User> findByName(String name);
+
+  @Query("SELECT t.id, t.title, t.content, t.is_deleted, t.priority, t.category, t.category_key, t.user, t.user_key"
+      + "FROM task AS t"
+      + "JOIN user AS u"
+      + "ON u.id = t.user"
+      + "WHERE u.name = :name")
+  User findTaskUserName(String name);
 }
