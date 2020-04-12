@@ -37,11 +37,6 @@ public class CategoryController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-//  @GetMapping("/category/{num}/all")
-//  public ResponseEntity<ApiResponse> showAllTaskItemsByCategoryNum(@PathVariable int num) {
-//    return new ResponseEntity<>(response, HttpStatus.OK);
-//  }
-
   @GetMapping("/category/add")
   public ResponseEntity<ApiResponse> addCategoryItem() {
     Category addCategory = todoService.addCategory();
