@@ -7,11 +7,14 @@ import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.task.TaskRepository;
 import com.codesquad.todo5.dto.category.CategoryDeleteRequest;
 import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
-import com.codesquad.todo5.dto.task.TaskCreateDto;
-import com.codesquad.todo5.dto.task.TaskEditRequestDto;
+import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
+import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
+import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -59,7 +62,7 @@ public class TodoService {
   }
 
   @Transactional
-  public Task addTask(TaskCreateDto dto) {
+  public Task addTask(TaskCreateRequestDto dto) {
     //TODO 작업해야 함
     Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
     Task newTask = Task.create(dto.getTitle(), dto.getContent(), category.getTask().size());
@@ -68,12 +71,18 @@ public class TodoService {
   }
 
   @Transactional
-  public Task editTask(Long cardId, TaskEditRequestDto dto) {
-    //TODO 작업해야 함
-    Task editTask = taskRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
-    editTask.updateTask(dto);
-    taskRepository.save(editTask);
-    return editTask;
+  public Optional<Task> editTask(Long taskId, TaskModifyRequestDto dto) {
+    String modifiedTitle = dto.getModifiedTitle();
+    String modifiedContent = dto.getModifiedContent();
+    Task targetTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
+
+    if (isInvalidModification(targetTask, modifiedTitle, modifiedContent)) {
+      throw new InvalidModificationException();
+    }
+
+    taskRepository.modifyTaskContentsById(modifiedTitle, modifiedContent, taskId);
+
+    return taskRepository.findById(taskId);
   }
 
   @Transactional
@@ -83,5 +92,9 @@ public class TodoService {
     deletedTask.setDeleted(true);
     taskRepository.save(deletedTask);
     return deletedTask;
+  }
+
+  private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {
+     return task.getTitle().equals(modifiedTitle) && task.getContent().equals(modifiedContent);
   }
 }
