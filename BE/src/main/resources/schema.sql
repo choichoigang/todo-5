@@ -1,33 +1,38 @@
-DROP TABLE IF EXISTS CATEGORY;
-DROP TABLE IF EXISTS USER;
-DROP TABLE IF EXISTS TASK;
-DROP TABLE IF EXISTS ACTIVITY;
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS task;
+DROP TABLE IF EXISTS activity;
 
-CREATE TABLE CATEGORY (
+CREATE TABLE category (
 	id int auto_increment primary key NOT NULL,
-    name varchar(10) NOT NULL
+    name varchar(10) NOT NULL,
+    is_deleted boolean NOT NULL DEFAULT FALSE,
+    created_date_time datetime NOT NULL DEFAULT current_timestamp
 );
 
-CREATE TABLE USER (
+CREATE TABLE user (
 	id int auto_increment primary key NOT NULL,
     name varchar(16) NOT NULL,
     password varchar(15) NOT NULL
 );
 
-CREATE TABLE TASK (
+CREATE TABLE task (
 	id int auto_increment primary key NOT NULL,
-    description varchar(500) NOT NULL,
-    is_deleted tinyint(2) NOT NULL DEFAULT FALSE,
-    category int references category(id) NOT NULL,
+    title varchar(500) NOT NULL,
+    content varchar(500) NOT NULL,
+    is_deleted boolean NOT NULL DEFAULT FALSE,
+    priority int NOT NULL,
+    category_to int DEFAULT 0,
+    category int NOT NULL references category(id) ON UPDATE CASCADE,
     category_key int NOT NULL,
-    user int references user(id) NOT NULL,
+    user int NOT NULL references user(id) ON UPDATE CASCADE,
     user_key int NOT NULL
 );
 
-CREATE TABLE ACTIVITY (
+CREATE TABLE activity (
 	id int auto_increment primary key NOT NULL,
-    created_date_time datetime NOT NULL,
-    action_item varchar(45) NOT NULL,
-    task int references task(id) NOT NULL,
+    created_date datetime NOT NULL DEFAULT current_timestamp,
+    action varchar(45) NOT NULL,
+    task int NOT NULL references task(id) ON UPDATE CASCADE,
     task_key int NOT NULL
 );

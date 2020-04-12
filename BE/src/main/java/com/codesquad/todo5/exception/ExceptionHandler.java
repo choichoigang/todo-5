@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionHandler {
 
-  @org.springframework.web.bind.annotation.ExceptionHandler(NotFoundException.class)
+  @org.springframework.web.bind.annotation.ExceptionHandler(ResourceNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ResponseBody
-  public ApiResponse handleError(NotFoundException exception) {
+  public ApiResponse handleError(ResourceNotFoundException exception) {
     return exception.returnErrorMessage();
   }
 }
