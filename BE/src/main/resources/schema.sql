@@ -22,6 +22,7 @@ CREATE TABLE task (
     content varchar(500) NOT NULL,
     is_deleted boolean NOT NULL DEFAULT FALSE,
     priority int NOT NULL,
+    category_to int DEFAULT 0,
     category int NOT NULL references category(id) ON UPDATE CASCADE,
     category_key int NOT NULL,
     user int NOT NULL references user(id) ON UPDATE CASCADE,
@@ -32,8 +33,6 @@ CREATE TABLE activity (
 	id int auto_increment primary key NOT NULL,
     created_date datetime NOT NULL DEFAULT current_timestamp,
     action varchar(45) NOT NULL,
-    category_from varchar(45),
-    category_to varchar(45),
     task int NOT NULL references task(id) ON UPDATE CASCADE,
     task_key int NOT NULL
 );
