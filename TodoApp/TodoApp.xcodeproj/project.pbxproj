@@ -27,6 +27,7 @@
 		30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E38243D9C4800325035 /* TitleViewDelegate.swift */; };
 		30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */; };
 		30E446AB2442E53600EDFC92 /* Tasks+Rearranging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E446AA2442E53600EDFC92 /* Tasks+Rearranging.swift */; };
+		30E446AD2442E65900EDFC92 /* Tasks+Dragging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E446AC2442E65900EDFC92 /* Tasks+Dragging.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		30D53E38243D9C4800325035 /* TitleViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleViewDelegate.swift; sourceTree = "<group>"; };
 		30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardViewDelegate.swift; sourceTree = "<group>"; };
 		30E446AA2442E53600EDFC92 /* Tasks+Rearranging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tasks+Rearranging.swift"; sourceTree = "<group>"; };
+		30E446AC2442E65900EDFC92 /* Tasks+Dragging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tasks+Dragging.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			children = (
 				3047A5C12440133F00ABF88C /* Tasks.swift */,
 				30E446AA2442E53600EDFC92 /* Tasks+Rearranging.swift */,
+				30E446AC2442E65900EDFC92 /* Tasks+Dragging.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */,
 				306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */,
 				306240E0243AD5D100491A44 /* SceneDelegate.swift in Sources */,
+				30E446AD2442E65900EDFC92 /* Tasks+Dragging.swift in Sources */,
 				3047A5C22440133F00ABF88C /* Tasks.swift in Sources */,
 				3047A5C42440281300ABF88C /* DecodeManager.swift in Sources */,
 				3072CD35243EB7050045D048 /* NetworkManager.swift in Sources */,
