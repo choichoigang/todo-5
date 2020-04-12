@@ -9,11 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryEditRequestDto {
-  private String name;
+public class CategoryDeleteRequest {
   public boolean isDeleted;
-
-  public boolean isDeleted() {
-    return isDeleted;
-  }
+  //TODO CategoryEditRequest로 CategoryNameEditRequest와 CategoryDeleteRequest를 통합하는 방안 생각해보기
 }
