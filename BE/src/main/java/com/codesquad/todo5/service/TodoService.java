@@ -5,8 +5,8 @@ import com.codesquad.todo5.domain.category.Category;
 import com.codesquad.todo5.domain.category.CategoryRepository;
 import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.task.TaskRepository;
-import com.codesquad.todo5.domain.user.User;
-import com.codesquad.todo5.dto.category.CategoryEditRequestDto;
+import com.codesquad.todo5.dto.category.CategoryDeleteRequest;
+import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
 import com.codesquad.todo5.dto.task.TaskCreateDto;
 import com.codesquad.todo5.dto.task.TaskEditRequestDto;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
@@ -38,7 +38,7 @@ public class TodoService {
   }
 
   @Transactional
-  public Category editCategory(Long categoryId, CategoryEditRequestDto dto) {
+  public Category editCategory(Long categoryId, CategoryNameEditRequestDto dto) {
     Category editedCategory = categoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
     editedCategory.setName(dto.getName());
     categoryRepository.save(editedCategory);
@@ -46,7 +46,7 @@ public class TodoService {
   }
 
   @Transactional
-  public Category deleteCategory(Long categoryId, CategoryEditRequestDto dto) {
+  public Category deleteCategory(Long categoryId, CategoryDeleteRequest dto) {
     Category deletedCategory = categoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
     deletedCategory.setDeleted(dto.isDeleted);
     categoryRepository.save(deletedCategory);
