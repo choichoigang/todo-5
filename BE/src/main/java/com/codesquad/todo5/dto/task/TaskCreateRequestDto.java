@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskCreateDto {
+public class TaskCreateRequestDto {
   private String title;
   private String content;
   private String userName;
