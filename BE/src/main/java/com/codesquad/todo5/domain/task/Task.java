@@ -1,5 +1,7 @@
 package com.codesquad.todo5.domain.task;
 
+import com.codesquad.todo5.domain.category.Category;
+import com.codesquad.todo5.domain.user.User;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
 import com.codesquad.todo5.exception.RudimentaryException;
 import lombok.Getter;
@@ -7,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Reference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.util.ObjectUtils;

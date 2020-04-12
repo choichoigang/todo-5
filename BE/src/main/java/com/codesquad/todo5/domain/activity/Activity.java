@@ -16,15 +16,16 @@ public class Activity {
 
   @Id
   private Long id;
-  private User user;
-  private Task task;
+  // 컬럼으로 인식하여 에러 발생
+//  private User user;
+//  private Task task;
   private String createdDate;
   private Action action;
   private Long categoryFrom;
   private Long categoryTo;
 
   private Activity(User user, Action action) {
-    this.user = user;
+//    this.user = user;
     this.action = action;
   }
 
