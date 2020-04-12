@@ -32,7 +32,7 @@ public class TaskController {
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
     User testUser = userService.getUserByName("jypthemiracle");
-    Task task = Task.create("github 공부하기", "호눅스 짱짱맨이에요.", "crongro", 1);
+    Task task = Task.create("github 공부하기", "호눅스 짱짱맨이에요.", 1);
     task.setId(1L);
     response.setData(task);
     return new ResponseEntity<>(response, HttpStatus.OK);

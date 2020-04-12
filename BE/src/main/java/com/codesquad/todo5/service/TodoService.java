@@ -63,8 +63,8 @@ public class TodoService {
   @Transactional
   public Task addTask(TaskCreateDto dto) {
     Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
-    //User testUser = userService.getUserByName("jypthemiracle");
-    Task newTask = Task.create(dto.getTitle(), dto.getContent(), dto.getUserName(), category.getTask().size());
+    //User testUser = userService.getUserByName("jypthemiracle"); join을 써서 User 가져오게 해야 함..
+    Task newTask = Task.create(dto.getTitle(), dto.getContent(), category.getTask().size());
     category.addTask(newTask);
     return newTask;
   }

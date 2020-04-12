@@ -19,7 +19,6 @@ public class TaskResponseDto {
     this.id = item.getId();
     this.title = item.getTitle();
     this.content = item.getContent();
-    this.userName = item.getUserName();
     this.priority = item.getPriority();
   }
 }

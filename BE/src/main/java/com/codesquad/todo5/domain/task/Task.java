@@ -25,20 +25,18 @@ public class Task {
 
   @Length(max=500)
   private String content;
-  private String userName;
   private boolean isDeleted;
   private int priority;
 
-  private Task(String title, String content, String userName, int priority) {
+  private Task(String title, String content, int priority) {
     this.title = title;
     this.content = content;
     this.isDeleted = false;
-    this.userName = userName;
     this.priority = priority;
   }
 
-  public static Task create(String title, String content, String userName, int priority) {
-    return new Task(title, content, userName, priority);
+  public static Task create(String title, String content, int priority) {
+    return new Task(title, content, priority);
   }
 
   public void updateTask(TaskEditDto dto) {
