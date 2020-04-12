@@ -15,4 +15,9 @@ public class ExceptionHandler {
   public ApiResponse handleError(ResourceNotFoundException exception) {
     return exception.returnErrorMessage();
   }
+
+  @org.springframework.web.bind.annotation.ExceptionHandler
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ResponseBody
+  public ApiResponse handleInvalidModificationError(InvalidModificationException exception) { return exception.returnErrorMessage(); }
 }
