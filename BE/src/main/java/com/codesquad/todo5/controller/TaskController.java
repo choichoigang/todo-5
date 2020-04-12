@@ -62,10 +62,11 @@ public class TaskController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @GetMapping("/task/{num}/delete")
-  public ResponseEntity<ApiResponse> deleteCard(@PathVariable int num) {
+  @GetMapping("/task/{id}/delete")
+  public ResponseEntity<ApiResponse> deleteCard(@PathVariable Long id) {
     //TODO 작업해야함: TaskService 참고
-    logger.debug("Number of a task: {} ", num);
+    logger.debug("Number of a task: {} ", id);
+    todoService.deleteTask(id);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);

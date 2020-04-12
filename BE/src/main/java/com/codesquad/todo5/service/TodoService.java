@@ -110,12 +110,11 @@ public class TodoService {
   }
 
   @Transactional
-  public Task deleteTask(Long cardId) {
+  public void deleteTask(Long taskId) {
     //TODO 작업해야 함
-    Task deletedTask = taskRepository.findById(cardId).orElseThrow(ResourceNotFoundException::new);
-    deletedTask.setDeleted(true);
-    taskRepository.save(deletedTask);
-    return deletedTask;
+    Task deletedTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
+    taskRepository.deleteTaskById(taskId);
+    // 변경된 값을 더 효율적으로 리턴할 수 있는 방법을 고민 해보겠습니다.
   }
 
   private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {

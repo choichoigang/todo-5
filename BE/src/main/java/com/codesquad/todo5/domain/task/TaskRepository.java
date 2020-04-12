@@ -32,4 +32,9 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
   @Query("SELECT u.name FROM task t LEFT OUTER JOIN user u ON t.user = u.id WHERE t.id = :id")
   String findUserNameByTaskId(Long id);
+
+  @Modifying
+  @Transactional
+  @Query("UPDATE task t SET is_deleted = true WHERE t.id = :id")
+  void deleteTaskById(Long id);
 }
