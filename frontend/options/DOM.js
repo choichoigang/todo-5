@@ -1,9 +1,9 @@
 const commonDOM = {
   dropTarget: document.querySelector(".wrapper"),
 
-  todoBox: document.querySelector("#todo"),
-  doingBox: document.querySelector("#doing"),
-  doneBox: document.querySelector("#done"),
+  todoTaskList: document.querySelector("#todo .task_list"),
+  doingTaskList: document.querySelector("#doing .task_list"),
+  doneTaskList: document.querySelector("#done .task_list"),
 
   blind: document.querySelector(".blind_off"),
   modal: document.querySelector(".modify_modal"),
