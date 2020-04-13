@@ -11,27 +11,9 @@ import UIKit
 class TasksViewController: UIViewController, TitleViewDelegate {
     let titleView = TitleView()
     let tableView = TasksTableView()
-    
     var tasksDataSource: TasksTableViewDataSource!
     var tasksDelegate = TasksTableViewDelegate()
-    
-    let childID: Int
-    
-    var category: Category? {
-        didSet {
-            configureData()
-            configureDataSource()
-        }
-    }
-    
-    init(childID: Int, nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.childID = childID
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var category: Category?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,18 +43,15 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     
-    func configureData() {
-        guard let category = category else { return }
+    func configureData(category: Category) {
         titleView.setTasksCount(count: category.tasks.count)
         titleView.setTitle(title: category.name)
     }
     
-    func configureDataSource() {
-        guard let category = category else { return }
-
-            tasksDataSource = TasksTableViewDataSource(tasksID: childID, tasks: category.tasks)
-                       tableView.dataSource = tasksDataSource
-                       tableView.reloadData()
+    func configureDataSource(tasksID: Int, category: Category) {
+        tasksDataSource = TasksTableViewDataSource(tasksID: tasksID, tasks: category.tasks)
+       tableView.dataSource = tasksDataSource
+       tableView.reloadData()
         
     }
     
