@@ -63,6 +63,10 @@ const modifyModalHandler = (event) => {
   commonDOM.modal_textarea.value = modifyOption.titleElement.innerText;
 };
 //------------------------------------------------------------------------------------
+const modalCancelHandler = () => {
+  commonDOM.blind.className = "blind_off";
+  commonDOM.modal.style.visibility = "hidden";
+};
 
 export function testEvent() {
   registerColumnClickEvent("todo");
