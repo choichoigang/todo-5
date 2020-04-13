@@ -35,7 +35,7 @@ public class CategoryController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @GetMapping("/category/add")
+  @PostMapping("/category/add")
   public ResponseEntity<ApiResponse> addCategoryItem() {
     Category addCategory = todoService.addCategory();
     ApiResponse response = new ApiResponse();
