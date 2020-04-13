@@ -39,18 +39,6 @@
             <button class="todo_cancel_btn">Cancel</button>
           </div>
         </div>
-        <div>
-          <div id="task1" class="todo_task" draggable="true">
-            <div class="title">
-              <span>BUG FIX AND UPLOAD</span>
-              <button><i class="fas fa-trash-alt"></i></button>
-            </div>
-            <div class="writer">
-              <span>Added by</span>
-              <span> hoi</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div class="box" id="doing">
@@ -95,7 +83,20 @@
         </div>
       </div>
 
+      <div class="blind_off"></div>
       <div class="menu_box">SIDE BAR AREA</div>
+
+      <div class="modify_modal">
+        <div class="modal_nav">
+          <div class="modal_title">Edit note</div>
+          <div class="modal_cancel"><i class="fas fa-times"></i></div>
+        </div>
+        <div class="modal_textarea">
+          <div>Note</div>
+          <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <button class="save_note">Save note</button>
+      </div>
     </div>
     <script src="../js/test.js" type="module"></script>
   </body>

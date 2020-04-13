@@ -8,12 +8,14 @@
   font-size: 10px;
   color: black;
 }
+
 .text_line {
   display: flex;
   align-items: center;
   font-size: 8px;
   font-weight: bold;
 }
+
 i {
   font-size: 11px;
 }
@@ -24,6 +26,7 @@ i {
   font-size: 8px;
   padding: 2px;
 }
+
 .add_area {
   display: none;
   animation: ease-in;
@@ -31,17 +34,20 @@ i {
   flex-direction: column;
   margin: 3px;
 }
+
 .add_area textarea {
   height: 50px;
   border-radius: 5px;
   font-size: 8px;
 }
+
 .add_btns {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 3px;
 }
+
 .add_btns button {
   font-weight: bold;
   width: 48%;
@@ -49,18 +55,21 @@ i {
   padding: 5px;
   border-radius: 3px;
 }
+
 .todo_add_btn,
 .doing_add_btn,
 .done_add_btn {
   background-color: #03cf5d;
   color: #ffffff;
 }
+
 .todo_cancel_btn,
 .doing_cancel_btn,
 .done_cancel_btn {
   background-color: #ffffff;
   color: black;
 }
+
 .menu_box {
   display: none;
   position: absolute;
@@ -69,27 +78,47 @@ i {
   background-color: blue;
   right: 0%;
 }
+
 .fa-plus {
   pointer-events: none;
 }
+
 .fa-trash-alt {
   font-size: 8px;
   pointer-events: none;
 }
+
+.fa-sticky-note {
+  margin-left: 3px;
+  font-size: 8px;
+  pointer-events: none;
+}
+.fa-times {
+  pointer-events: none;
+}
+
 .todo_task,
 .doing_tesk,
 .done_tesk {
   display: flex;
   flex-direction: column;
 }
+
+.task {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .writer :first-child {
   color: #828282;
 }
+
 .writer {
   margin-top: 5px;
   font-size: 7px;
