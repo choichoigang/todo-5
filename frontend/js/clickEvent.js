@@ -89,10 +89,15 @@ const modalSaveNoteHandler = () => {
   }
 };
 
+const registerModalClickEvent = () => {
+  commonDOM.modal.addEventListener("click", modalClickEventHandler);
+};
+
 export function testEvent() {
   registerColumnClickEvent("todo");
   registerColumnClickEvent("doing");
   registerColumnClickEvent("done");
+  registerModalClickEvent();
 }
 
 export default testEvent;
