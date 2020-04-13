@@ -5,7 +5,6 @@ const textareaHandler = (event, todoAddButton) => {
 
   if (textareaValue === "") {
     todoAddButton.disabled = true;
-    return;
   } else {
     todoAddButton.disabled = false;
   }
