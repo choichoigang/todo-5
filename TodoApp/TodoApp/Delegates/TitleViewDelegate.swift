@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TitleViewDelegate {
-    func popNewCardView()
+    func presentNewCardView()
 }

@@ -55,7 +55,7 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         
     }
     
-    func popNewCardView() {
+    func presentNewCardView() {
         let newCardViewController = NewCardViewController()
         self.present(newCardViewController, animated: true, completion: nil)
     }

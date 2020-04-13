@@ -47,11 +47,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
             tableView.endUpdates()
         }
     }
-    
-    func updateTasksCount(handler: (Int) -> ()) {
-        
-    }
-    
+   
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }

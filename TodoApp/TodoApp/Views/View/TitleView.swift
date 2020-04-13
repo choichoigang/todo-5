@@ -48,7 +48,7 @@ class TitleView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.tintColor = .black
-        button.addTarget(self, action:  #selector(popNewCardView), for: .touchUpInside)
+        button.addTarget(self, action:  #selector(presentNewCardView), for: .touchUpInside)
         return button
     }()
     
@@ -86,7 +86,7 @@ class TitleView: UIView {
         tasksTitle.text = title
     }
 
-    @objc private func popNewCardView() {
-        delegate?.popNewCardView()
+    @objc private func presentNewCardView() {
+        delegate?.presentNewCardView()
     }
 }
