@@ -16,8 +16,8 @@ const itemTemplate = (inputValue, className) => {
   </div>`;
 };
 
-const renderItem = (inputValue, className, id) => {
-  return ` <div class="task" draggable="true" task_data_id="${id}">
+const renderItem = (inputValue, id, className) => {
+  return ` <div class="task" draggable="true" data_task_id="${id}">
     <div id="task1" class="${className}_task">
       <div class="title">
       <span class="task_value">${inputValue}</span>
