@@ -10,10 +10,6 @@ import UIKit
 
 extension TasksViewController: UITableViewDropDelegate {
     
-    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
-        return category!.canHandle(session)
-    }
-    
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         if tableView.hasActiveDrag {
             if session.items.count > 1 {
@@ -36,19 +32,13 @@ extension TasksViewController: UITableViewDropDelegate {
                    let row = tableView.numberOfRows(inSection: section)
                    destinationIndexPath = IndexPath(row: row, section: section)
                }
-               
-               coordinator.session.loadObjects(ofClass: NSString.self) { items in
-                   let stringItems = items as! [Contents]
-                   
-                   var indexPaths = [IndexPath]()
-                   for (index, item) in stringItems.enumerated() {
-                       let indexPath = IndexPath(row: destinationIndexPath.row + index, section: destinationIndexPath.section)
-                       self.category?.addItem(item, at: indexPath.row)
-                       indexPaths.append(indexPath)
-                   }
-
-                   tableView.insertRows(at: indexPaths, with: .automatic)
-               }
+        
+        
+        let dragItem = coordinator.items.first!.dragItem
+        let item = dragItem.localObject as! Contents
+        self.tasksDataSource.tasks.insert(item, at: coordinator.destinationIndexPath!.row)
+//        self.tasksDataSource.tasks.remove(at: item.priority!)
+        tableView.insertRows(at: [coordinator.destinationIndexPath!], with: .automatic)
     }
     
     

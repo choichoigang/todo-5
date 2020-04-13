@@ -14,9 +14,9 @@ struct Tasks: Codable {
 }
 
 struct Category: Codable {
-       var id: Int
-       var name: String
-       var tasks: [Contents]
+    var id: Int
+    var name: String
+    var tasks: [Contents]
 }
 
 struct Contents: Codable {

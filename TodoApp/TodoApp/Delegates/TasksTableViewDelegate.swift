@@ -25,8 +25,11 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
         
         let delete = UIAction(title: "delete", attributes: [.destructive]) { action in
             let dataSource = tableView.dataSource as! TasksTableViewDataSource
-            dataSource.tasks.remove(at: indexPath.row)
-            tableView.reloadData()
+            let delay = 0.4
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                dataSource.tasks.remove(at: indexPath.row)
+                tableView.reloadData()
+            }
         }
         
         return UIContextMenuConfiguration(identifier: indexPath as NSCopying,
@@ -34,6 +37,5 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
                                             UIMenu(title: "", children: [move, edit, delete])
         }
     }
-    
     
 }
