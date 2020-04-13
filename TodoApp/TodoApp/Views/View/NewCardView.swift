@@ -200,7 +200,7 @@ class NewCardView: UIView, UITextViewDelegate {
     }
     
     @objc func addNewCard() {
-        newTask = Contents(title: titleView.text, content: contentsView.text, userName: "")
+        newTask = Contents(title: titleView.text, content: contentsView.text, userName: "", priority: 0, id: 0)
         guard let newTask = newTask else { return }
         delegate?.addNewCard(content: newTask)
     }

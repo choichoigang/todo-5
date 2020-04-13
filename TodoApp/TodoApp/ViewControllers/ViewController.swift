@@ -86,7 +86,6 @@ class ViewController: UIViewController {
                     self.secondViewController.configureDataSource(tasksID: 1, category: allData.data[1])
                     self.thirdViewController.configureData(category: allData.data[2])
                     self.thirdViewController.configureDataSource(tasksID: 2, category: allData.data[2])
-                   
                 }
             case .failure(let error):
                 //네트워크 오류 알림 알럿창 생성

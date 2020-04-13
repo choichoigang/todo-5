@@ -13,9 +13,7 @@ extension TasksViewController: UITableViewDragDelegate {
         let itemProvider = NSItemProvider()
         
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        let tasks = tasksDataSource.tasks
-  
-//        dragItem.localObject = Contents(title: tasks[indexPath.row].title , content: tasks[indexPath.row].content, userName: tasks[indexPath.row].userName, priority: nil, id: tasks[indexPath.row].id)
+        dragItem.localObject = DragItem(dataSource: tasksDataSource, indexPath: indexPath, tableView: tableView as! TasksTableView)
         
         return [dragItem]
     }

@@ -10,34 +10,25 @@ import UIKit
 
 extension TasksViewController: UITableViewDropDelegate {
     
-    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-        if tableView.hasActiveDrag {
-            if session.items.count > 1 {
-                return UITableViewDropProposal(operation: .cancel)
-            } else {
-                return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-            }
-        } else {
-            return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
-        }
-    }
-    
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-         let destinationIndexPath: IndexPath
-               
-               if let indexPath = coordinator.destinationIndexPath {
-                   destinationIndexPath = indexPath
-               } else {
-                   let section = tableView.numberOfSections - 1
-                   let row = tableView.numberOfRows(inSection: section)
-                   destinationIndexPath = IndexPath(row: row, section: section)
-               }
+        let destinationIndexPath: IndexPath
         
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let section = tableView.numberOfSections - 1
+            let row = tableView.numberOfRows(inSection: section)
+            destinationIndexPath = IndexPath(row: row, section: section)
+        }
+                
+        let item = coordinator.items.first!.dragItem.localObject as! DragItem
+        let data = item.dataSource
+        let index = item.indexPath.row
+        self.tasksDataSource.tasks.insert(data.tasks[index], at: coordinator.destinationIndexPath!.row)
         
-        let dragItem = coordinator.items.first!.dragItem
-        let item = dragItem.localObject as! Contents
-        self.tasksDataSource.tasks.insert(item, at: coordinator.destinationIndexPath!.row)
-//        self.tasksDataSource.tasks.remove(at: item.priority!)
+        data.tasks.remove(at: index)
+        item.tableView.deleteRows(at: [item.indexPath], with: .automatic)
+        
         tableView.insertRows(at: [coordinator.destinationIndexPath!], with: .automatic)
     }
     
