@@ -16,12 +16,12 @@ import lombok.Setter;
 public class CategoryWithTasksDto {
   private Long categoryId;
   private String categoryName;
-  private List<TaskShowResponseDto> taskResponseDtoList;
+  private List<TaskShowResponseDto> task;
 
   public CategoryWithTasksDto(Category category) {
     this.categoryId = category.getId();
     this.categoryName = category.getName();
-    this.taskResponseDtoList = category.getTask().stream()
+    this.task = category.getTask().stream()
         .map(taskItem -> new TaskShowResponseDto(taskItem.getId(), taskItem.getTitle(), taskItem.getContent(), taskItem.getPriority(), this.categoryId))
         .collect(Collectors.toList());
   }
@@ -29,6 +29,6 @@ public class CategoryWithTasksDto {
   public CategoryWithTasksDto(Category category, List<TaskShowResponseDto> dto) {
     this.categoryId = category.getId();
     this.categoryName = category.getName();
-    this.taskResponseDtoList = dto;
+    this.task = dto;
   }
 }
