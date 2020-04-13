@@ -68,6 +68,17 @@ const modalCancelHandler = () => {
   commonDOM.modal.style.visibility = "hidden";
 };
 
+const modalSaveNoteHandler = () => {
+  const modifyValue = commonDOM.modal_textarea.value;
+  if (modifyValue === "") {
+    alert("수정하려는 내용이 없습니다.");
+  } else {
+    // 수정 사항을 서버로 보냄
+    modifyOption.titleElement.innerText = modifyValue;
+    modalCancelHandler();
+  }
+};
+
 export function testEvent() {
   registerColumnClickEvent("todo");
   registerColumnClickEvent("doing");
