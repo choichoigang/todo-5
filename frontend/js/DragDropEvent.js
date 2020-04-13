@@ -1,26 +1,38 @@
-import { DOM } from "../options/DOM.js";
+import { commonDOM } from "../options/DOM.js";
+
+const option = {
+  dragTargetEl: null,
+  dargTargetHeight: null,
+  toTarget: null,
+  toTargetWrapper: null,
+};
+
+const dragEnterHandler = (event) => {
+  option.toTarget = event.toElement.closest(".task");
+  option.toTargetWrapper = event.toElement.closest(".box");
+
+  if (option.toTarget && event.offsetY > option.dargTargetHeight) {
+    option.toTarget.after(option.dragTargetEl);
+  } else if (option.toTarget && event.offsetY < option.dargTargetHeight) {
+    option.toTarget.before(option.dragTargetEl);
+  } else if (option.toTargetWrapper) {
+    option.toTargetWrapper.appendChild(option.dragTargetEl);
+  }
+};
 
 const dragStartHandler = (event) => {
-  event.dataTransfer.setData("ID", event.target.id);
+  option.dragTargetEl = event.toElement;
+  option.dargTargetHeight = event.target.offsetHeight / 2;
 };
 
 const dragOverHandler = (event) => {
   event.preventDefault();
 };
 
-const dropHanlder = (event) => {
-  const getID = event.dataTransfer.getData("ID");
-  const dropArea = event.target.classList.contains("box");
-
-  if (dropArea) {
-    event.target.appendChild(document.getElementById(getID));
-  }
-};
-
 const initDragDropEvent = () => {
-  DOM.dropTarget.addEventListener("dragstart", dragStartHandler);
-  DOM.dropTarget.addEventListener("dragover", dragOverHandler);
-  DOM.dropTarget.addEventListener("drop", dropHanlder);
+  commonDOM.dropTarget.addEventListener("dragstart", dragStartHandler);
+  commonDOM.dropTarget.addEventListener("dragover", dragOverHandler);
+  commonDOM.dropTarget.addEventListener("dragenter", dragEnterHandler);
 };
 
 export default initDragDropEvent;
