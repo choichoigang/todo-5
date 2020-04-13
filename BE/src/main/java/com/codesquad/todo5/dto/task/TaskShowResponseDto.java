@@ -13,6 +13,7 @@ public class TaskShowResponseDto {
   private String content;
   private String userName;
   private int priority;
+  private Long categoryId;
 //  private Long id;
 
   public TaskShowResponseDto(Task item) {
@@ -22,10 +23,11 @@ public class TaskShowResponseDto {
     this.priority = item.getPriority();
   }
 
-  public TaskShowResponseDto(String title, String content, String userName, int priority) {
+  public TaskShowResponseDto(String title, String content, String userName, int priority, Long categoryId) {
     this.title = title;
     this.content = content;
     this.userName = userName;
     this.priority = priority;
+    this.categoryId = categoryId;
   }
 }

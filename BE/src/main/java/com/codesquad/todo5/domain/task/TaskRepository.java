@@ -37,4 +37,8 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
   @Transactional
   @Query("UPDATE task t SET is_deleted = true WHERE t.id = :id")
   void deleteTaskById(Long id);
+
+  @Transactional
+  @Query("SELECT category FROM task WHERE id = :taskId")
+  Long findCategoryIdByTaskId(Long taskId);
 }

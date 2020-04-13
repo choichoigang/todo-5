@@ -88,9 +88,10 @@ public class TodoService {
   public TaskShowResponseDto showTask(Long taskId) {
     Task task = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
     String userName = taskRepository.findUserNameByTaskId(taskId);
+    Long categoryId = taskRepository.findCategoryIdByTaskId(taskId);
     logger.debug("userName : {}", userName);
 
-    return new TaskShowResponseDto(task.getTitle(), task.getContent(), userName, task.getPriority());
+    return new TaskShowResponseDto(task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId);
 
   }
 
