@@ -17,6 +17,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 //      + "WHERE u.name = :name")
 //  User findTaskByUserName(String name);
 
+  @Query("SELECT u.name FROM task t LEFT OUTER JOIN user u ON t.user = u.id WHERE t.id = :taskId")
+  String findUserByTaskId(Long taskId);
+
   @Query("SELECT id FROM user WHERE name = :name")
   Long findIdByUserName(String name);
 }

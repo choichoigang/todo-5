@@ -25,4 +25,10 @@ public class CategoryWithTasksDto {
         .map(taskItem -> new TaskShowResponseDto(taskItem.getId(), taskItem.getTitle(), taskItem.getContent(), taskItem.getPriority(), this.categoryId))
         .collect(Collectors.toList());
   }
+
+  public CategoryWithTasksDto(Category category, List<TaskShowResponseDto> dto) {
+    this.categoryId = category.getId();
+    this.categoryName = category.getName();
+    this.taskResponseDtoList = dto;
+  }
 }

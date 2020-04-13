@@ -53,7 +53,7 @@ public class CategoryController {
   @GetMapping("/category/{id}/all")
   public ResponseEntity<ApiResponse> showSpecificCategory(@PathVariable Long id) {
     logger.debug("id : {}", id);
-    CategoryWithTasksDto categoryWithTasksDto = todoService.findCategory(id).orElseThrow(() -> new ResourceNotFoundException());
+    CategoryWithTasksDto categoryWithTasksDto = todoService.findCategory(id);
     ApiResponse response = new ApiResponse();
     response.setData(categoryWithTasksDto);
     response.setStatus(true);

@@ -20,9 +20,4 @@ public class UserService {
   public User getUserByName(String name) {
     return userRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException());
   }
-
-  @Transactional(readOnly = true)
-  public User getUserNameofTask(String name) {
-    return userRepository.findTaskByUserName(name);
-  }
 }
