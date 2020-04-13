@@ -76,24 +76,15 @@ public class TodoService {
     }
 
     @Transactional
-    public void addTask(TaskCreateRequestDto dto) {
-        //TODO 작업해야 함
+    public Long addTask(TaskCreateRequestDto dto) {
         Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
         User user = userRepository.findByName(dto.getUserName()).orElseThrow(UserNotFoundException::new);
         Long userId = userRepository.findIdByUserName(dto.getUserName());
         logger.debug("User : {}", user);
-//    Task newTask = new Task(dto.getTitle(), dto.getContent(), category.getTask().size() + 1);
-//    user.addTask(newTask);
-//    userRepository.save(user);
-//    category.addTask(newTask);
-//    categoryRepository.save(category);
 
-        Long updatedTaskId = taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getUserName(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
-        Task updatedTask = taskRepository.findTaskById(updatedTaskId);
-        category.addTask(updatedTask);
-        user.addTask(updatedTask);
-//        userRepository.save(user);
-        //categoryRepository.save(category);
+        taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getUserName(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+        Long lastInsertId = taskRepository.lastInsertId();
+        return lastInsertId;
     }
 
     @Transactional(readOnly = true)
@@ -124,7 +115,6 @@ public class TodoService {
 
     @Transactional
     public void deleteTask(Long taskId) {
-        //TODO 작업해야 함
         Task deletedTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
         taskRepository.deleteTaskById(taskId);
         // 변경된 값을 더 효율적으로 리턴할 수 있는 방법을 고민 해보겠습니다.
@@ -141,6 +131,5 @@ public class TodoService {
               element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId))
               .collect(Collectors.toList());
       return new CategoryWithTasksDto(category, dtoList);
-      //return Optional.of(new CategoryWithTasksDto(category));
     }
 }
