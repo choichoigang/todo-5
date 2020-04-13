@@ -2,6 +2,7 @@ package com.codesquad.todo5.domain.activity;
 
 import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.user.User;
+import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,7 @@ public class Activity {
   // 컬럼으로 인식하여 에러 발생
 //  private User user;
 //  private Task task;
-  private String createdDate;
+  private Timestamp createdDate;
   private Action action;
   private Long categoryFrom;
   private Long categoryTo;
