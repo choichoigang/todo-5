@@ -15,4 +15,14 @@ public class ExceptionHandler {
   public ApiResponse handleError(ResourceNotFoundException exception) {
     return exception.returnErrorMessage();
   }
+
+  @org.springframework.web.bind.annotation.ExceptionHandler(UserNotFoundException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ResponseBody
+  public ApiResponse handleUserNotFoundException(UserNotFoundException exception) { return exception.returnErrorMessage(); }
+
+  @org.springframework.web.bind.annotation.ExceptionHandler
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ResponseBody
+  public ApiResponse handleInvalidModificationError(InvalidModificationException exception) { return exception.returnErrorMessage(); }
 }

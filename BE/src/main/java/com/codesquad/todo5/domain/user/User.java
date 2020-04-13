@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
@@ -21,11 +22,17 @@ public class User {
   private String name;
   private String password;
   private List<Task> task = new ArrayList<>();
+
+  @MappedCollection(idColumn="user", keyColumn="user_key")
   private List<Activity> activity = new ArrayList<>();
 
   private User(String name, String password) {
     this.name = name;
     this.password = password;
+  }
+
+  public void addTask(Task newTask) {
+    task.add(newTask);
   }
 
   public static User create(String name, String password) {

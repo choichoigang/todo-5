@@ -17,7 +17,28 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
   @Modifying
   @Transactional
-  @Query("UPDATE task t SET category = :categoryTo WHERE t.id = :id")
-  void updateTaskCategoryById(int categoryTo, Long id);
+  @Query("UPDATE task t SET t.title = :title, t.content = :content WHERE t.id = :id")
+  void modifyTaskContentsById(String title, String content, Long id);
 
+  @Modifying
+  @Transactional
+  @Query("INSERT INTO task (title, content, user, user_key, category, category_key, priority) VALUES (:title, :content, :userId, :userKey,:categoryId, :categoryKey, :priority)")
+  void addTaskByUserAndCategoryId(String title, String content, Long userId, int userKey, Long categoryId, int categoryKey, int priority);
+
+  @Modifying
+  @Transactional
+  @Query("UPDATE task t SET t.category = :categoryTo, t.priority = :priority WHERE t.id = :id")
+  void updateTaskCategoryById(int categoryTo, int priority, Long id);
+
+  @Query("SELECT u.name FROM task t LEFT OUTER JOIN user u ON t.user = u.id WHERE t.id = :id")
+  String findUserNameByTaskId(Long id);
+
+  @Modifying
+  @Transactional
+  @Query("UPDATE task t SET is_deleted = true WHERE t.id = :id")
+  void deleteTaskById(Long id);
+
+  @Transactional
+  @Query("SELECT category FROM task WHERE id = :taskId")
+  Long findCategoryIdByTaskId(Long taskId);
 }
