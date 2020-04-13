@@ -2,6 +2,7 @@ import { commonDOM, createDOM, cerateColumnDom } from "../options/DOM.js";
 import classNameObj from "../options/columnClassName.js";
 import { itemTemplate } from "../template/template.js";
 import modifyOption from "../options/modifyOption.js";
+import { add } from "../options/fetchOption.js";
 
 const columnClickEventHandler = (event, className, DOM) => {
   const targetClassName = event.target.className;
@@ -40,8 +41,8 @@ const activatingHandler = (addBoxDom) => {
 };
 
 const addBtnHandler = (textareaDom, className) => {
-  // 추가 사항을 서버로 보냄
   const inputValue = textareaDom.value;
+
   return itemTemplate(inputValue, className);
 };
 
