@@ -33,12 +33,13 @@ public class TaskController {
   }
 
   //handling with newly created card
-  @GetMapping("/task/add")
+  @PostMapping("/task/add")
   public ResponseEntity<ApiResponse> addTask(@RequestBody TaskCreateRequestDto dto) {
     //TODO 작업해야함: TaskService 참고
-    todoService.addTask(dto);
+    Long lastInsertId = todoService.addTask(dto);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
+    response.setData(lastInsertId);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
@@ -53,7 +54,7 @@ public class TaskController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @GetMapping("/task/{id}/edit")
+  @PostMapping("/task/{id}/edit")
   public ResponseEntity<ApiResponse> editTask(@PathVariable Long id, @RequestBody TaskModifyRequestDto dto) {
     // DATA 업데이트시 값을 반환하기 때문에 반환된 값을 한번 더 검증 하도록 했는데, 한번 더 검증하는 과정이 꼭 필요한지는 모르겠다.
     todoService.editTask(id, dto).orElseThrow(ResourceNotFoundException::new);
@@ -63,7 +64,7 @@ public class TaskController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @GetMapping("/task/{id}/delete")
+  @PostMapping("/task/{id}/delete")
   public ResponseEntity<ApiResponse> deleteCard(@PathVariable Long id) {
     //TODO 작업해야함: TaskService 참고
     logger.debug("Number of a task: {} ", id);

@@ -35,7 +35,7 @@ public class CategoryController {
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @GetMapping("/category/add")
+  @PostMapping("/category/add")
   public ResponseEntity<ApiResponse> addCategoryItem() {
     Category addCategory = todoService.addCategory();
     ApiResponse response = new ApiResponse();
@@ -43,12 +43,6 @@ public class CategoryController {
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
-//
-//  @GetMapping("/category/{id}/test/all")
-//  public void checkNull(@PathVariable Long id) {
-//    CategoryWithTasksDto categoryWithTasksDto = todoService.findCategory(id);
-//    System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>" + categoryWithTasksDto.getTaskResponseDtoList().size());
-//  }
 
   @GetMapping("/category/{id}/all")
   public ResponseEntity<ApiResponse> showSpecificCategory(@PathVariable Long id) {
@@ -69,6 +63,7 @@ public class CategoryController {
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
+
   @PostMapping("/category/{id}/delete")
   public ResponseEntity<ApiResponse> deleteCategoryItem(@PathVariable Long id, @RequestBody
       CategoryDeleteRequest dto) {
