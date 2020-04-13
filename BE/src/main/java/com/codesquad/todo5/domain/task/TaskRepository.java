@@ -23,7 +23,10 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Modifying
     @Transactional
     @Query("INSERT INTO task (title, content, user, user_key, author, category, category_key, priority) VALUES (:title, :content, :userId, :userKey, :author, :categoryId, :categoryKey, :priority)")
-    Long addTaskByUserAndCategoryId(String title, String content, String author, Long userId, int userKey, Long categoryId, int categoryKey, int priority);
+    void addTaskByUserAndCategoryId(String title, String content, String author, Long userId, int userKey, Long categoryId, int categoryKey, int priority);
+
+    @Query("SELECT LAST_INSERT_ID()")
+    Long lastInsertId();
 
     @Modifying
     @Transactional
