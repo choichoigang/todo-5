@@ -1,16 +1,32 @@
-import { createDOM, cerateColumnDom } from "../options/DOM.js";
+import { commonDOM, createDOM, cerateColumnDom } from "../options/DOM.js";
 import classNameObj from "../options/columnClassName.js";
-import itemTemplate from "../template/template.js";
+import { itemTemplate } from "../template/template.js";
+import modifyOption from "../options/modifyOption.js";
 
-const ClickEventHandler = (event, className, DOM) => {
+const columnClickEventHandler = (event, className, DOM) => {
   const targetClassName = event.target.className;
+
   if (targetClassName === className.plusButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === className.addButton) {
     DOM.column.innerHTML += addBtnHandler(DOM.textArea, DOM.columnName);
   } else if (targetClassName === className.cancelButton) {
     activatingHandler(DOM.addBox);
+  } else if (targetClassName === "deletion") {
+    deletionBtnHandler(event);
+  } else if (targetClassName === "modify") {
+    modifyModalHandler(event);
   }
+};
+
+const registerColumnClickEvent = (ColumnName) => {
+  cerateColumnDom(`${ColumnName}`).addEventListener("click", (event) => {
+    columnClickEventHandler(
+      event,
+      classNameObj(`${ColumnName}`),
+      createDOM(`${ColumnName}`)
+    );
+  });
 };
 
 const activatingHandler = (addBoxDom) => {
@@ -24,24 +40,34 @@ const activatingHandler = (addBoxDom) => {
 };
 
 const addBtnHandler = (textareaDom, className) => {
+  // 추가 사항을 서버로 보냄
   const inputValue = textareaDom.value;
   return itemTemplate(inputValue, className);
 };
 
-const registerClickEvent = (ColumnName) => {
-  cerateColumnDom(`${ColumnName}`).addEventListener("click", (event) => {
-    ClickEventHandler(
-      event,
-      classNameObj(`${ColumnName}`),
-      createDOM(`${ColumnName}`)
-    );
-  });
+const deletionBtnHandler = (event) => {
+  // 삭제 내용을 서버로 보냄
+  const taskElement = event.target.closest(".task");
+
+  taskElement.remove();
 };
 
+const modifyModalHandler = (event) => {
+  modifyOption.targetElement = event.target.closest(".task");
+  modifyOption.titleElement = modifyOption.targetElement.querySelector(
+    ".task_value"
+  );
+
+  commonDOM.blind.className = "blind_on";
+  commonDOM.modal.style.visibility = "visible";
+  commonDOM.modal_textarea.value = modifyOption.titleElement.innerText;
+};
+//------------------------------------------------------------------------------------
+
 export function testEvent() {
-  registerClickEvent("todo");
-  registerClickEvent("doing");
-  registerClickEvent("done");
+  registerColumnClickEvent("todo");
+  registerColumnClickEvent("doing");
+  registerColumnClickEvent("done");
 }
 
 export default testEvent;
