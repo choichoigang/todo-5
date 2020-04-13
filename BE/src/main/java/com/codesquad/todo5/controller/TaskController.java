@@ -77,12 +77,10 @@ public class TaskController {
   public ResponseEntity<ApiResponse> moveTask(@PathVariable Long id,
       @RequestBody TaskMoveRequestDto dto) {
     logger.debug("Dto : {} ", dto);
-    // priority?
+    //TODO: 카테고리가 존재하지 않는 인덱스 번호에 이동할 경우에도 true라고 반환되며 값 자체가 반환된다. 이는 UPDATE 쿼리에서 에러 처리를 제대로 반환하지 않는 문제에서 기인하는 것으로 추정된다.
     taskRepository.updateTaskCategoryById(dto.getCategoryTo(), dto.getPriority(), id);
-    Task updatedTask = taskRepository.findTaskById(id);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
-    response.setData(updatedTask);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 }
