@@ -1,5 +1,6 @@
 package com.codesquad.todo5.controller;
 
+import com.codesquad.todo5.domain.category.Category;
 import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.task.TaskRepository;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
