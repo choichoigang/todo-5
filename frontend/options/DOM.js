@@ -1,9 +1,13 @@
-const DOM = {
+const commonDOM = {
   dropTarget: document.querySelector(".wrapper"),
 
   todoBox: document.querySelector("#todo"),
   doingBox: document.querySelector("#doing"),
   doneBox: document.querySelector("#done"),
+
+  blind: document.querySelector(".blind_off"),
+  modal: document.querySelector(".modify_modal"),
+  modal_textarea: document.querySelector(".modify_modal textarea"),
 };
 
 const cerateColumnDom = (columnName) => {
@@ -28,4 +32,4 @@ const createTextareaDOM = (columnName) => {
   };
 };
 
-export { DOM, createDOM, createTextareaDOM, cerateColumnDom };
+export { commonDOM, createDOM, createTextareaDOM, cerateColumnDom };
