@@ -63,6 +63,16 @@ const modifyModalHandler = (event) => {
   commonDOM.modal_textarea.value = modifyOption.titleElement.innerText;
 };
 //------------------------------------------------------------------------------------
+const modalClickEventHandler = (event) => {
+  const targetClassName = event.target.className;
+
+  if (targetClassName === "save_note") {
+    modalSaveNoteHandler();
+  } else if (targetClassName === "modal_cancel") {
+    modalCancelHandler();
+  }
+};
+
 const modalCancelHandler = () => {
   commonDOM.blind.className = "blind_off";
   commonDOM.modal.style.visibility = "hidden";
