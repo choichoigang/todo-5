@@ -1,4 +1,4 @@
-const add = {
+export const add = {
   title: "",
   content: "",
   userName: "hoi",
