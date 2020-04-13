@@ -9,6 +9,7 @@ import com.codesquad.todo5.domain.user.User;
 import com.codesquad.todo5.domain.user.UserRepository;
 import com.codesquad.todo5.dto.category.CategoryDeleteRequest;
 import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
+import com.codesquad.todo5.dto.category.CategoryWithTasksDto;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
 import com.codesquad.todo5.dto.task.TaskShowResponseDto;
@@ -79,9 +80,18 @@ public class TodoService {
     User user = userRepository.findByName(dto.getUserName()).orElseThrow(UserNotFoundException::new);
     Long userId = userRepository.findIdByUserName(dto.getUserName());
     logger.debug("User : {}", user);
-    taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+//    Task newTask = new Task(dto.getTitle(), dto.getContent(), category.getTask().size() + 1);
+//    user.addTask(newTask);
 //    userRepository.save(user);
+//    category.addTask(newTask);
 //    categoryRepository.save(category);
+
+    Long updatedTaskId = taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+    Task updatedTask = taskRepository.findTaskById(updatedTaskId);
+    category.addTask(updatedTask);
+    user.addTask(updatedTask);
+//        userRepository.save(user);
+    //categoryRepository.save(category);
   }
 
   @Transactional(readOnly = true)
@@ -91,7 +101,7 @@ public class TodoService {
     Long categoryId = taskRepository.findCategoryIdByTaskId(taskId);
     logger.debug("userName : {}", userName);
 
-    return new TaskShowResponseDto(task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId);
+    return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId);
 
   }
 
@@ -120,5 +130,12 @@ public class TodoService {
 
   private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {
      return task.getTitle().equals(modifiedTitle) && task.getContent().equals(modifiedContent);
+  }
+
+  @Transactional(readOnly = true)
+  public Optional<CategoryWithTasksDto> findCategory(Long categoryId) {
+    Category category = categoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
+    logger.debug("CategoryWithTasksDto : {}", new CategoryWithTasksDto(category));
+    return Optional.of(new CategoryWithTasksDto(category));
   }
 }

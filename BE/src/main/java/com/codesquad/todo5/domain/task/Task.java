@@ -33,7 +33,7 @@ public class Task {
   @Column("category_to")
   private int categoryTo;
 
-  private Task(String title, String content, int priority) {
+  public Task(String title, String content, int priority) {
     this.title = title;
     this.content = content;
     this.isDeleted = false;

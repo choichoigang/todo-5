@@ -23,6 +23,6 @@ public class UserService {
 
   @Transactional(readOnly = true)
   public User getUserNameofTask(String name) {
-    return userRepository.findTaskUserName(name);
+    return userRepository.findTaskByUserName(name);
   }
 }
