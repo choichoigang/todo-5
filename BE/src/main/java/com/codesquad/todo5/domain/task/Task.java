@@ -28,20 +28,23 @@ public class Task {
   private String content;
   private boolean isDeleted;
   private int priority;
+  @Column("author")
+  private String author;
 //  @Column("category_from")
 //  private int categoryFrom;
   @Column("category_to")
   private int categoryTo;
 
-  public Task(String title, String content, int priority) {
+  public Task(String title, String content, int priority, String author) {
     this.title = title;
     this.content = content;
     this.isDeleted = false;
     this.priority = priority;
+    this.author = author;
   }
 
-  public static Task create(String title, String content, int priority) {
-    return new Task(title, content, priority);
+  public static Task create(String title, String content, int priority, String author) {
+    return new Task(title, content, priority, author);
   }
 
 //  public void updateCategoryOrder(TaskEditRequestDto dto) {

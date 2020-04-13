@@ -88,7 +88,7 @@ public class TodoService {
 //    category.addTask(newTask);
 //    categoryRepository.save(category);
 
-        Long updatedTaskId = taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+        Long updatedTaskId = taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getUserName(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
         Task updatedTask = taskRepository.findTaskById(updatedTaskId);
         category.addTask(updatedTask);
         user.addTask(updatedTask);
