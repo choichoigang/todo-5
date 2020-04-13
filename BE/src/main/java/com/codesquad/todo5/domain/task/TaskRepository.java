@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
 
-  @Query("SELECT id, title, content, IF(is_deleted, 'true', 'false') as is_deleted, priority, category_to, category, category_key, user, user_key FROM task WHERE id = :id AND is_deleted = FALSE")
+  @Query("SELECT id, title, content, IF(is_deleted, 'true', 'false') as is_deleted, priority, category_to, category, user, user_key FROM task WHERE id = :id AND is_deleted = FALSE")
   Task findTaskById(Long id);
 
   @Modifying
