@@ -49,7 +49,7 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     }
     
     func configureDataSource(tasksID: Int, category: Category) {
-        tasksDataSource = TasksTableViewDataSource(tasksID: tasksID, tasks: category.tasks)
+        tasksDataSource = TasksTableViewDataSource(tasksID: tasksID, category: category)
        tableView.dataSource = tasksDataSource
        tableView.reloadData()
         
