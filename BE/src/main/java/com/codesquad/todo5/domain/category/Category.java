@@ -20,7 +20,7 @@ public class Category {
   private String name;
   private boolean isDeleted;
 
-  //@MappedCollection(idColumn = "category_id", keyColumn = "category_key")
+  @MappedCollection(keyColumn = "priority")
   private List<Task> task = new ArrayList<>();
 
   private Category(String name) {
