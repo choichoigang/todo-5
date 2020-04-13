@@ -24,7 +24,6 @@ CREATE TABLE task (
     priority int NOT NULL,
     category_to int DEFAULT 0,
     category int NOT NULL references category(id) ON UPDATE CASCADE,
-    category_key int,
     user int NOT NULL references user(id) ON UPDATE CASCADE,
     user_key int
 );
