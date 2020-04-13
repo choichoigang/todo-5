@@ -5,5 +5,3 @@ const add = {
   priority: Number,
   categoryNum: Number,
 };
-
-const delete = {};
