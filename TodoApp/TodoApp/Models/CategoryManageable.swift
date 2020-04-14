@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol CategoryManageable {
+    func updateCategory(count: Int)
+}

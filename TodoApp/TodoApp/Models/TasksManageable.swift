@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+protocol TasksManageable {
+    func removeTask()
+    func addTask()
+    func editTask()
+    func getTasksCount() -> Int
+}

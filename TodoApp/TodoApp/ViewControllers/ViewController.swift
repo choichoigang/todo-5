@@ -31,7 +31,6 @@ class ViewController: UIViewController {
         setConstraints()
         
         requestAllData()
-        addNotification()
     }
     
     func addChild() {
@@ -80,7 +79,7 @@ class ViewController: UIViewController {
                 guard let allData = self.allData else { return }
                 DispatchQueue.main.async {
                     for index in 0..<self.controllers.count {
-                        self.dataBindSubController(viewController: self.controllers[index], allData: allData, index: index)
+                        self.controllers[index].category = allData.data[index]
                     }
                 }
             case .failure(let error):
@@ -89,26 +88,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    func dataBindSubController(viewController: TasksViewController , allData: AllData, index: Int) {
-        let category = allData.data[index]
-        viewController.configureData(category: category)
-        viewController.configureDataSource(tasksID: category.id, category: category)
-    }
-    
-    func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
-    }
-    
-    @objc func updateData(_ notification: Notification) {
-        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, tasksID: Int) else { return }
-        for controller in controllers {
-            if controller.tasksDataSource.tasksID == updateInfo.tasksID {
-                controller.titleView.setTasksCount(count: updateInfo.count)
-            }
-        }
-    }
-    
     
 }
 
