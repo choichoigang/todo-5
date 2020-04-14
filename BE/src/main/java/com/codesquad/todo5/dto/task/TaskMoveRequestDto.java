@@ -11,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TaskMoveRequestDto {
     private int priority;
-//    private int categoryFrom;
-    private int categoryTo;
+    private Long categoryFrom;
+    private Long categoryTo;
 }

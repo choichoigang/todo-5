@@ -12,15 +12,18 @@ import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
 import com.codesquad.todo5.dto.category.CategoryWithTasksDto;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
+import com.codesquad.todo5.dto.task.TaskMoveRequestDto;
 import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
+import com.codesquad.todo5.exception.RudimentaryException;
 import com.codesquad.todo5.exception.UserNotFoundException;
 import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -131,5 +134,61 @@ public class TodoService {
               element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId))
               .collect(Collectors.toList());
       return new CategoryWithTasksDto(category, dtoList);
+    }
+
+    public void sortLogicJunction(Long taskId, TaskMoveRequestDto dto) {
+        if (dto.getCategoryFrom().equals(dto.getCategoryTo())) {
+            sortWithinCategory(taskId, dto);
+        }
+        else if (!dto.getCategoryFrom().equals(dto.getCategoryTo())) {
+            sortBetweenCategories(taskId, dto);
+        } else {
+            throw new RudimentaryException("무언가 이상해요..");
+        }
+    }
+
+    @Transactional
+    public void sortBetweenCategories(Long taskId, TaskMoveRequestDto dto) {
+        Category previousCategory = categoryRepository.findById(dto.getCategoryFrom()).orElseThrow(() -> new ResourceNotFoundException());
+        Category nextCategory = categoryRepository.findById(dto.getCategoryTo()).orElseThrow(() -> new ResourceNotFoundException());
+
+        Task moveTask = taskRepository.findById(taskId).orElseThrow(() -> new ResourceNotFoundException());
+
+        //컬럼에서 컬럼 이동하는 로직
+        List<Task> previousCategoryAfterRemovedTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
+        previousCategory.getTask().remove(moveTask);
+        previousCategoryAfterRemovedTask.forEach(element -> {
+//            element.setPriority(element.getPriority() - 1);
+            taskRepository.updateTaskPriorityById(element.getPriority() - 1, element.getId());
+        });
+//        categoryRepository.save(previousCategory);
+
+
+        List<Task> nextCategoryAfterAddTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
+        nextCategoryAfterAddTask.forEach(element -> {
+//            element.setPriority(element.getPriority() + 1);
+            taskRepository.updateTaskPriorityById(element.getPriority() + 1, element.getId());
+        });
+//        categoryRepository.save(nextCategory);
+        taskRepository.updateTaskCategoryById(dto.getCategoryTo(), dto.getPriority(), taskId);
+    }
+
+    @Transactional
+    public void sortWithinCategory(Long taskId, TaskMoveRequestDto dto) {
+        //컬럼 내부에서 이동하는 로직
+        if (taskRepository.findTaskById(taskId).getPriority() == 1) {
+            List<Task> taskList = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
+            taskList.forEach(element -> {
+                element.setPriority(element.getPriority() - 1);
+                taskRepository.save(element);
+            });
+        }
+        if (taskRepository.findTaskById(taskId).getPriority() != 1) {
+            List<Task> taskList = taskRepository.findTasksByTargetIndexWithoutTheFirst(dto.getPriority(), dto.getCategoryFrom());
+            taskList.forEach(element -> {
+                element.setPriority(element.getPriority() - 1);
+                taskRepository.save(element);
+            });
+        }
     }
 }

@@ -11,6 +11,7 @@ import com.codesquad.todo5.exception.ResourceNotFoundException;
 import com.codesquad.todo5.response.ApiResponse;
 import com.codesquad.todo5.service.TodoService;
 import com.codesquad.todo5.service.UserService;
+import com.sun.tools.javac.comp.Todo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -79,7 +80,9 @@ public class TaskController {
       @RequestBody TaskMoveRequestDto dto) {
     logger.debug("Dto : {} ", dto);
     //TODO: 카테고리가 존재하지 않는 인덱스 번호에 이동할 경우에도 true라고 반환되며 값 자체가 반환된다. 이는 UPDATE 쿼리에서 에러 처리를 제대로 반환하지 않는 문제에서 기인하는 것으로 추정된다.
-    taskRepository.updateTaskCategoryById(dto.getCategoryTo(), dto.getPriority(), id);
+    //TODO: 아래의 로직은 서비스 객체로 이동하는 리팩토링이 필요하다.
+    todoService.sortLogicJunction(id, dto);
+//    taskRepository.updateTaskCategoryById(dto.getCategoryTo(), taskId);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
