@@ -17,7 +17,7 @@ const cerateColumnDom = (columnName) => {
 const createDOM = (columnName) => {
   return {
     columnName: `${columnName}`,
-    column: document.querySelector(`#${columnName}`),
+    task_list: document.querySelector(`#${columnName} .task_list`),
     addBox: document.querySelector(`#${columnName}_add_area`),
     textArea: document.querySelector(`#${columnName}_add_area textarea`),
     addButton: document.querySelector(`.${columnName}_add_btn`),
