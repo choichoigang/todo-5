@@ -1,5 +1,5 @@
-const taskTemplate = (inputValue, id, className) => {
-  return ` <div class="task" draggable="true" data_task_id="${id}">
+export const taskTemplate = (inputValue, id, className) => {
+  return ` <div class="task" draggable="true" data-task-id="${id}">
     <div id="task1" class="${className}_task">
       <div class="title">
       <span class="task_value">${inputValue}</span>
@@ -15,5 +15,3 @@ const taskTemplate = (inputValue, id, className) => {
     </div>
   </div>`;
 };
-
-export { itemTemplate, taskTemplate };
