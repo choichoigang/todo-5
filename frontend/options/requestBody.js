@@ -4,3 +4,10 @@ export const requestBodyAdd = {
   author: "jypthemiracle",
   categoryNum: Number,
 };
+
+export const requestBodyEdit = {
+  modifiedTitle: String,
+  modifiedContent: String,
+};
+
+///api/task/{taskId}/edit
