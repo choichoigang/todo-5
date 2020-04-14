@@ -11,6 +11,7 @@ import UIKit
 class NewCardView: UIView, UITextViewDelegate {
     
     var delegate: NewCardViewDelegate?
+    var categoryNum: Int?
     
     let titlePlaceholder = "제목을 입력해주세요"
     let contentsPlaceholder = "내용을 입력해주세요"
@@ -200,7 +201,7 @@ class NewCardView: UIView, UITextViewDelegate {
     }
     
     @objc func addNewCard() {
-        newTask = Contents(id: 0, title: titleView.text, content: contentsView.text, priority: 0, author: "", categoryTo: 0, deleted: false)
+        newTask = Contents(id: nil, title: titleView.text, content: contentsView.text, priority: nil, author: "", categoryTo: nil, categoryNum: categoryNum!, deleted: nil)
         guard let newTask = newTask else { return }
         delegate?.addNewCard(content: newTask)
     }

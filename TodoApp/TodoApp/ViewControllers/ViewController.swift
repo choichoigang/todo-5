@@ -72,7 +72,7 @@ class ViewController: UIViewController {
     }
     
     func requestAllData() {
-        networkManager.getResource(url: NetworkManager.EndPoints.AllData!, methodType: .get) { result in
+        networkManager.getResource(url: EndPoints.AllData!, methodType: .get) { result in
             switch result {
             case .success(let anyData):
                 self.allData = anyData as? AllData

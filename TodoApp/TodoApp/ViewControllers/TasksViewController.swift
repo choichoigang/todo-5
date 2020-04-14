@@ -65,6 +65,7 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     
     func presentNewCardView() {
         let newCardViewController = NewCardViewController()
+        newCardViewController.newCardView.categoryNum = category?.id
         self.present(newCardViewController, animated: true, completion: nil)
     }
     

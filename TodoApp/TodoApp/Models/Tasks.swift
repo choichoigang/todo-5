@@ -21,13 +21,15 @@ struct Category: Codable {
 }
 
 struct Contents: Codable {
-    var id: Int
+    var id: Int?
     var title: String
     var content: String
-    var priority: Int
+    var priority: Int?
     var author: String
-    var categoryTo: Int
-    var deleted: Bool
+    var categoryTo: Int?
+    var categoryFrom: Int?
+    var categoryNum: Int
+    var deleted: Bool?
 }
 
 struct DragItem {
