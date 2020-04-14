@@ -26,6 +26,7 @@ public class Task {
 
   @Length(max=500)
   private String content;
+  @Column("is_deleted")
   private boolean isDeleted;
   private int priority;
   @Column("author")
@@ -34,6 +35,10 @@ public class Task {
 //  private int categoryFrom;
   @Column("category_to")
   private int categoryTo;
+  @Column("category_from")
+  private int categoryFrom;
+  @Column("category")
+  private int categoryNum;
 
   public Task(String title, String content, int priority, String author) {
     this.title = title;
