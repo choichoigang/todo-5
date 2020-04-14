@@ -137,14 +137,16 @@ public class TodoService {
     }
 
     public void sortLogicJunction(Long taskId, TaskMoveRequestDto dto) {
-        if (dto.getCategoryFrom().equals(dto.getCategoryTo())) {
-            sortWithinCategory(taskId, dto);
-        }
-        else if (!dto.getCategoryFrom().equals(dto.getCategoryTo())) {
+//                    sortWithinCategory(taskId, dto);
+
+//        if (dto.getCategoryFrom().equals(dto.getCategoryTo())) {
+//            sortWithinCategory(taskId, dto);
+//        }
+//        else if (!dto.getCategoryFrom().equals(dto.getCategoryTo())) {
             sortBetweenCategories(taskId, dto);
-        } else {
-            throw new RudimentaryException("무언가 이상해요..");
-        }
+//        } else {
+//            throw new RudimentaryException("무언가 이상해요..");
+//        }
     }
 
     @Transactional
@@ -157,19 +159,26 @@ public class TodoService {
         //컬럼에서 컬럼 이동하는 로직
         List<Task> previousCategoryAfterRemovedTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
         previousCategory.getTask().remove(moveTask);
-        previousCategoryAfterRemovedTask.forEach(element -> {
-//            element.setPriority(element.getPriority() - 1);
-            taskRepository.updateTaskPriorityById(element.getPriority() - 1, element.getId());
-        });
+//        previousCategoryAfterRemovedTask.forEach(element -> {
+////            element.setPriority(element.getPriority() - 1);
+//            taskRepository.updateTaskPriorityById(element.getPriority() - 1, element.getId());
+//        });
+        for (Task task : previousCategoryAfterRemovedTask) {
+            taskRepository.updateTaskPriorityById(task.getPriority() - 1, task.getId());
+        }
 //        categoryRepository.save(previousCategory);
 
 
         List<Task> nextCategoryAfterAddTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
-        nextCategoryAfterAddTask.forEach(element -> {
-//            element.setPriority(element.getPriority() + 1);
-            taskRepository.updateTaskPriorityById(element.getPriority() + 1, element.getId());
-        });
-//        categoryRepository.save(nextCategory);
+//        nextCategoryAfterAddTask.forEach(element -> {
+////            element.setPriority(element.getPriority() + 1);
+//            taskRepository.updateTaskPriorityById(element.getPriority() + 1, element.getId());
+////            logger.info("element : {}", element.getPriority());
+//        });
+////        categoryRepository.save(nextCategory);
+        for (Task task : previousCategoryAfterRemovedTask) {
+            taskRepository.updateTaskPriorityById(task.getPriority() + 1, task.getId());
+        }
         taskRepository.updateTaskCategoryById(dto.getCategoryTo(), dto.getPriority(), taskId);
     }
 

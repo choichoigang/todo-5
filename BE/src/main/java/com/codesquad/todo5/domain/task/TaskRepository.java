@@ -41,11 +41,6 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE task t SET t.category = :categoryTo WHERE t.id = :id")
-    void updateTaskCategoryById(Long categoryTo, Long id);
-
-    @Modifying
-    @Transactional
     @Query("UPDATE task t SET t.priority = :priority WHERE t.id = :id")
     void updateTaskPriorityById(int priority, Long id);
 
