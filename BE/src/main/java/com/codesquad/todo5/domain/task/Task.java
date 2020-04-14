@@ -26,6 +26,7 @@ public class Task {
 
   @Length(max=500)
   private String content;
+  @Column("is_deleted")
   private boolean isDeleted;
   private int priority;
   @Column("author")

@@ -22,7 +22,7 @@ public class CategoryWithTasksDto {
     this.categoryId = category.getId();
     this.categoryName = category.getName();
     this.task = category.getTask().stream()
-        .map(taskItem -> new TaskShowResponseDto(taskItem.getId(), taskItem.getTitle(), taskItem.getContent(), taskItem.getPriority(), this.categoryId))
+        .map(taskItem -> new TaskShowResponseDto(taskItem.getId(), taskItem.getTitle(), taskItem.getContent(), taskItem.getPriority(), this.categoryId, taskItem.isDeleted()))
         .collect(Collectors.toList());
   }
 

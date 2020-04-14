@@ -94,7 +94,7 @@ public class TodoService {
         Long categoryId = taskRepository.findCategoryIdByTaskId(taskId);
         logger.debug("userName : {}", userName);
 
-        return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId);
+        return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId, task.isDeleted());
 
     }
 
@@ -128,7 +128,7 @@ public class TodoService {
     public CategoryWithTasksDto findCategory(Long categoryId) {
       Category category = categoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
       List<TaskShowResponseDto> dtoList = category.getTask().stream().map(element -> new TaskShowResponseDto(element.getId(),
-              element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId))
+              element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId, element.isDeleted()))
               .collect(Collectors.toList());
       return new CategoryWithTasksDto(category, dtoList);
     }

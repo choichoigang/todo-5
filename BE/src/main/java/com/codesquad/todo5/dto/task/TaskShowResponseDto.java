@@ -20,40 +20,24 @@ public class TaskShowResponseDto {
   private int categoryFrom;
   private int categoryTo;
   private Long categoryNum;
+  private boolean isDeleted;
 
-//  var id: Int?
-//  var title: String
-//  var content: String
-//  var priority: Int?
-//  var author: String
-//  var categoryFrom: Int? //카드 move에서만 사용
-//  var categoryTo: Int? //카드 move에서만 사용
-//  var categoryNum: Int
-
-
-//  public TaskShowResponseDto(Task item, Long categoryId) {
-////    this.id = item.getId();
-//    this.title = item.getTitle();
-//    this.content = item.getContent();
-//    this.userName = taskRepository.findUserNameByTaskId(item.getId());
-//    this.priority = item.getPriority();
-//    this.categoryId = categoryId;
-//  }
-//
-  public TaskShowResponseDto(Long id, String title, String content, int priority, Long categoryNum) {
+  public TaskShowResponseDto(Long id, String title, String content, int priority, Long categoryNum, boolean isDeleted) {
     this.id = id;
     this.title = title;
     this.content = content;
     this.priority = priority;
     this.categoryNum = categoryNum;
+    this.isDeleted = isDeleted;
   }
 
-  public TaskShowResponseDto(Long id, String title, String content, String author, int priority, Long categoryNum) {
+  public TaskShowResponseDto(Long id, String title, String content, String author, int priority, Long categoryNum, boolean isDeleted) {
     this.id = id;
     this.title = title;
     this.content = content;
     this.author = author;
     this.priority = priority;
     this.categoryNum = categoryNum;
+    this.isDeleted = isDeleted;
   }
 }
