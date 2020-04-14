@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet var navigationBar: UINavigationBar!
-    let firstViewController = TasksViewController(childID: 0, nibName: nil, bundle: nil)
-    let secondViewController = TasksViewController(childID: 1, nibName: nil, bundle: nil)
-    let thirdViewController = TasksViewController(childID: 2, nibName: nil, bundle: nil)
+    let firstViewController = TasksViewController()
+    let secondViewController = TasksViewController()
+    let thirdViewController = TasksViewController()
     
     lazy var controllers = [firstViewController, secondViewController, thirdViewController]
     
@@ -80,9 +80,12 @@ class ViewController: UIViewController {
                 self.tasks = anyData as? Tasks
                 guard let allData = self.tasks else { return }
                 DispatchQueue.main.async {
-                    self.firstViewController.category = allData.data[0]
-                    self.secondViewController.category = allData.data[1]
-                    self.thirdViewController.category = allData.data[2]
+                    self.firstViewController.configureData(category: allData.data[0])
+                    self.firstViewController.configureDataSource(tasksID: 0, category: allData.data[0])
+                    self.secondViewController.configureData(category: allData.data[1])
+                    self.secondViewController.configureDataSource(tasksID: 1, category: allData.data[1])
+                    self.thirdViewController.configureData(category: allData.data[2])
+                    self.thirdViewController.configureDataSource(tasksID: 2, category: allData.data[2])
                 }
             case .failure(let error):
                 //네트워크 오류 알림 알럿창 생성
@@ -98,12 +101,13 @@ class ViewController: UIViewController {
     @objc func updateData(_ notification: Notification) {
         guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, tasksID: Int) else { return }
         for controller in controllers {
-            if controller.childID == updateInfo.tasksID {
+            if controller.tasksDataSource.tasksID == updateInfo.tasksID {
                 controller.titleView.setTasksCount(count: updateInfo.count)
             }
         }
-        
     }
+    
+    
 }
 
 extension Notification.Name {

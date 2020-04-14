@@ -9,8 +9,9 @@
 import UIKit
 
 class TasksTableViewDataSource: NSObject, UITableViewDataSource {
-
+    
     static let identifier = "tasksCell"
+    var category: Category
     let tasksID: Int
     var tasks: [Contents] {
         didSet {
@@ -18,21 +19,22 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
         }
     }
     
-    init(tasksID: Int, tasks: [Contents]) {
+    init(tasksID: Int, category: Category) {
         self.tasksID = tasksID
-        self.tasks = tasks
+        self.category = category
+        self.tasks = category.task
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TasksTableViewDataSource.identifier, for: indexPath) as! TasksTableViewCell
-        cell.configure(title: tasks[indexPath.row].title, contents: tasks[indexPath.row].content ,author: tasks[indexPath.row].userName)
+        cell.configure(title: tasks[indexPath.row].title , contents: tasks[indexPath.row].content ,author: tasks[indexPath.row].author)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -45,9 +47,5 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
             tableView.endUpdates()
         }
     }
-    
-    func updateTasksCount(handler: (Int) -> ()) {
-        
-    }
-
+   
 }

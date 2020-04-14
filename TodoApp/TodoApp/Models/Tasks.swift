@@ -14,15 +14,24 @@ struct Tasks: Codable {
 }
 
 struct Category: Codable {
-       var id: Int
-       var name: String
-       var tasks: [Contents]
+    var id: Int
+    var name: String
+    var task: [Contents]
+    var deleted: Bool
 }
 
 struct Contents: Codable {
+    var id: Int
     var title: String
     var content: String
-    var userName: String
     var priority: Int
-    var id: Int
+    var author: String
+    var categoryTo: Int
+    var deleted: Bool
+}
+
+struct DragItem {
+    var dataSource: TasksTableViewDataSource
+    var indexPath: IndexPath
+    var tableView: TasksTableView
 }

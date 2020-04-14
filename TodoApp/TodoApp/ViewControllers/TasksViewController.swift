@@ -11,32 +11,17 @@ import UIKit
 class TasksViewController: UIViewController, TitleViewDelegate {
     let titleView = TitleView()
     let tableView = TasksTableView()
-    
     var tasksDataSource: TasksTableViewDataSource!
     var tasksDelegate = TasksTableViewDelegate()
-    
-    let childID: Int
-    
-    var category: Category? {
-        didSet {
-            configureData()
-            configureDataSource()
-        }
-    }
-    
-    init(childID: Int, nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.childID = childID
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var category: Category?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         titleView.delegate = self
         tableView.delegate = tasksDelegate
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self as? UITableViewDragDelegate
+        tableView.dropDelegate = self as? UITableViewDropDelegate
         
         self.view.addSubview(titleView)
         self.view.addSubview(tableView)
@@ -58,22 +43,19 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     
-    func configureData() {
-        guard let category = category else { return }
-        titleView.setTasksCount(count: category.tasks.count)
+    func configureData(category: Category) {
+        titleView.setTasksCount(count: category.task.count)
         titleView.setTitle(title: category.name)
     }
     
-    func configureDataSource() {
-        guard let category = category else { return }
-
-            tasksDataSource = TasksTableViewDataSource(tasksID: childID, tasks: category.tasks)
-                       tableView.dataSource = tasksDataSource
-                       tableView.reloadData()
+    func configureDataSource(tasksID: Int, category: Category) {
+        tasksDataSource = TasksTableViewDataSource(tasksID: tasksID, category: category)
+       tableView.dataSource = tasksDataSource
+       tableView.reloadData()
         
     }
     
-    func popNewCardView() {
+    func presentNewCardView() {
         let newCardViewController = NewCardViewController()
         self.present(newCardViewController, animated: true, completion: nil)
     }
