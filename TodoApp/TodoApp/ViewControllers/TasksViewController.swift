@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TasksViewController: UIViewController, TitleViewDelegate, CategoryManageable, TasksManageable {
+class TasksViewController: UIViewController, TitleViewDelegate {
     
     let titleView = TitleView()
     let tableView = TasksTableView()
@@ -76,29 +76,8 @@ class TasksViewController: UIViewController, TitleViewDelegate, CategoryManageab
         guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, tasksID: Int) else { return }
         guard let category = category else { return }
         if category.id == updateInfo.tasksID {
-            self.updateCategory(count: updateInfo.count)
+            titleView.setTasksCount(count: updateInfo.count)
         }
-    }
-    
-    func updateCategory(count: Int) {
-        titleView.setTasksCount(count: count)
-    }
-    
-    func removeTask() {
-        
-    }
-    
-    func addTask() {
-        
-    }
-    
-    func editTask() {
-        
-    }
-    
-    func getTasksCount() -> Int {
-        guard let category = category else { return 0 }
-        return category.task.count
     }
 }
 
