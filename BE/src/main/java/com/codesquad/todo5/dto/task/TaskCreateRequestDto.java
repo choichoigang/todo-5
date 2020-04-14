@@ -12,6 +12,8 @@ import lombok.Setter;
 public class TaskCreateRequestDto {
   private String title;
   private String content;
-  private String userName;
+  private String author;
   private Long categoryNum;
+  private Long categoryFrom;
+  private Long categoryTo;
 }

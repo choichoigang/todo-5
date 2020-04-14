@@ -34,6 +34,8 @@ public class Task {
 //  private int categoryFrom;
   @Column("category_to")
   private int categoryTo;
+  @Column("category_from")
+  private int categoryFrom;
 
   public Task(String title, String content, int priority, String author) {
     this.title = title;

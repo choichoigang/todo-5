@@ -12,12 +12,24 @@ import org.springframework.stereotype.Repository;
 @Setter
 @NoArgsConstructor
 public class TaskShowResponseDto {
-  private Long taskId;
+  private Long id;
   private String title;
   private String content;
-  private String userName;
   private int priority;
-  private Long categoryId;
+  private String author;
+  private int categoryFrom;
+  private int categoryTo;
+  private Long categoryNum;
+
+//  var id: Int?
+//  var title: String
+//  var content: String
+//  var priority: Int?
+//  var author: String
+//  var categoryFrom: Int? //카드 move에서만 사용
+//  var categoryTo: Int? //카드 move에서만 사용
+//  var categoryNum: Int
+
 
 //  public TaskShowResponseDto(Task item, Long categoryId) {
 ////    this.id = item.getId();
@@ -28,20 +40,20 @@ public class TaskShowResponseDto {
 //    this.categoryId = categoryId;
 //  }
 //
-  public TaskShowResponseDto(Long taskId, String title, String content, int priority, Long categoryId) {
-    this.taskId = taskId;
+  public TaskShowResponseDto(Long id, String title, String content, int priority, Long categoryNum) {
+    this.id = id;
     this.title = title;
     this.content = content;
     this.priority = priority;
-    this.categoryId = categoryId;
+    this.categoryNum = categoryNum;
   }
 
-  public TaskShowResponseDto(Long taskId, String title, String content, String userName, int priority, Long categoryId) {
-    this.taskId = taskId;
+  public TaskShowResponseDto(Long id, String title, String content, String author, int priority, Long categoryNum) {
+    this.id = id;
     this.title = title;
     this.content = content;
-    this.userName = userName;
+    this.author = author;
     this.priority = priority;
-    this.categoryId = categoryId;
+    this.categoryNum = categoryNum;
   }
 }
