@@ -37,3 +37,8 @@ struct DragItem {
     var indexPath: IndexPath
     var tableView: TasksTableView
 }
+
+struct RequestBody: Codable {
+    var status: Bool
+    var data: Int
+}

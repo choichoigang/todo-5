@@ -29,7 +29,7 @@ enum EndPoints {
 struct NetworkManager {
     let decodeManager = DecodeManager()
     
-    func getResource(url: URL, methodType: HTTPMethod, body: Data? = nil, completion: @escaping(Result<Any, NetworkErrorCase>) -> Void) {
+    func getResource<T:Decodable>(url: URL, methodType: HTTPMethod, dataType:T.Type, body: Data? = nil, completion: @escaping(Result<Any, NetworkErrorCase>) -> Void) {
         
         var request = URLRequest(url: url)
         request.httpMethod = methodType.rawValue
@@ -41,7 +41,7 @@ struct NetworkManager {
                 if let error = error as NSError?, error.domain == NSURLErrorDomain { completion(.failure(.InvalidURL)) }
                 return
             }
-            self.decodeManager.decode(data: data) { completion($0) }
+            self.decodeManager.decode(data: data, dataType: dataType) { completion($0) }
         }.resume()
     }
 }
