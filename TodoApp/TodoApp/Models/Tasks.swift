@@ -20,11 +20,13 @@ struct Category: Codable {
 }
 
 struct Contents: Codable {
+    var id: Int
     var title: String
     var content: String
-    var userName: String
     var priority: Int
-    var id: Int
+    var author: String
+    var categoryTo: Int
+    var deleted: Bool
 }
 
 struct DragItem {
