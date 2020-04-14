@@ -44,7 +44,7 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     }
     
     func configureData(category: Category) {
-        titleView.setTasksCount(count: category.tasks.count)
+        titleView.setTasksCount(count: category.task.count)
         titleView.setTitle(title: category.name)
     }
     

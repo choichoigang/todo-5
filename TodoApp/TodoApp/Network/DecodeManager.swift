@@ -13,6 +13,5 @@ class DecodeManager {
         let decoder = JSONDecoder()
         guard let anyData = try? decoder.decode(Tasks.self, from: data) else { completion(.failure(.DecodeError)); return }
         completion(.success(anyData))
-       
     }
 }
