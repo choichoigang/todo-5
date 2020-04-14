@@ -11,7 +11,7 @@ import Foundation
 class DecodeManager {
     func decode(data: Data, completion: @escaping (Result<Any, NetworkErrorCase>) -> Void) {
         let decoder = JSONDecoder()
-        guard let anyData = try? decoder.decode(Tasks.self, from: data) else { completion(.failure(.DecodeError)); return }
+        guard let anyData = try? decoder.decode(AllData.self, from: data) else { completion(.failure(.DecodeError)); return }
         completion(.success(anyData))
     }
 }

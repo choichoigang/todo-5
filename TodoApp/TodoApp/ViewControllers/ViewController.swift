@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     private var thirdView: UIView?
     
     let networkManager = NetworkManager()
-    private var tasks: Tasks?
+    private var allData: AllData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,6 @@ class ViewController: UIViewController {
         self.view.addSubview(firstView!)
         self.view.addSubview(secondView!)
         self.view.addSubview(thirdView!)
-        
     }
     
     func setConstraints() {
@@ -77,21 +76,24 @@ class ViewController: UIViewController {
         networkManager.getResource(url: NetworkManager.EndPoints.AllData!, methodType: .get) { result in
             switch result {
             case .success(let anyData):
-                self.tasks = anyData as? Tasks
-                guard let allData = self.tasks else { return }
+                self.allData = anyData as? AllData
+                guard let allData = self.allData else { return }
                 DispatchQueue.main.async {
-                    self.firstViewController.configureData(category: allData.data[0])
-                    self.firstViewController.configureDataSource(tasksID: 0, category: allData.data[0])
-                    self.secondViewController.configureData(category: allData.data[1])
-                    self.secondViewController.configureDataSource(tasksID: 1, category: allData.data[1])
-                    self.thirdViewController.configureData(category: allData.data[2])
-                    self.thirdViewController.configureDataSource(tasksID: 2, category: allData.data[2])
+                    for index in 0..<self.controllers.count {
+                        self.dataBindSubController(viewController: self.controllers[index], allData: allData, index: index)
+                    }
                 }
             case .failure(let error):
                 //네트워크 오류 알림 알럿창 생성
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func dataBindSubController(viewController: TasksViewController , allData: AllData, index: Int) {
+        let category = allData.data[index]
+        viewController.configureData(category: category)
+        viewController.configureDataSource(tasksID: category.id, category: category)
     }
     
     func addNotification() {

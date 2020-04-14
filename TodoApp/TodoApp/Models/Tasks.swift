@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Tasks: Codable {
+struct AllData: Codable {
     var status: Bool
     var data: [Category]
 }
