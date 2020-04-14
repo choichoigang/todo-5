@@ -6,8 +6,12 @@ export const requestBodyAdd = {
 };
 
 export const requestBodyEdit = {
-  modifiedTitle: String,
-  modifiedContent: String,
+  author: "string",
+  categoryFrom: 0,
+  categoryNum: 0,
+  categoryTo: 0,
+  content: "",
+  title: String,
 };
 
 ///api/task/{taskId}/edit
