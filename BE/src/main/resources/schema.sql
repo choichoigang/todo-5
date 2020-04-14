@@ -27,7 +27,7 @@ CREATE TABLE task (
     category_key int,
     user int references user(id) ON UPDATE CASCADE,
     user_key int,
-    author varchar(30)
+    author varchar(30) NOT NULL
 );
 
 CREATE TABLE activity (
