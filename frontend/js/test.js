@@ -3,7 +3,7 @@ import testEvent from "./clickEvent.js";
 import initTextareaEvent from "./textareaEvent.js";
 import { initRenderTodoList } from "./render.js";
 
+initTextareaEvent();
 DragDropEvent();
 testEvent();
-initTextareaEvent();
 initRenderTodoList();
