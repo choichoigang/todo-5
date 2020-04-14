@@ -1,7 +1,6 @@
-export const add = {
+export const requestBodyAdd = {
   title: "",
-  content: "",
-  userName: "hoi",
-  priority: Number,
+  content: "test",
+  userName: "jypthemiracle",
   categoryNum: Number,
 };
