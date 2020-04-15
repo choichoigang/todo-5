@@ -136,6 +136,7 @@ public class TodoService {
       return new CategoryWithTasksDto(category, dtoList);
     }
 
+    @Transactional
     public void sortLogicJunction(Long taskId, TaskMoveRequestDto dto) {
 //                    sortWithinCategory(taskId, dto);
 
@@ -154,32 +155,46 @@ public class TodoService {
         Category previousCategory = categoryRepository.findById(dto.getCategoryFrom()).orElseThrow(() -> new ResourceNotFoundException());
         Category nextCategory = categoryRepository.findById(dto.getCategoryTo()).orElseThrow(() -> new ResourceNotFoundException());
 
-        Task moveTask = taskRepository.findById(taskId).orElseThrow(() -> new ResourceNotFoundException());
+        Task targetTask = taskRepository.findById(taskId).orElseThrow(() -> new ResourceNotFoundException());
+        taskRepository.setPrioritiesByTargetIndexForNextCategory(dto.getPriority(), dto.getCategoryTo());
+        taskRepository.setPrioritiesByTargetIndexForPreviousCategory(targetTask.getPriority(), dto.getCategoryFrom());
+        taskRepository.updateTaskCategoryWithPriorityById(dto.getCategoryTo(), dto.getPriority(), taskId);
+//        nextCategory.addTask(targetTask);
 
         //컬럼에서 컬럼 이동하는 로직
-        List<Task> previousCategoryAfterRemovedTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
-        previousCategory.getTask().remove(moveTask);
+//        previousCategory.getTask().remove(moveTask);
+//        taskRepository.updateTaskCategoryWithPriorityById(dto.getCategoryTo(), dto.getPriority(), taskId);
+//        List<Task> previousCategoryAfterRemovedTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
+//        Task moveTask = previousCategoryAfterRemovedTask.stream().filter(task -> task.getId() == targetTask.getId()).findFirst().orElseThrow(ResourceNotFoundException::new);
+//        previousCategoryAfterRemovedTask.remove(moveTask);
 //        previousCategoryAfterRemovedTask.forEach(element -> {
 ////            element.setPriority(element.getPriority() - 1);
 //            taskRepository.updateTaskPriorityById(element.getPriority() - 1, element.getId());
 //        });
-        for (Task task : previousCategoryAfterRemovedTask) {
-            taskRepository.updateTaskPriorityById(task.getPriority() - 1, task.getId());
-        }
+//        taskRepository.updateTaskPriorityById(2, 3L);
+//        Task testTask = taskRepository.findTaskById(3L);
+//        logger.error("testTask : {}", testTask);
+//        for (Task task : previousCategoryAfterRemovedTask) {
+//            System.out.println("Before >>>>>>>>>>>>>>>>>>>>>>>>>>> " + task.priority);
+//            int newPriority = task.priority - 1;
+//            task.setPriority(newPriority);
+//            taskRepository.updateTaskPriorityWithoutTargetById(newPriority, task.getId(), targetTask.getId());
+//            System.out.println("After >>>>>>>>>>>>>>>>>>>>>>>>>>> " + taskRepository.findTaskById(task.getId()).priority);
+//        }
 //        categoryRepository.save(previousCategory);
 
 
-        List<Task> nextCategoryAfterAddTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
+//        List<Task> nextCategoryAfterAddTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
 //        nextCategoryAfterAddTask.forEach(element -> {
 ////            element.setPriority(element.getPriority() + 1);
 //            taskRepository.updateTaskPriorityById(element.getPriority() + 1, element.getId());
 ////            logger.info("element : {}", element.getPriority());
 //        });
 ////        categoryRepository.save(nextCategory);
-        for (Task task : previousCategoryAfterRemovedTask) {
-            taskRepository.updateTaskPriorityById(task.getPriority() + 1, task.getId());
-        }
-        taskRepository.updateTaskCategoryById(dto.getCategoryTo(), dto.getPriority(), taskId);
+//        for (Task task : nextCategoryAfterAddTask) {
+//            taskRepository.updateTaskPriorityWithoutTargetById(task.getPriority() + 1, task.getId(), targetTask.getId());
+//        }
+//        categoryRepository.save(nextCategory);
     }
 
     @Transactional

@@ -27,13 +27,17 @@ public class Task implements Comparable<Task> {
   @Length(max=500)
   private String content;
   private boolean isDeleted;
-  private int priority;
+
+  @Column("priority")
+  public int priority;
   @Column("author")
   private String author;
 //  @Column("category_from")
 //  private int categoryFrom;
+//  @Column("category_key")
+//  private int categoryKey;
   @Column("category_to")
-  private int categoryTo;
+  private Long categoryTo;
 
   public Task(String title, String content, int priority, String author) {
     this.title = title;
