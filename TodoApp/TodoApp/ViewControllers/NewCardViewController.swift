@@ -11,6 +11,7 @@ import UIKit
 class NewCardViewController: UIViewController, NewCardViewDelegate {
  
     let newCardView = NewCardView()
+    let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +38,23 @@ class NewCardViewController: UIViewController, NewCardViewDelegate {
      }
     
     func addNewCard(content: Contents){
-        //모델에 데이터 추가하는 기능
+        requestEncodedData(content: content)
         self.dismiss(animated: true)
     }
      
+    func requestEncodedData(content: Contents) {
+        let encoder = JSONEncoder()
+        var data: Data?
+        do {
+            data = try encoder.encode(content)
+            networkManager.getResource(url: EndPoints.AddOneTask!, methodType: .post, dataType: RequestBody.self, body: data) { _ in
+                NotificationCenter.default.post(name: .addNewCard, object: nil, userInfo: ["categoryNumber":content.categoryNum])
+            }
+        } catch {
+            print("failure encode")
+        }
+    }
+    
+   
+    
 }

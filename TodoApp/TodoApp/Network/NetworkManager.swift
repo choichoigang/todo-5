@@ -11,6 +11,7 @@ import Foundation
 enum NetworkErrorCase: Error {
     case InvalidURL
     case DecodeError
+    case EncodeError
 }
 
 enum HTTPMethod: String {
@@ -20,15 +21,16 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
+enum EndPoints {
+    static let API = URL(string: "http://13.209.180.92:8080/api")
+    static let AllCategories = URL(string: "http://13.209.180.92:8080/api/category/all")
+    static let AddOneTask = URL(string: "http://13.209.180.92:8080/api/task/add")
+}
+
 struct NetworkManager {
-    
     let decodeManager = DecodeManager()
     
-    enum EndPoints {
-        static let AllData = URL(string: "http://13.209.180.92:8080/api/category/all")
-    }
-    
-    func getResource(url: URL, methodType: HTTPMethod, body: Data? = nil, completion: @escaping(Result<Any, NetworkErrorCase>) -> Void) {
+    func getResource<T:Decodable>(url: URL, methodType: HTTPMethod, dataType:T.Type, body: Data? = nil, completion: @escaping(Result<Any, NetworkErrorCase>) -> Void) {
         
         var request = URLRequest(url: url)
         request.httpMethod = methodType.rawValue
@@ -40,7 +42,7 @@ struct NetworkManager {
                 if let error = error as NSError?, error.domain == NSURLErrorDomain { completion(.failure(.InvalidURL)) }
                 return
             }
-            self.decodeManager.decode(data: data) { completion($0) }
+            self.decodeManager.decode(data: data, dataType: dataType) { completion($0) }
         }.resume()
     }
 }

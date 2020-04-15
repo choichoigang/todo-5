@@ -9,11 +9,18 @@
 import UIKit
 
 class TasksViewController: UIViewController, TitleViewDelegate {
+    
     let titleView = TitleView()
     let tableView = TasksTableView()
     var tasksDataSource: TasksTableViewDataSource!
     var tasksDelegate = TasksTableViewDelegate()
-    var category: Category?
+    var category: Category? {
+        didSet {
+            configureData()
+            configureDataSource()
+            // tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,7 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         self.view.addSubview(tableView)
         self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
         setConstraints()
+        addNotification()
     }
     
     func setConstraints() {
@@ -43,21 +51,39 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     
-    func configureData(category: Category) {
+    func configureData() {
+        guard let category = category else { return }
         titleView.setTasksCount(count: category.task.count)
         titleView.setTitle(title: category.name)
     }
     
-    func configureDataSource(tasksID: Int, category: Category) {
-        tasksDataSource = TasksTableViewDataSource(tasksID: tasksID, category: category)
-       tableView.dataSource = tasksDataSource
-       tableView.reloadData()
-        
+    func configureDataSource() {
+        guard let category = category else { return }
+        tasksDataSource = TasksTableViewDataSource(tasksID: category.id, category: category)
+        DispatchQueue.main.async {
+            self.tableView.dataSource = self.tasksDataSource
+            self.tableView.reloadData()
+            
+        }
     }
     
     func presentNewCardView() {
         let newCardViewController = NewCardViewController()
+        newCardViewController.newCardView.categoryNum = category?.id
         self.present(newCardViewController, animated: true, completion: nil)
     }
+    
+    func addNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
+    }
+    
+    @objc func updateData(_ notification: Notification) {
+        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, tasksID: Int) else { return }
+        guard let category = category else { return }
+        if category.id == updateInfo.tasksID {
+            titleView.setTasksCount(count: updateInfo.count)
+        }
+    }
+    
 }
 
