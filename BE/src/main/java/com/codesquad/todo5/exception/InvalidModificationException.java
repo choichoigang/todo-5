@@ -1,6 +1,8 @@
 
 package com.codesquad.todo5.exception;
 
+import com.codesquad.todo5.response.ApiResponseCode;
+
 public class InvalidModificationException extends RudimentaryException {
-  public InvalidModificationException() { super("유효하지 않은 수정 요청 입니다. 다시 입력 해주세요."); }
+  public InvalidModificationException() { super(ApiResponseCode.BAD_PARAMETER.getMessage()); }
 }

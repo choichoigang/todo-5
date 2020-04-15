@@ -49,7 +49,7 @@ public class TodoService {
   @Transactional
   public Category addCategory() {
     int categoryNum = categoryRepository.countNumber() - 1;
-    Category newCategory = Category.create("새로운 카테고리 " + categoryNum);
+    Category newCategory = new Category("새로운 카테고리 " + categoryNum);
     categoryRepository.save(newCategory);
     return newCategory;
   }
@@ -82,7 +82,7 @@ public class TodoService {
     Long userId = userRepository.findIdByUserName(dto.getAuthor());
     logger.debug("User : {}", user);
 
-    taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getAuthor(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+    taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
     Long lastInsertId = taskRepository.lastInsertId();
     return lastInsertId;
   }
@@ -117,7 +117,6 @@ public class TodoService {
   public void deleteTask(Long taskId) {
     Task deletedTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
     taskRepository.deleteTaskById(taskId);
-    // 변경된 값을 더 효율적으로 리턴할 수 있는 방법을 고민 해보겠습니다.
   }
 
   private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {

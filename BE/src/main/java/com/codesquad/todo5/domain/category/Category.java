@@ -13,6 +13,10 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 public class Category {
 
+  public Category(String name) {
+    this.name = name;
+  }
+
   @Id
   private Long id;
   private String name;
