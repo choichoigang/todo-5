@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         setConstraints()
         
         requestAllData()
+        addObserver()
     }
     
     func addChild() {
@@ -89,8 +90,19 @@ class ViewController: UIViewController {
         }
     }
     
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(requestOneCategory(_:)), name: .addNewCard, object: nil)
+    }
+    
+    @objc func requestOneCategory(_ notification: Notification) {
+        //넘어온 카테고리 아이디를 기반으로 해당 TasksViewController에서 서버로 재요청
+        guard let categoryNumber = notification.userInfo?["categoryNumber"] as? Int else { return }
+//        controllers[categoryNumber-1]
+    }
+    
 }
 
 extension Notification.Name {
     static let updateCount = Notification.Name(rawValue: "updateTitle")
+    static let addNewCard = Notification.Name("addNewCard")
 }

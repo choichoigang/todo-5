@@ -38,7 +38,6 @@ class NewCardViewController: UIViewController, NewCardViewDelegate {
      }
     
     func addNewCard(content: Contents){
-        print(content)
         requestEncodedData(content: content)
         self.dismiss(animated: true)
     }
@@ -48,8 +47,8 @@ class NewCardViewController: UIViewController, NewCardViewDelegate {
         var data: Data?
         do {
             data = try encoder.encode(content)
-            networkManager.getResource(url: EndPoints.addOneTask!, methodType: .post, dataType: RequestBody.self, body: data) { result in
-                print(result)
+            networkManager.getResource(url: EndPoints.addOneTask!, methodType: .post, dataType: RequestBody.self, body: data) { _ in
+                NotificationCenter.default.post(name: .addNewCard, object: nil, userInfo: ["categoryNumber":content.categoryNum])
             }
         } catch {
             print("failure encode")
