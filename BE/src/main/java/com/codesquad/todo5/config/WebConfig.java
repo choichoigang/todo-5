@@ -1,12 +1,15 @@
 package com.codesquad.todo5.config;
 
+import com.codesquad.todo5.interceptor.HttpInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebCorsConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
@@ -19,5 +22,16 @@ public class WebCorsConfig implements WebMvcConfigurer {
             HttpMethod.PATCH.name(),
             HttpMethod.DELETE.name()
         );
+  }
+
+  @Bean
+  HttpInterceptor httpInterceptor() {
+    return new HttpInterceptor();
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(httpInterceptor())
+        .addPathPatterns("/api/**");
   }
 }
