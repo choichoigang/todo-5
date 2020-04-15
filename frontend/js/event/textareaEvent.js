@@ -1,4 +1,4 @@
-import { createTextareaDOM } from "../options/DOM.js";
+import { createTextareaDOM } from "../../options/DOM.js";
 
 const textareaHandler = (event, todoAddButton) => {
   const textareaValue = event.target.value;

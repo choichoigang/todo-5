@@ -13,3 +13,9 @@ export const requestBodyEdit = {
   content: "",
   title: String,
 };
+
+export const requestBodyMove = {
+  priority: Number,
+  categoryFrom: Number,
+  categoryTo: Number,
+};

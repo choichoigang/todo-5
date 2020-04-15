@@ -9,6 +9,9 @@ const TODO_URL = {
   EDIT: (taskId) => {
     return `http://13.209.180.92:8080/api/task/${taskId}/edit`;
   },
+  MOVE: (taskId) => {
+    return `http://13.209.180.92:8080/api/task/${taskId}/move`;
+  },
 };
 
 export default TODO_URL;

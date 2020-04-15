@@ -1,4 +1,4 @@
-import { renderList } from "./render.js";
+import { renderList } from "../render.js";
 
 export async function fetchTodoList(url, columnDom, className) {
   const response = await fetch(url);
@@ -32,6 +32,17 @@ export async function fetchDelete(url) {
 }
 
 export async function fetchEdit(url, data) {
+  const fetchOption = {
+    method: "POST",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
+
+  const response = await fetch(url, fetchOption);
+}
+
+export async function fetchMove(url, data) {
   const fetchOption = {
     method: "POST",
     mode: "cors",
