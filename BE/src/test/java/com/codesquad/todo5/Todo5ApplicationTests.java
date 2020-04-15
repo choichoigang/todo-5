@@ -23,7 +23,7 @@ class Todo5ApplicationTests {
 	@Before
 	public void setUp() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-				.apply(documentationConfiguration(this.restDocumentation))
+//				.apply(documentationConfiguration(this.restDocumentation))
 				.build();
 	}
 
