@@ -1,15 +1,8 @@
 import { commonDOM } from "../options/DOM.js";
 import { requestBodyMove } from "../options/requestBody.js";
-import TODO_URL from "../constants/url.js";
 import { fetchMove } from "../js/httpRequest.js";
-
-const option = {
-  dragTargetEl: null,
-  dargTargetHeight: null,
-  dragTargetId: null,
-  toTarget: null,
-  toTargetWrapper: null,
-};
+import TODO_URL from "../constants/url.js";
+import option from "../options/DragDropOption.js";
 
 const dragEnterHandler = (event) => {
   const targetTask = event.toElement.closest(".task");
