@@ -6,6 +6,7 @@ import { requestBodyAdd, requestBodyEdit } from "../../options/requestBody.js";
 import { fetchAdd, fetchDelete, fetchEdit } from "../fetch/httpRequest.js";
 import TODO_URL from "../../constants/url.js";
 
+//column_click------------------------------------------------------------------------------------
 const columnClickEventHandler = async (event, className, DOM) => {
   const targetClassName = event.target.className;
 
@@ -85,7 +86,7 @@ const modifyModalHandler = (event) => {
   commonDOM.modal.style.visibility = "visible";
   commonDOM.modal_textarea.value = modifyOption.titleElement.innerText;
 };
-//------------------------------------------------------------------------------------
+//modal_click------------------------------------------------------------------------------------
 const modalClickEventHandler = (event) => {
   const targetClassName = event.target.className;
 
@@ -119,11 +120,28 @@ const registerModalClickEvent = () => {
   commonDOM.modal.addEventListener("click", modalClickEventHandler);
 };
 
+//menu_click------------------------------------------------------------------------------------
+const menuClickHandler = () => {
+  const menuClassName = commonDOM.menu_box.className;
+
+  if (menuClassName === "menu_box") {
+    commonDOM.menu_box.style.visibility = "visible";
+    commonDOM.menu_box.className = "menu_box_active";
+  } else {
+    commonDOM.menu_box.className = "menu_box";
+  }
+};
+
+const registerMenuClickEvent = () => {
+  commonDOM.menu_tab.addEventListener("click", menuClickHandler);
+};
+//------------------------------------------------------------------------------------
 export function initClickEvent() {
   registerColumnClickEvent("todo");
   registerColumnClickEvent("doing");
   registerColumnClickEvent("done");
   registerModalClickEvent();
+  registerMenuClickEvent();
 }
 
 export default initClickEvent;
