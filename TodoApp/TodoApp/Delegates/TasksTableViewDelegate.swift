@@ -27,6 +27,7 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
             let dataSource = tableView.dataSource as! TasksTableViewDataSource
             let delay = 0.4
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                dataSource.taskID = dataSource.tasks[indexPath.row].id
                 dataSource.tasks.remove(at: indexPath.row)
                 tableView.reloadData()
             }

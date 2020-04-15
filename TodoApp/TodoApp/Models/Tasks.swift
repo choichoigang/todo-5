@@ -40,5 +40,5 @@ struct DragItem {
 
 struct RequestBody: Codable {
     var status: Bool
-    var data: Int
+    var data: Int?
 }
