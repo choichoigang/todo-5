@@ -76,7 +76,8 @@ i {
   position: absolute;
   width: 30%;
   height: 100%;
-  background-color: #fff;
+  background-image: url("https://i.pinimg.com/564x/bd/6d/09/bd6d09ee22e7f7b46acea16168c92416.jpg");
+  background-size: 36%;
   right: 0%;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -90,7 +91,8 @@ i {
   position: absolute;
   width: 30%;
   height: 100%;
-  background-color: #fff;
+  background-size: 36%;
+  background-image: url("https://i.pinimg.com/564x/bd/6d/09/bd6d09ee22e7f7b46acea16168c92416.jpg");
   right: 0%;
   border: 1px solid #ccc;
   border-radius: 5px;
