@@ -58,7 +58,7 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     
     func configureDataSource() {
         guard let category = category else { return }
-        tasksDataSource = TasksTableViewDataSource(tasksID: category.id, category: category)
+        tasksDataSource = TasksTableViewDataSource(categoryID: category.id, category: category)
         DispatchQueue.main.async {
             self.tableView.dataSource = self.tasksDataSource
             self.tableView.reloadData()

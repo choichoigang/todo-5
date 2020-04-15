@@ -12,15 +12,15 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
     
     static let identifier = "tasksCell"
     var category: Category
-    let tasksID: Int
+    let categoryID: Int
     var tasks: [Contents] {
         didSet {
-            NotificationCenter.default.post(name: .updateCount , object: tasks, userInfo: ["updateInfo":(count: tasks.count, tasksID: tasksID)])
+            NotificationCenter.default.post(name: .updateCount , object: tasks, userInfo: ["updateInfo":(count: tasks.count, categoryID: categoryID)])
         }
     }
     
-    init(tasksID: Int, category: Category) {
-        self.tasksID = tasksID
+    init(categoryID: Int, category: Category) {
+        self.categoryID = categoryID
         self.category = category
         self.tasks = category.task.filter { !$0.deleted! }
     }
