@@ -1,4 +1,4 @@
-import { renderList } from "./render.js";
+import { renderList } from "../render.js";
 
 export async function fetchTodoList(url, columnDom, className) {
   const response = await fetch(url);
