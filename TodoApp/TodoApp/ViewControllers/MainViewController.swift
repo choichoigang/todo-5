@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     private var thirdView: UIView?
     
     let networkManager = NetworkManager()
-    private var allData: AllData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +57,7 @@ class ViewController: UIViewController {
     private func branchAllData(result: Result<Any, NetworkErrorCase>) {
         switch result {
         case .success(let anyData):
-            self.allData = anyData as? AllData
-            guard let allData = self.allData else { return }
+            guard let allData = anyData as? AllData else { return }
             DispatchQueue.main.async {
                 for index in 0..<self.controllers.count {
                     self.controllers[index].category = allData.data[index]
