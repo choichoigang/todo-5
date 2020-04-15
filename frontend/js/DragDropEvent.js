@@ -1,4 +1,5 @@
 import { commonDOM } from "../options/DOM.js";
+import { requestBodyMove } from "../options/requestBody.js";
 
 const option = {
   dragTargetEl: null,
@@ -8,8 +9,11 @@ const option = {
 };
 
 const dragEnterHandler = (event) => {
-  option.toTarget = event.toElement.closest(".task");
-  option.toTargetWrapper = event.toElement.closest(".box");
+  const targetTask = event.toElement.closest(".task");
+  const targetColumn = event.toElement.closest(".column");
+
+  option.toTarget = targetTask;
+  option.toTargetWrapper = targetColumn;
 
   if (option.toTarget && event.offsetY > option.dargTargetHeight) {
     option.toTarget.after(option.dragTargetEl);
