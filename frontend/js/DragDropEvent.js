@@ -33,6 +33,11 @@ const dragOverHandler = (event) => {
   event.preventDefault();
 };
 
+const dragEndHandler = (event) => {
+  const targetColumn = event.target.closest(".column");
+  const targetColumnTasks = targetColumn.querySelectorAll(".task");
+};
+
 const initDragDropEvent = () => {
   commonDOM.dropTarget.addEventListener("dragstart", dragStartHandler);
   commonDOM.dropTarget.addEventListener("dragover", dragOverHandler);
