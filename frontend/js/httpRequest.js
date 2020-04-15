@@ -41,3 +41,14 @@ export async function fetchEdit(url, data) {
 
   const response = await fetch(url, fetchOption);
 }
+
+export async function fetchMove(url, data) {
+  const fetchOption = {
+    method: "POST",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
+
+  const response = await fetch(url, fetchOption);
+}
