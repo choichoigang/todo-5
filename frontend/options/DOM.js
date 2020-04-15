@@ -1,9 +1,9 @@
 const commonDOM = {
   dropTarget: document.querySelector(".wrapper"),
 
-  todoBox: document.querySelector("#todo"),
-  doingBox: document.querySelector("#doing"),
-  doneBox: document.querySelector("#done"),
+  todoTaskList: document.querySelector("#todo .task_list"),
+  doingTaskList: document.querySelector("#doing .task_list"),
+  doneTaskList: document.querySelector("#done .task_list"),
 
   blind: document.querySelector(".blind_off"),
   modal: document.querySelector(".modify_modal"),
@@ -17,7 +17,7 @@ const cerateColumnDom = (columnName) => {
 const createDOM = (columnName) => {
   return {
     columnName: `${columnName}`,
-    column: document.querySelector(`#${columnName}`),
+    task_list: document.querySelector(`#${columnName} .task_list`),
     addBox: document.querySelector(`#${columnName}_add_area`),
     textArea: document.querySelector(`#${columnName}_add_area textarea`),
     addButton: document.querySelector(`.${columnName}_add_btn`),

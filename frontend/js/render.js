@@ -1,32 +1,30 @@
-import { itemTemplate, renderItem } from "../template/template.js";
+import { taskTemplate } from "../template/template.js";
 import { commonDOM } from "../options/DOM.js";
 import URL from "../constants/url.js";
+import { fetchTodoList } from "./httpRequest.js";
 
-const renderTodoList = (className) => {
+const registerTodoList = (className) => {
   if (className === "todo") {
-    fetchList(URL.TODO_LIST, commonDOM.todoBox);
+    fetchTodoList(URL.TODO_LIST, commonDOM.todoTaskList, className);
   } else if (className === "doing") {
-    fetchList(URL.DOING_LIST, commonDOM.doingBox);
+    fetchTodoList(URL.DOING_LIST, commonDOM.doingTaskList, className);
   } else if (className === "done") {
-    fetchList(URL.DONE_LIST, commonDOM.doneBox);
+    fetchTodoList(URL.DONE_LIST, commonDOM.doneTaskList, className);
   }
 };
 
-async function fetchList(url, columnDom) {
-  const dataFetch = await fetch(url);
-  const fetchJson = await dataFetch.json();
-
-  renderList(columnDom, fetchJson.data);
-}
-
-const renderList = (columnDom, dataList) => {
+export const renderList = (columnDom, dataList, className) => {
   dataList.forEach((el) => {
-    columnDom.innerHTML += renderItem(el.title, "todo", el.id);
+    if (el.deleted === true) {
+      return;
+    } else {
+      columnDom.innerHTML += taskTemplate(el.title, el.id, className);
+    }
   });
 };
 
-const testing = () => {
-  renderTodoList("todo");
+export const initRenderTodoList = () => {
+  registerTodoList("todo");
+  registerTodoList("doing");
+  registerTodoList("done");
 };
-
-export default testing;

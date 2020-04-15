@@ -1,19 +1,31 @@
 import { commonDOM, createDOM, cerateColumnDom } from "../options/DOM.js";
 import classNameObj from "../options/columnClassName.js";
-import { itemTemplate } from "../template/template.js";
+import { taskTemplate } from "../template/template.js";
 import modifyOption from "../options/modifyOption.js";
+import { requestBodyAdd, requestBodyEdit } from "../options/requestBody.js";
+import { fetchAdd, fetchDelete, fetchEdit } from "../js/httpRequest.js";
+import TODO_URL from "../constants/url.js";
 
-const columnClickEventHandler = (event, className, DOM) => {
+const columnClickEventHandler = async (event, className, DOM) => {
   const targetClassName = event.target.className;
 
   if (targetClassName === className.plusButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === className.addButton) {
-    DOM.column.innerHTML += addBtnHandler(DOM.textArea, DOM.columnName);
+    await addBtnHandler(DOM.textArea, DOM.columnName);
+    await fetchAdd(TODO_URL.ADD, requestBodyAdd).then((resBody) => {
+      DOM.task_list.innerHTML += taskTemplate(
+        requestBodyAdd.title,
+        resBody.data,
+        DOM.columnName
+      );
+    });
   } else if (targetClassName === className.cancelButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === "deletion") {
-    deletionBtnHandler(event);
+    const handler = await deletionBtnHandler(event);
+
+    await fetchDelete(TODO_URL.DELETE(handler));
   } else if (targetClassName === "modify") {
     modifyModalHandler(event);
   }
@@ -40,16 +52,26 @@ const activatingHandler = (addBoxDom) => {
 };
 
 const addBtnHandler = (textareaDom, className) => {
-  // 추가 사항을 서버로 보냄
   const inputValue = textareaDom.value;
-  return itemTemplate(inputValue, className);
+  textareaDom.value = "";
+
+  if (className === "todo") {
+    requestBodyAdd.title = inputValue;
+    requestBodyAdd.categoryNum = 1;
+  } else if (className === "doing") {
+    requestBodyAdd.title = inputValue;
+    requestBodyAdd.categoryNum = 2;
+  } else if (className === "done") {
+    requestBodyAdd.title = inputValue;
+    requestBodyAdd.categoryNum = 3;
+  }
 };
 
 const deletionBtnHandler = (event) => {
-  // 삭제 내용을 서버로 보냄
   const taskElement = event.target.closest(".task");
-
+  const taskId = taskElement.dataset.taskId;
   taskElement.remove();
+  return taskId;
 };
 
 const modifyModalHandler = (event) => {
@@ -57,6 +79,7 @@ const modifyModalHandler = (event) => {
   modifyOption.titleElement = modifyOption.targetElement.querySelector(
     ".task_value"
   );
+  modifyOption.targetId = event.target.closest(".task").dataset.taskId;
 
   commonDOM.blind.className = "blind_on";
   commonDOM.modal.style.visibility = "visible";
@@ -78,12 +101,15 @@ const modalCancelHandler = () => {
   commonDOM.modal.style.visibility = "hidden";
 };
 
-const modalSaveNoteHandler = () => {
+const modalSaveNoteHandler = async () => {
   const modifyValue = commonDOM.modal_textarea.value;
   if (modifyValue === "") {
     alert("수정하려는 내용이 없습니다.");
   } else {
-    // 수정 사항을 서버로 보냄
+    requestBodyEdit.title = modifyValue;
+    console.log(requestBodyEdit);
+    fetchEdit(TODO_URL.EDIT(modifyOption.targetId), requestBodyEdit);
+
     modifyOption.titleElement.innerText = modifyValue;
     modalCancelHandler();
   }

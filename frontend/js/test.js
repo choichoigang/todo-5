@@ -1,9 +1,9 @@
 import DragDropEvent from "./DragDropEvent.js";
 import testEvent from "./clickEvent.js";
 import initTextareaEvent from "./textareaEvent.js";
-import testing from "./render.js";
+import { initRenderTodoList } from "./render.js";
 
+initTextareaEvent();
 DragDropEvent();
 testEvent();
-initTextareaEvent();
-testing();
+initRenderTodoList();
