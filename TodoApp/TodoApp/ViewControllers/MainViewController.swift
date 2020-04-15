@@ -92,6 +92,8 @@ class ViewController: UIViewController {
     
     func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(requestOneCategory(_:)), name: .addNewCard, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
+        
     }
     
     @objc func requestOneCategory(_ notification: Notification) {
@@ -108,6 +110,13 @@ class ViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    @objc func updateData(_ notification: Notification) {
+        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, tasksID: Int) else { return }
+        let targetController = controllers.filter { $0.category?.id == updateInfo.tasksID }.first
+        guard let controller = targetController else { return }
+        controller.titleView.setTasksCount(count: updateInfo.count)
     }
     
 }

@@ -33,7 +33,6 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         self.view.addSubview(tableView)
         self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
         setConstraints()
-        addNotification()
     }
     
     func setConstraints() {
@@ -71,18 +70,5 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         newCardViewController.newCardView.categoryNum = category?.id
         self.present(newCardViewController, animated: true, completion: nil)
     }
-    
-    func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
-    }
-    
-    @objc func updateData(_ notification: Notification) {
-        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, tasksID: Int) else { return }
-        guard let category = category else { return }
-        if category.id == updateInfo.tasksID {
-            titleView.setTasksCount(count: updateInfo.count)
-        }
-    }
-    
 }
 
