@@ -45,13 +45,13 @@ public class CategoryController {
   }
 
   @GetMapping("/category/{id}/all")
-  public ResponseEntity<ApiResponse> showSpecificCategory(@PathVariable Long id) {
+  public ResponseEntity<CategoryWithTasksDto> showSpecificCategory(@PathVariable Long id) {
     logger.debug("id : {}", id);
     CategoryWithTasksDto categoryWithTasksDto = todoService.findCategory(id);
-    ApiResponse response = new ApiResponse();
-    response.setData(categoryWithTasksDto);
-    response.setStatus(true);
-    return new ResponseEntity<>(response, HttpStatus.OK);
+    //ApiResponse response = new ApiResponse();
+    //response.setData(categoryWithTasksDto);
+    //response.setStatus(true);
+    return new ResponseEntity<>(categoryWithTasksDto, HttpStatus.OK);
   }
 
   @PostMapping("/category/{id}/edit")
