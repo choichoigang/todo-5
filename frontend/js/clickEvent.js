@@ -119,11 +119,11 @@ const registerModalClickEvent = () => {
   commonDOM.modal.addEventListener("click", modalClickEventHandler);
 };
 
-export function testEvent() {
+export function initClickEvent() {
   registerColumnClickEvent("todo");
   registerColumnClickEvent("doing");
   registerColumnClickEvent("done");
   registerModalClickEvent();
 }
 
-export default testEvent;
+export default initClickEvent;
