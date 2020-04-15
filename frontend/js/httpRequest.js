@@ -3,8 +3,8 @@ import { renderList } from "./render.js";
 export async function fetchTodoList(url, columnDom, className) {
   const response = await fetch(url);
   const responseJSON = await response.json();
-  console.log(responseJSON.data);
-  await renderList(columnDom, responseJSON.data.task, className);
+
+  await renderList(columnDom, responseJSON.task, className);
 }
 
 export async function fetchAdd(url, data) {
