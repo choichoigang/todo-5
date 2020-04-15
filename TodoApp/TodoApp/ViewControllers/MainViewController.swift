@@ -112,14 +112,17 @@ class ViewController: UIViewController {
     }
     
     @objc func updateData(_ notification: Notification) {
-        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, categoryID: Int) else { return }
+        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, categoryID: Int, taskID: Int) else { return }
+        requestDelete(taskID: updateInfo.taskID)
         let targetController = controllers.filter { $0.category?.id == updateInfo.categoryID }.first
         guard let controller = targetController else { return }
         controller.titleView.setTasksCount(count: updateInfo.count)
     }
     
-    func requestDelete() {
-        
+    private func requestDelete(taskID: Int) {
+        let urlString = EndPoints.API!.absoluteString + "/task/\(taskID)/delete"
+        let url = URL(string: urlString)
+        networkManager.getResource(url: url!, methodType: .post, dataType: RequestBody.self) { _ in }
     }
 }
 

@@ -13,9 +13,10 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
     static let identifier = "tasksCell"
     var category: Category
     let categoryID: Int
+    var taskID: Int?
     var tasks: [Contents] {
         didSet {
-            NotificationCenter.default.post(name: .updateCount , object: tasks, userInfo: ["updateInfo":(count: tasks.count, categoryID: categoryID)])
+            NotificationCenter.default.post(name: .updateCount , object: tasks, userInfo: ["updateInfo":(count: tasks.count, categoryID: categoryID, taskID: taskID)])
         }
     }
     
@@ -42,6 +43,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
+            taskID = tasks[indexPath.row].id
             tasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
