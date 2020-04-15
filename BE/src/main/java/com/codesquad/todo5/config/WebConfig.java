@@ -1,6 +1,6 @@
 package com.codesquad.todo5.config;
 
-import com.codesquad.todo5.interceptor.HttpInterceptor;
+import com.codesquad.todo5.utils.HttpInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
