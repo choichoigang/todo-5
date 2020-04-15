@@ -22,7 +22,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
     init(tasksID: Int, category: Category) {
         self.tasksID = tasksID
         self.category = category
-        self.tasks = category.task
+        self.tasks = category.task.filter { !$0.deleted! }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

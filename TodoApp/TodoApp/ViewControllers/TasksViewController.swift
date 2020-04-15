@@ -18,7 +18,6 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         didSet {
             configureData()
             configureDataSource()
-            // tableView.reloadData()
         }
     }
     
@@ -53,7 +52,8 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     
     func configureData() {
         guard let category = category else { return }
-        titleView.setTasksCount(count: category.task.count)
+        let notDeletedTaskCount = category.task.filter { !$0.deleted! }.count
+        titleView.setTasksCount(count: notDeletedTaskCount)
         titleView.setTitle(title: category.name)
     }
     
@@ -63,7 +63,6 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         DispatchQueue.main.async {
             self.tableView.dataSource = self.tasksDataSource
             self.tableView.reloadData()
-            
         }
     }
     
