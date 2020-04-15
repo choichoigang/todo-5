@@ -56,7 +56,6 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Query("SELECT category FROM task WHERE id = :taskId")
     Long findCategoryIdByTaskId(Long taskId);
 
-
     @Modifying
     @Transactional
     @Query("UPDATE task SET priority = priority - 1 WHERE id IN (SELECT id FROM (SELECT id FROM task WHERE priority >= :targetIndex AND category = :categoryId)at)")
@@ -66,4 +65,20 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Transactional
     @Query("UPDATE task SET priority = priority + 1 WHERE id IN (SELECT id FROM (SELECT id FROM task WHERE priority >= :targetIndex AND category = :categoryId)at)")
     void setPrioritiesByTargetIndexForNextCategory(int targetIndex, Long categoryId);
+
+    // 하나의 쿼리로 줄일 수 있을거 같은데...
+    @Modifying
+    @Transactional
+    @Query("UPDATE task SET priority = priority - 1 WHERE priority <= :targetIndex AND id != :taskId AND category = :categoryId")
+    void subtractAfterPrioritiesByTargetIndexForSingleCategory(int targetIndex, Long categoryId, Long taskId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE task SET priority = :targetIndex WHERE id = :taskId")
+    void setPriorityByTaskIdForSingleCategory(int targetIndex, Long taskId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE task SET priority = priority + 1 WHERE priority > :targetIndex AND category = :categoryId")
+    void plusAfterPrioritiesByTargetIndexForSingleCategory(int targetIndex, Long categoryId, Long taskId);
 }
