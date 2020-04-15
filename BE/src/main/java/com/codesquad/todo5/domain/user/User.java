@@ -39,4 +39,7 @@ public class User {
     return new User(name, password);
   }
 
+  public boolean isMatchWithUserName(String userName) {
+    return this.name.equals(userName);
+  }
 }
