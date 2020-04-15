@@ -71,12 +71,72 @@ i {
 }
 
 .menu_box {
-  display: none;
+  display: flex;
+  visibility: hidden;
   position: absolute;
-  width: 150px;
-  height: 300px;
-  background-color: blue;
+  width: 30%;
+  height: 100%;
+  background-color: #fff;
   right: 0%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  animation: unfoldOut 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.menu_box_active {
+  display: flex;
+  visibility: visible;
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  background-color: #fff;
+  right: 0%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform: scaleX(0) scaleY(0.005);
+  }
+  50% {
+    transform: scaleX(1) scaleY(0.005);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scaleX(1) scaleY(0.005);
+  }
+  100% {
+    transform: scaleX(0) scaleY(0.005);
+  }
+}
+
+/* @keyframes roadRunnerOut {
+  0% {
+    transform: translateX(0px) skewX(0deg) scaleX(1);
+  }
+  30% {
+    transform: translateX(-100px) skewX(-5deg) scaleX(0.9);
+  }
+  100% {
+    transform: translateX(1500px) skewX(30deg) scaleX(1.3);
+  }
+} */
+
+.menu_tag {
+  cursor: pointer;
 }
 
 .fa-plus {
