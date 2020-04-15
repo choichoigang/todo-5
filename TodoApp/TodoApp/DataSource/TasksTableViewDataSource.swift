@@ -11,8 +11,8 @@ import UIKit
 class TasksTableViewDataSource: NSObject, UITableViewDataSource {
     
     static let identifier = "tasksCell"
-    var category: Category
-    let categoryID: Int
+    private var category: Category
+    private let categoryID: Int
     var taskID: Int?
     var tasks: [Contents] {
         didSet {
