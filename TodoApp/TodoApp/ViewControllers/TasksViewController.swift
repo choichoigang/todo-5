@@ -80,5 +80,6 @@ class TasksViewController: UIViewController, TitleViewDelegate {
             titleView.setTasksCount(count: updateInfo.count)
         }
     }
+    
 }
 

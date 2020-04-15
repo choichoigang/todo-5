@@ -22,8 +22,9 @@ enum HTTPMethod: String {
 }
 
 enum EndPoints {
-    static let AllData = URL(string: "http://13.209.180.92:8080/api/category/all")
-    static let addOneTask = URL(string: "http://13.209.180.92:8080/api/task/add")
+    static let API = URL(string: "http://13.209.180.92:8080/api")
+    static let AllCategories = URL(string: "http://13.209.180.92:8080/api/category/all")
+    static let AddOneTask = URL(string: "http://13.209.180.92:8080/api/task/add")
 }
 
 struct NetworkManager {

@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     }
     
     func requestAllData() {
-        networkManager.getResource(url: EndPoints.AllData!, methodType: .get, dataType: AllData.self) { result in
+        networkManager.getResource(url: EndPoints.AllCategories!, methodType: .get, dataType: AllData.self) { result in
             switch result {
             case .success(let anyData):
                 self.allData = anyData as? AllData
@@ -95,9 +95,20 @@ class ViewController: UIViewController {
     }
     
     @objc func requestOneCategory(_ notification: Notification) {
-        //넘어온 카테고리 아이디를 기반으로 해당 TasksViewController에서 서버로 재요청
         guard let categoryNumber = notification.userInfo?["categoryNumber"] as? Int else { return }
-//        controllers[categoryNumber-1]
+        //여기서 재요청 하고 해당 컨트롤러에 데이터 넘겨줘야겠다
+        let urlString = EndPoints.API!.absoluteString + "/category/\(categoryNumber)/all"
+        let url = URL(string: urlString)
+        networkManager.getResource(url: url!, methodType: .get, dataType: AllData.self, body: nil) { result in
+            switch result {
+            case .success(let anyData):
+                guard let categoryData = anyData as? Category else { return }
+                self.controllers[categoryNumber-1].category = categoryData
+            case .failure(let error):
+                //네트워크 오류 알림 알럿창 생성
+                print(error.localizedDescription)
+            }
+        }
     }
     
 }

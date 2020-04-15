@@ -17,7 +17,7 @@ struct Category: Codable {
     var id: Int
     var name: String
     var task: [Contents]
-    var deleted: Bool
+    var deleted: Bool?
 }
 
 struct Contents: Codable {
