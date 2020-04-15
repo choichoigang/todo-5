@@ -42,6 +42,7 @@ const initDragDropEvent = () => {
   commonDOM.dropTarget.addEventListener("dragstart", dragStartHandler);
   commonDOM.dropTarget.addEventListener("dragover", dragOverHandler);
   commonDOM.dropTarget.addEventListener("dragenter", dragEnterHandler);
+  commonDOM.dropTarget.addEventListener("dragend", dragEndHandler);
 };
 
 export default initDragDropEvent;
