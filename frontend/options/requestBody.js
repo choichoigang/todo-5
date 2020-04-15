@@ -16,5 +16,6 @@ export const requestBodyEdit = {
 
 export const requestBodyMove = {
   priority: Number,
+  categoryFrom: Number,
   categoryTo: Number,
 };
