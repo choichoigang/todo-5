@@ -18,6 +18,7 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         didSet {
             configureData()
             configureDataSource()
+            // tableView.reloadData()
         }
     }
     
@@ -59,8 +60,11 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     func configureDataSource() {
         guard let category = category else { return }
         tasksDataSource = TasksTableViewDataSource(tasksID: category.id, category: category)
-        tableView.dataSource = tasksDataSource
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.dataSource = self.tasksDataSource
+            self.tableView.reloadData()
+            
+        }
     }
     
     func presentNewCardView() {

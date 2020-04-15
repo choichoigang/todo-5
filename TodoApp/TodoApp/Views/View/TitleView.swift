@@ -79,11 +79,15 @@ class TitleView: UIView {
     }
     
     func setTasksCount(count: Int) {
-        tasksCount.text = "\(count)"
+        DispatchQueue.main.async {
+            self.tasksCount.text = "\(count)"
+        }
     }
     
     func setTitle(title: String) {
-        tasksTitle.text = title
+        DispatchQueue.main.async {
+            self.tasksTitle.text = title
+        }
     }
 
     @objc private func presentNewCardView() {

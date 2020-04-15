@@ -96,10 +96,9 @@ class ViewController: UIViewController {
     
     @objc func requestOneCategory(_ notification: Notification) {
         guard let categoryNumber = notification.userInfo?["categoryNumber"] as? Int else { return }
-        //여기서 재요청 하고 해당 컨트롤러에 데이터 넘겨줘야겠다
         let urlString = EndPoints.API!.absoluteString + "/category/\(categoryNumber)/all"
         let url = URL(string: urlString)
-        networkManager.getResource(url: url!, methodType: .get, dataType: AllData.self, body: nil) { result in
+        networkManager.getResource(url: url!, methodType: .get, dataType: Category.self, body: nil) { result in
             switch result {
             case .success(let anyData):
                 guard let categoryData = anyData as? Category else { return }
