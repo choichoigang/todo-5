@@ -28,13 +28,14 @@ public class Task {
   private String content;
   @Column("is_deleted")
   private boolean isDeleted;
+  @Column("priority")
   private int priority;
   @Column("author")
   private String author;
 //  @Column("category_from")
 //  private int categoryFrom;
   @Column("category_to")
-  private int categoryTo;
+  private Long categoryTo;
   @Column("category_from")
   private int categoryFrom;
   @Column("category")

@@ -12,6 +12,7 @@ import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
 import com.codesquad.todo5.dto.category.CategoryWithTasksDto;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
+import com.codesquad.todo5.dto.task.TaskMoveRequestDto;
 import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
@@ -115,9 +116,7 @@ public class TodoService {
 
     @Transactional
     public void deleteTask(Long taskId) {
-        Task deletedTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
         taskRepository.deleteTaskById(taskId);
-        // 변경된 값을 더 효율적으로 리턴할 수 있는 방법을 고민 해보겠습니다.
     }
 
     private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {
@@ -131,5 +130,22 @@ public class TodoService {
               element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId, element.isDeleted()))
               .collect(Collectors.toList());
       return new CategoryWithTasksDto(category, dtoList);
+    }
+
+    @Transactional
+    public void sortLogicJunction(Long taskId, TaskMoveRequestDto dto) {
+        sortBetweenCategories(taskId, dto);
+    }
+
+    @Transactional
+    public void sortBetweenCategories(Long taskId, TaskMoveRequestDto dto) {
+        Task targetTask = taskRepository.findById(taskId)
+            .orElseThrow(ResourceNotFoundException::new);
+        taskRepository
+            .setPrioritiesByTargetIndexForNextCategory(dto.getPriority(), dto.getCategoryTo());
+        taskRepository.setPrioritiesByTargetIndexForPreviousCategory(targetTask.getPriority(),
+            dto.getCategoryFrom());
+        taskRepository
+            .updateTaskCategoryWithPriorityById(dto.getCategoryTo(), dto.getPriority(), taskId);
     }
 }
