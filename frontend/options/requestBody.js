@@ -13,3 +13,8 @@ export const requestBodyEdit = {
   content: "",
   title: String,
 };
+
+export const requestBodyMove = {
+  priority: Number,
+  categoryTo: Number,
+};
