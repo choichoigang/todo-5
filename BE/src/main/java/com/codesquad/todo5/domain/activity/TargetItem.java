@@ -1,15 +1,12 @@
-package com.codesquad.todo5.domain;
+package com.codesquad.todo5.domain.activity;
 
 import com.codesquad.todo5.utils.EnumType;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum ActionItem implements EnumType {
-  ADD("ADD"),
-  REMOVE("REMOVE"),
-  UPDATE("UPDATE"),
-  MOVE("MOVE");
+public enum TargetItem implements EnumType {
+  TASK("태스크"),
+  CATEGORY("카테고리");
 
   private final String action;
 

@@ -1,4 +1,4 @@
-package com.codesquad.todo5.domain;
+package com.codesquad.todo5.domain.task;
 
 import org.springframework.data.repository.CrudRepository;
 
