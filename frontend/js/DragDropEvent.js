@@ -25,6 +25,10 @@ const dragEnterHandler = (event) => {
 };
 
 const dragStartHandler = (event) => {
+  const targetColumn = event.toElement.closest(".column").dataset.columnId;
+
+  requestBodyMove.categoryFrom = targetColumn;
+
   option.dragTargetEl = event.toElement;
   option.dargTargetHeight = event.target.offsetHeight / 2;
 };
