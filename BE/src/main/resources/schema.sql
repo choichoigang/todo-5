@@ -1,4 +1,3 @@
-USE todo;
 DROP TABLE IF EXISTS board;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS user;
@@ -20,9 +19,11 @@ CREATE TABLE category (
 );
 
 CREATE TABLE user (
-    id int primary_key auto_increment,
+    id int auto_increment primary key,
     name varchar(64),
-    password varchar(64)
+    password varchar(64),
+    board int references board(id),
+    board_key int
 );
 
 CREATE TABLE task (
@@ -37,7 +38,7 @@ CREATE TABLE task (
     user int,
     author varchar(30),
     priority int
-)
+);
 
 CREATE TABLE activity (
 	id int auto_increment primary key,

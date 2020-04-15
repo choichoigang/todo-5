@@ -46,13 +46,4 @@ public class Category {
   public void setTask(List<Task> task) {
     this.task = task;
   }
-
-  public Task getNewTask() {
-    return task.get(0);
-  }
-
-  public void addTask(Task newTask, User user, int priority) {
-    newTask.setUser(user);
-    this.task.add(priority, newTask);
-  }
 }

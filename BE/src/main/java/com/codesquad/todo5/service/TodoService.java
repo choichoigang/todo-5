@@ -19,6 +19,7 @@ import com.codesquad.todo5.exception.UserNotFoundException;
 import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,23 +29,21 @@ import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
-  Logger logger = LoggerFactory.getLogger(TodoService.class);
 
-  private final CategoryRepository categoryRepository;
-  private final ActivityRepository activityRepository;
-  private final TaskRepository taskRepository;
-  private final UserRepository userRepository;
-  private final UserService userService;
+  @Autowired
+  private CategoryRepository categoryRepository;
 
-  public TodoService(CategoryRepository categoryRepository,
-      ActivityRepository activityRepository,
-      TaskRepository taskRepository, UserRepository userRepository, UserService userService) {
-    this.categoryRepository = categoryRepository;
-    this.activityRepository = activityRepository;
-    this.taskRepository = taskRepository;
-    this.userRepository = userRepository;
-    this.userService = userService;
-  }
+  @Autowired
+  private ActivityRepository activityRepository;
+
+  @Autowired
+  private TaskRepository taskRepository;
+
+  @Autowired
+  private UserRepository userRepository;
+
+  @Autowired
+  private UserService userService;
 
   @Transactional
   public Category addCategory() {
@@ -71,8 +70,9 @@ public class TodoService {
   }
 
   @Transactional(readOnly = true)
-  public Iterable<Category> findAllTasks() {
-    return categoryRepository.findAllElements();
+  public List<Category> findAllTasks() {
+    List<Category> categories = categoryRepository.findAllElements();
+    return categories;
   }
 
   @Transactional
@@ -80,9 +80,8 @@ public class TodoService {
     Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
     User user = userRepository.findByName(dto.getAuthor()).orElseThrow(UserNotFoundException::new);
     Long userId = userRepository.findIdByUserName(dto.getAuthor());
-    logger.debug("User : {}", user);
 
-    taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+    taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getAuthor(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1, userId);
     Long lastInsertId = taskRepository.lastInsertId();
     return lastInsertId;
   }
@@ -92,7 +91,6 @@ public class TodoService {
     Task task = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
     String userName = taskRepository.findUserNameByTaskId(taskId);
     Long categoryId = taskRepository.findCategoryIdByTaskId(taskId);
-    logger.debug("userName : {}", userName);
 
     return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId, task.isDeleted());
 

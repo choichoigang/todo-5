@@ -6,6 +6,7 @@ import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
 import com.codesquad.todo5.dto.category.CategoryWithTasksDto;
 import com.codesquad.todo5.response.ApiResponse;
 import com.codesquad.todo5.service.TodoService;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,8 @@ public class CategoryController {
   @GetMapping("/category/all")
   public ResponseEntity<ApiResponse> showAllCategoryItem() {
     ApiResponse response = new ApiResponse();
-    response.setData(todoService.findAllTasks());
+    List<Category> categories = todoService.findAllTasks();
+    response.setData(categories);
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
