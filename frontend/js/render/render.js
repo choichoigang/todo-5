@@ -1,7 +1,7 @@
-import { renderTaskTemplate } from "../template/template.js";
-import { commonDOM } from "../options/DOM.js";
-import URL from "../constants/url.js";
-import { fetchTodoList } from "./fetch/httpRequest.js";
+import { renderTaskTemplate } from "../../template/template.js";
+import { commonDOM } from "../../options/DOM.js";
+import URL from "../../constants/url.js";
+import { fetchTodoList } from "../fetch/httpRequest.js";
 
 const registerTodoList = (className) => {
   if (className === "todo") {
