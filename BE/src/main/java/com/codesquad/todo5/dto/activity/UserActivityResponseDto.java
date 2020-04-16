@@ -18,7 +18,7 @@ public class UserActivityResponseDto {
   private Long categoryFrom;
   private Long categoryTo;
   private String createdTime;
-  private String taskTitle;
+  private String targetTitle;
 
   public UserActivityResponseDto(Activity item, String userName) {
     this.userName = userName;
@@ -29,6 +29,6 @@ public class UserActivityResponseDto {
     this.categoryFrom = item.getCategoryFrom();
     this.categoryTo = item.getCategoryTo();
     this.createdTime = item.getCreatedDate();
-    this.taskTitle = item.getTargetTitle();
+    this.targetTitle = item.getTargetTitle();
   }
 }
