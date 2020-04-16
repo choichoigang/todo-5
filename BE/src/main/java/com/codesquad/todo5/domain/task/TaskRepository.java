@@ -28,10 +28,21 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Query("SELECT LAST_INSERT_ID()")
     Long lastInsertId();
 
+    @Query("SELECT * FROM task t WHERE t.priority >= :targetIndex AND t.category = :categoryId")
+    List<Task> findTasksByTargetIndex(int targetIndex, Long categoryId);
+
+    @Query("SELECT * FROM task WHERE priority > 1 AND priority <= :targetIndex AND category = :categoryId")
+    List<Task> findTasksByTargetIndexWithoutTheFirst(int targetIndex, Long categoryId);
+
     @Modifying
     @Transactional
     @Query("UPDATE task t SET t.category = :categoryTo, t.priority = :priority WHERE t.id = :id")
     void setNewCategoryAndPriorityByTaskId(Long categoryTo, int priority, Long id);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE task t SET t.priority = t.priority + 1 WHERE t.priority >= :priority AND t.category = :categoryId AND t.id != :targetId")
+    void updateTaskPriorityWithoutTargetByIdForNextCategory(int priority, Long categoryId, Long targetId);
 
     @Query("SELECT u.name FROM task t LEFT OUTER JOIN user u ON t.user = u.id WHERE t.id = :id")
     String findUserNameByTaskId(Long id);

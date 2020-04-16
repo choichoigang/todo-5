@@ -12,36 +12,32 @@ import org.springframework.stereotype.Repository;
 @Setter
 @NoArgsConstructor
 public class TaskShowResponseDto {
-  private Long taskId;
+  private Long id;
   private String title;
   private String content;
-  private String userName;
   private int priority;
-  private Long categoryId;
+  private String author;
+  private int categoryFrom;
+  private int categoryTo;
+  private Long categoryNum;
+  private boolean isDeleted;
 
-//  public TaskShowResponseDto(Task item, Long categoryId) {
-////    this.id = item.getId();
-//    this.title = item.getTitle();
-//    this.content = item.getContent();
-//    this.userName = taskRepository.findUserNameByTaskId(item.getId());
-//    this.priority = item.getPriority();
-//    this.categoryId = categoryId;
-//  }
-//
-  public TaskShowResponseDto(Long taskId, String title, String content, int priority, Long categoryId) {
-    this.taskId = taskId;
+  public TaskShowResponseDto(Long id, String title, String content, int priority, Long categoryNum, boolean isDeleted) {
+    this.id = id;
     this.title = title;
     this.content = content;
     this.priority = priority;
-    this.categoryId = categoryId;
+    this.categoryNum = categoryNum;
+    this.isDeleted = isDeleted;
   }
 
-  public TaskShowResponseDto(Long taskId, String title, String content, String userName, int priority, Long categoryId) {
-    this.taskId = taskId;
+  public TaskShowResponseDto(Long id, String title, String content, String author, int priority, Long categoryNum, boolean isDeleted) {
+    this.id = id;
     this.title = title;
     this.content = content;
-    this.userName = userName;
+    this.author = author;
     this.priority = priority;
-    this.categoryId = categoryId;
+    this.categoryNum = categoryNum;
+    this.isDeleted = isDeleted;
   }
 }

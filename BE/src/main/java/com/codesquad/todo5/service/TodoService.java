@@ -78,11 +78,11 @@ public class TodoService {
     @Transactional
     public Long addTask(TaskCreateRequestDto dto) {
         Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
-        User user = userRepository.findByName(dto.getUserName()).orElseThrow(UserNotFoundException::new);
-        Long userId = userRepository.findIdByUserName(dto.getUserName());
+        User user = userRepository.findByName(dto.getAuthor()).orElseThrow(UserNotFoundException::new);
+        Long userId = userRepository.findIdByUserName(dto.getAuthor());
         logger.debug("User : {}", user);
 
-        taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getUserName(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+        taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getAuthor(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
         Long lastInsertId = taskRepository.lastInsertId();
         return lastInsertId;
     }
@@ -94,14 +94,14 @@ public class TodoService {
         Long categoryId = taskRepository.findCategoryIdByTaskId(taskId);
         logger.debug("userName : {}", userName);
 
-        return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId);
+        return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId, task.isDeleted());
 
     }
 
     @Transactional
     public Optional<Task> editTask(Long taskId, TaskModifyRequestDto dto) {
-        String modifiedTitle = dto.getModifiedTitle();
-        String modifiedContent = dto.getModifiedContent();
+        String modifiedTitle = dto.getTitle();
+        String modifiedContent = dto.getContent();
         Task targetTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
 
         if (isInvalidModification(targetTask, modifiedTitle, modifiedContent)) {
@@ -115,9 +115,7 @@ public class TodoService {
 
     @Transactional
     public void deleteTask(Long taskId) {
-        Task deletedTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
         taskRepository.deleteTaskById(taskId);
-        // 변경된 값을 더 효율적으로 리턴할 수 있는 방법을 고민 해보겠습니다.
     }
 
     private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {
@@ -128,7 +126,7 @@ public class TodoService {
     public CategoryWithTasksDto findCategory(Long categoryId) {
       Category category = categoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
       List<TaskShowResponseDto> dtoList = category.getTask().stream().map(element -> new TaskShowResponseDto(element.getId(),
-              element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId))
+              element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId, element.isDeleted()))
               .collect(Collectors.toList());
       return new CategoryWithTasksDto(category, dtoList);
     }
