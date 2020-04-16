@@ -46,7 +46,10 @@ export const renderActionList = (actionInfo) => {
       break;
     }
     case "UPDATE": {
-      makeActionUpdate(actionInfo.taskTitle, actionInfo.categoryTo);
+      commonDOM.action_list.insertAdjacentHTML(
+        "afterbegin",
+        makeActionUpdate(actionInfo.taskTitle, actionInfo.categoryTo)
+      );
       break;
     }
     case "MOVE": {
@@ -61,11 +64,11 @@ export const renderActionList = (actionInfo) => {
 };
 
 export const judgeCategoryName = (categoryNumber) => {
-  if (categoryNumber === 1) {
+  if (categoryNumber === "1") {
     return "todo";
-  } else if (categoryNumber === 2) {
+  } else if (categoryNumber === "2") {
     return "doing";
-  } else if (categoryNumber === 3) {
+  } else if (categoryNumber === "3") {
     return "done";
   }
 };
