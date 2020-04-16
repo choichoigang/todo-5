@@ -17,7 +17,7 @@ class NewCardView: UIView, UITextViewDelegate {
     let contentsPlaceholder = "내용을 입력해주세요"
     private var titleFlag = false
     private var contentsFlag = false
-    private var newTask: Contents?
+    var newTask: Contents?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -85,7 +85,7 @@ class NewCardView: UIView, UITextViewDelegate {
         return label
     }()
     
-    func addSubViews() {
+    private func addSubViews() {
         self.addSubview(cancelButton)
         self.addSubview(sendButton)
         self.addSubview(titleView)
@@ -93,11 +93,11 @@ class NewCardView: UIView, UITextViewDelegate {
         self.addSubview(authorView)
     }
     
-    func configure() {
+    private func configure() {
         self.backgroundColor = .white
     }
     
-    func configureConstraints() {
+    private func configureConstraints() {
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         sendButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
         sendButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8).isActive = true
@@ -150,7 +150,7 @@ class NewCardView: UIView, UITextViewDelegate {
         }
     }
     
-    func judgeValuesConfigured() {
+    private func judgeValuesConfigured() {
         if titleFlag, contentsFlag {
             sendButton.tintColor = #colorLiteral(red: 0.2161633072, green: 0.4459061551, blue: 1, alpha: 1)
             sendButton.isEnabled = true
@@ -187,7 +187,7 @@ class NewCardView: UIView, UITextViewDelegate {
         }
         
         if textView == contentsView, let str = textView.text {
-          judgeValuesConfigured()
+            judgeValuesConfigured()
             let newLength = str.count + text.count - range.length
             return newLength <= 500
         }
@@ -205,4 +205,13 @@ class NewCardView: UIView, UITextViewDelegate {
         guard let newTask = newTask else { return }
         delegate?.addNewCard(content: newTask)
     }
+    
+    func configureEditData() {
+        guard let newTask = newTask else { return }
+        titleView.text = newTask.title
+        titleView.textColor = .black
+        contentsView.text = newTask.content
+        contentsView.textColor = .black
+    }
+    
 }

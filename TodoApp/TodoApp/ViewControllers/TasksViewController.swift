@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TasksViewController: UIViewController, TitleViewDelegate {
+class TasksViewController: UIViewController, TitleViewDelegate, NewCardViewDelegate {
     
     let titleView = TitleView()
     let tableView = TasksTableView()
@@ -23,19 +23,27 @@ class TasksViewController: UIViewController, TitleViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureDelegates()
+        configureSubviews()
+        configureConstraints()
+    }
+    
+    private func configureSubviews() {
+        self.view.addSubview(titleView)
+        self.view.addSubview(tableView)
+        self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
+    }
+    
+    private func configureDelegates() {
+        tasksDelegate.delegate = self
         titleView.delegate = self
         tableView.delegate = tasksDelegate
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self as? UITableViewDragDelegate
         tableView.dropDelegate = self as? UITableViewDropDelegate
-        
-        self.view.addSubview(titleView)
-        self.view.addSubview(tableView)
-        self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
-        setConstraints()
     }
     
-    func setConstraints() {
+    private func configureConstraints() {
         titleView.translatesAutoresizingMaskIntoConstraints = false
         titleView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
         titleView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
@@ -65,10 +73,22 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         }
     }
     
-    func presentNewCardView() {
+    func presentNewCardView(contents: Contents?, isEdit: Bool) {
         let newCardViewController = NewCardViewController()
-        newCardViewController.newCardView.categoryNum = category?.id
-        self.present(newCardViewController, animated: true, completion: nil)
+        newCardViewController.newCardView.categoryNum = self.category?.id
+        newCardViewController.newCardView.newTask = contents
+        if isEdit { newCardViewController.newCardView.configureEditData() }
+        self.present(newCardViewController, animated: true)
     }
+    
+    func dismissNewCardView() {
+        self.dismiss(animated: true)
+    }
+    
+    func addNewCard(content: Contents) {
+        //서버에 새로운 edit 요청 
+        self.dismiss(animated: true)
+    }
+    
 }
 
