@@ -13,4 +13,7 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
   @Query("SELECT count(*) FROM category c")
   int countNumber();
+
+  @Query("SELECT LAST_INSERT_ID()")
+  Long lastInsertId();
 }
