@@ -26,9 +26,12 @@ extension TasksViewController: UITableViewDropDelegate {
         let data = dragItem.dataSource
         
         let index = dragItem.indexPath.row
-        self.tasksDataSource.tasks.insert(data.tasks[index], at: destinationIndexPath.row)
         guard let taskDataSource = tableView.dataSource as? TasksTableViewDataSource else { return }
-
+        taskDataSource.taskID = dragItem.taskId
+        
+        self.tasksDataSource.tasks.insert(data.tasks[index], at: destinationIndexPath.row)
+        
+        
         data.tasks.remove(at: index)
         dragItem.tableView.deleteRows(at: [dragItem.indexPath], with: .automatic)
         tableView.insertRows(at: [destinationIndexPath], with: .automatic)

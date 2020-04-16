@@ -92,12 +92,14 @@ class ViewController: UIViewController {
     }
     
     @objc func updateData(_ notification: Notification) {
-        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, categoryID: Int, taskID: Int) else { return }
-        requestDelete(taskID: updateInfo.taskID)
+        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, categoryID: Int, taskID: Int?) else { return }
+        if let taskID = updateInfo.taskID {
+            requestDelete(taskID: taskID)
+        }
         updateTasksCount(updateInfo: updateInfo)
     }
     
-    private func updateTasksCount(updateInfo: (count: Int, categoryID: Int, taskID: Int)) {
+    private func updateTasksCount(updateInfo: (count: Int, categoryID: Int, taskID: Int?)) {
         let targetController = controllers.filter { $0.category?.id == updateInfo.categoryID }.first
         guard let controller = targetController else { return }
         controller.titleView.setTasksCount(count: updateInfo.count)
