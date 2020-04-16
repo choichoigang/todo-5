@@ -32,6 +32,7 @@ export const makeActionAdd = (taskTitle, categoryTo) => {
     <span class="action">added </span>
     <span class="task_title">${taskTitle} </span>
     <span class="column_name">to ${categoryToName}</span>
+    <div class="time">- minutes ago</div>
   </div>
 </div>`;
 };
@@ -49,7 +50,8 @@ export const makeActionRemove = (taskTitle, categoryTo) => {
     <span class="user_id">@hoi </span>
     <span class="action">delete </span>
     <span class="task_title">${taskTitle} </span>
-    <span class="column_name">${categoryToName}</span>
+    <span class="column_name">${categoryToName}</span>\
+    <div class="time">- minutes ago</div>
   </div>
 </div>`;
 };
@@ -68,6 +70,7 @@ export const makeActionUpdate = (taskTitle, categoryTo) => {
     <span class="action">updated </span>
     <span class="task_title">${taskTitle} </span>
     <span class="column_name">to ${categoryToName}</span>
+    <div class="time">- minutes ago</div>
   </div>
 </div>`;
 };
@@ -87,6 +90,7 @@ export const makeActionMove = (taskTitle, categoryFrom, categoryTo) => {
     <span class="task_title">${taskTitle} </span>
     <span class="from_column">from ${categoryFromName} </span>
     <span class="to_column">to ${categoryToName}</span>
+    <div class="time">- minutes ago</div>
   </div>
 </div>`;
 };
