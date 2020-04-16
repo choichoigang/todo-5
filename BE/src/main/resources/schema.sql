@@ -33,9 +33,13 @@ CREATE TABLE task (
 CREATE TABLE activity (
 	id int auto_increment primary key NOT NULL,
     created_date datetime NOT NULL DEFAULT current_timestamp,
-    action varchar(45) NOT NULL,
+    action varchar(45),
+    target varchar(45),
+    user_name varchar(45),
     category_from int,
     category_to int,
+    previous_target_name varchar(45),
+    next_target_name varchar(45),
     user int NOT NULL references user(id) ON UPDATE CASCADE,
-    user_key int NOT NULL
+    user_key int
 );
