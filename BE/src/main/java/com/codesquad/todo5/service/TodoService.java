@@ -152,7 +152,7 @@ public class TodoService {
 
     @Transactional
     public String getTaskNameById(Long taskId) {
-        Task specifiedTask = taskRepository.findTaskById(taskId);
+        Task specifiedTask = taskRepository.findTaskByIdIncludingDeleted(taskId);
         return specifiedTask.getTitle();
     }
 
@@ -180,5 +180,17 @@ public class TodoService {
         Long lastInsertId = taskRepository.lastInsertId();
         Task lastInsertTask = taskRepository.findTaskById(lastInsertId);
         return lastInsertTask.getTitle();
+    }
+
+    @Transactional
+    public int getTaskCategoryToOfRecentlyAdded() {
+        Long lastInsertId = taskRepository.lastInsertId();
+        Task lastInsertTask = taskRepository.findTaskById(lastInsertId);
+        return lastInsertTask.getCategoryNum();
+    }
+
+    @Transactional
+    public Long getTaskCategoryToOfDeletedTask(Long categoryId) {
+        return taskRepository.findCategoryIdByTaskId(categoryId);
     }
 }
