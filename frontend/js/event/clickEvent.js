@@ -1,6 +1,6 @@
 import { commonDOM, createDOM, cerateColumnDom } from "../../options/DOM.js";
 import classNameObj from "../../options/columnClassName.js";
-import { taskTemplate } from "../../template/template.js";
+import { renderTaskTemplate } from "../../template/template.js";
 import modifyOption from "../../options/modifyOption.js";
 import { requestBodyAdd, requestBodyEdit } from "../../options/requestBody.js";
 import { fetchAdd, fetchDelete, fetchEdit } from "../fetch/httpRequest.js";
@@ -15,7 +15,7 @@ const columnClickEventHandler = async (event, className, DOM) => {
   } else if (targetClassName === className.addButton) {
     await addBtnHandler(DOM.textArea, DOM.columnName);
     await fetchAdd(TODO_URL.ADD, requestBodyAdd).then((resBody) => {
-      DOM.task_list.innerHTML += taskTemplate(
+      DOM.task_list.innerHTML += renderTaskTemplate(
         requestBodyAdd.title,
         resBody.data,
         DOM.columnName

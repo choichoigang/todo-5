@@ -1,4 +1,4 @@
-export const taskTemplate = (inputValue, id, className) => {
+export const renderTaskTemplate = (inputValue, id, className) => {
   return ` <div class="task" draggable="true" data-task-id="${id}">
     <div id="task1" class="${className}_task">
       <div class="title">

@@ -1,4 +1,4 @@
-import { taskTemplate } from "../template/template.js";
+import { renderTaskTemplate } from "../template/template.js";
 import { commonDOM } from "../options/DOM.js";
 import URL from "../constants/url.js";
 import { fetchTodoList } from "./fetch/httpRequest.js";
@@ -18,7 +18,7 @@ export const renderList = (columnDom, dataList, className) => {
     if (el.deleted === true) {
       return;
     } else {
-      columnDom.innerHTML += taskTemplate(el.title, el.id, className);
+      columnDom.innerHTML += renderTaskTemplate(el.title, el.id, className);
     }
   });
 };
