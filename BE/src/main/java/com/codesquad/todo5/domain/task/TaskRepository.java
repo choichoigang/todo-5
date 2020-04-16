@@ -37,7 +37,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE task t SET t.category = :categoryTo, t.priority = :priority WHERE t.id = :id")
-    void updateTaskCategoryWithPriorityById(Long categoryTo, int priority, Long id);
+    void setNewCategoryAndPriorityByTaskId(Long categoryTo, int priority, Long id);
 
     @Modifying
     @Transactional
@@ -56,14 +56,18 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Query("SELECT category FROM task WHERE id = :taskId")
     Long findCategoryIdByTaskId(Long taskId);
 
-
     @Modifying
     @Transactional
     @Query("UPDATE task SET priority = priority - 1 WHERE id IN (SELECT id FROM (SELECT id FROM task WHERE priority >= :targetIndex AND category = :categoryId)at)")
-    void setPrioritiesByTargetIndexForPreviousCategory(int targetIndex, Long categoryId);
+    void subtractAfterPropertiesByTargetIndexForTheCategory(int targetIndex, Long categoryId);
 
     @Modifying
     @Transactional
     @Query("UPDATE task SET priority = priority + 1 WHERE id IN (SELECT id FROM (SELECT id FROM task WHERE priority >= :targetIndex AND category = :categoryId)at)")
-    void setPrioritiesByTargetIndexForNextCategory(int targetIndex, Long categoryId);
+    void plusAfterPrioritiesByTargetIndexForTheCategory(int targetIndex, Long categoryId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE task SET priority = priority - 1 WHERE priority <= :targetIndex AND id != :taskId AND category = :categoryId")
+    void subtractAfterPrioritiesByTargetIndexForTheFirstTask(int targetIndex, Long categoryId, Long taskId);
 }

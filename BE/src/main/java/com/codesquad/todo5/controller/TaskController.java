@@ -1,7 +1,5 @@
 package com.codesquad.todo5.controller;
 
-import com.codesquad.todo5.domain.category.Category;
-import com.codesquad.todo5.domain.task.Task;
 import com.codesquad.todo5.domain.task.TaskRepository;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
@@ -78,7 +76,7 @@ public class TaskController {
   public ResponseEntity<ApiResponse> moveTask(@PathVariable Long id,
       @RequestBody TaskMoveRequestDto dto) {
     logger.debug("Dto : {} ", dto);
-    todoService.sortLogicJunction(id, dto);
+    todoService.sortTasksForCategories(id, dto);
     ApiResponse response = new ApiResponse();
     response.setStatus(true);
     return new ResponseEntity<>(response, HttpStatus.OK);

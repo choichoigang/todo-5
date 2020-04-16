@@ -17,7 +17,6 @@ import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
 import com.codesquad.todo5.exception.UserNotFoundException;
-import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -133,19 +132,21 @@ public class TodoService {
     }
 
     @Transactional
-    public void sortLogicJunction(Long taskId, TaskMoveRequestDto dto) {
-        sortBetweenCategories(taskId, dto);
-    }
+    public void sortTasksForCategories(Long taskId, TaskMoveRequestDto dto) {
+        Long categoryFrom = dto.getCategoryFrom();
+        Long categoryTo = dto.getCategoryTo();
+        Task targetTask = taskRepository.findTaskById(taskId);
+        int previousPriority = targetTask.getPriority();
+        int newPriority = dto.getPriority();
 
-    @Transactional
-    public void sortBetweenCategories(Long taskId, TaskMoveRequestDto dto) {
-        Task targetTask = taskRepository.findById(taskId)
-            .orElseThrow(ResourceNotFoundException::new);
-        taskRepository
-            .setPrioritiesByTargetIndexForNextCategory(dto.getPriority(), dto.getCategoryTo());
-        taskRepository.setPrioritiesByTargetIndexForPreviousCategory(targetTask.getPriority(),
-            dto.getCategoryFrom());
-        taskRepository
-            .updateTaskCategoryWithPriorityById(dto.getCategoryTo(), dto.getPriority(), taskId);
+        if (previousPriority == 1) {
+            taskRepository.subtractAfterPrioritiesByTargetIndexForTheFirstTask(newPriority, categoryFrom, taskId);
+            taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
+            return;
+        }
+
+        taskRepository.subtractAfterPropertiesByTargetIndexForTheCategory(previousPriority, categoryFrom);
+        taskRepository.plusAfterPrioritiesByTargetIndexForTheCategory(newPriority, categoryTo);
+        taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
     }
 }
