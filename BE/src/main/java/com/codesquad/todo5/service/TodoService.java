@@ -149,4 +149,36 @@ public class TodoService {
         taskRepository.plusAfterPrioritiesByTargetIndexForTheCategory(newPriority, categoryTo);
         taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
     }
+
+    @Transactional
+    public String getTaskNameById(Long taskId) {
+        Task specifiedTask = taskRepository.findTaskById(taskId);
+        return specifiedTask.getTitle();
+    }
+
+    @Transactional
+    public String getTaskContentById(Long taskId) {
+        Task specifiedTask = taskRepository.findTaskById(taskId);
+        return specifiedTask.getContent();
+    }
+
+    @Transactional
+    public String getCategoryTitleById(Long categoryId) {
+        Category specifiedCategory = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException());
+        return specifiedCategory.getName();
+    }
+
+    @Transactional
+    public String getCategoryTitleOfRecentlyAdded() {
+        Long lastInsertId = categoryRepository.lastInsertId();
+        Category lastInsertCategory = categoryRepository.findById(lastInsertId).orElseThrow(() -> new ResourceNotFoundException());
+        return lastInsertCategory.getName();
+    }
+
+    @Transactional
+    public String getTaskTitleOfRecentlyAdded() {
+        Long lastInsertId = taskRepository.lastInsertId();
+        Task lastInsertTask = taskRepository.findTaskById(lastInsertId);
+        return lastInsertTask.getTitle();
+    }
 }

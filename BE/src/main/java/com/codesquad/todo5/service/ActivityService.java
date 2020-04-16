@@ -45,8 +45,6 @@ public class ActivityService {
     activity.setUserId(userId);
     activity.setCategoryFrom(categoryFrom);
     activity.setCategoryTo(categoryTo);
-    activity.setPreviousTargetName(previousTargetName);
-    activity.setNextTargetName(nextTargetName);
     activityRepository.save(activity);
   }
 
