@@ -1,10 +1,17 @@
 import { commonDOM, createDOM, cerateColumnDom } from "../../options/DOM.js";
 import classNameObj from "../../options/columnClassName.js";
-import { renderTaskTemplate } from "../../template/template.js";
+import { makeTaskTemplate } from "../../template/template.js";
 import modifyOption from "../../options/modifyOption.js";
 import { requestBodyAdd, requestBodyEdit } from "../../options/requestBody.js";
 import { fetchAdd, fetchDelete, fetchEdit } from "../fetch/httpRequest.js";
 import TODO_URL from "../../constants/url.js";
+import { renderActionList } from "../render/render.js";
+import {
+  addActionOption,
+  removeActionOption,
+  updateActionOption,
+  moveActionOption,
+} from "../../options/actionOption.js";
 
 //column_click------------------------------------------------------------------------------------
 const columnClickEventHandler = async (event, className, DOM) => {
@@ -14,8 +21,9 @@ const columnClickEventHandler = async (event, className, DOM) => {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === className.addButton) {
     await addBtnHandler(DOM.textArea, DOM.columnName);
+    await renderActionList(addActionOption);
     await fetchAdd(TODO_URL.ADD, requestBodyAdd).then((resBody) => {
-      DOM.task_list.innerHTML += renderTaskTemplate(
+      DOM.task_list.innerHTML += makeTaskTemplate(
         requestBodyAdd.title,
         resBody.data,
         DOM.columnName
@@ -25,8 +33,8 @@ const columnClickEventHandler = async (event, className, DOM) => {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === "deletion") {
     const handler = await deletionBtnHandler(event);
-
     await fetchDelete(TODO_URL.DELETE(handler));
+    renderActionList(removeActionOption);
   } else if (targetClassName === "modify") {
     modifyModalHandler(event);
   }
@@ -54,33 +62,55 @@ const activatingHandler = (addBoxDom) => {
 
 const addBtnHandler = (textareaDom, className) => {
   const inputValue = textareaDom.value;
+
   textareaDom.value = "";
 
   if (className === "todo") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 1;
+
+    addActionOption.taskTitle = inputValue;
+    addActionOption.categoryTo = "1";
   } else if (className === "doing") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 2;
+
+    addActionOption.taskTitle = inputValue;
+    addActionOption.categoryTo = "2";
   } else if (className === "done") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 3;
+
+    addActionOption.taskTitle = inputValue;
+    addActionOption.categoryTo = "3";
   }
 };
 
 const deletionBtnHandler = (event) => {
   const taskElement = event.target.closest(".task");
+  const taskTitle = taskElement.querySelector(".task_value").innerText;
+  const columnId = event.target.closest(".column").dataset.columnId;
   const taskId = taskElement.dataset.taskId;
+
+  removeActionOption.taskTitle = taskTitle;
+  removeActionOption.categoryTo = columnId;
+
   taskElement.remove();
+
   return taskId;
 };
 
 const modifyModalHandler = (event) => {
+  const columnId = event.target.closest(".column").dataset.columnId;
+
   modifyOption.targetElement = event.target.closest(".task");
   modifyOption.titleElement = modifyOption.targetElement.querySelector(
     ".task_value"
   );
   modifyOption.targetId = event.target.closest(".task").dataset.taskId;
+
+  updateActionOption.taskTitle = modifyOption.titleElement.innerText;
+  updateActionOption.categoryTo = columnId;
 
   commonDOM.blind.className = "blind_on";
   commonDOM.modal.style.visibility = "visible";
@@ -108,10 +138,11 @@ const modalSaveNoteHandler = async () => {
     alert("수정하려는 내용이 없습니다.");
   } else {
     requestBodyEdit.title = modifyValue;
-    console.log(requestBodyEdit);
     fetchEdit(TODO_URL.EDIT(modifyOption.targetId), requestBodyEdit);
 
     modifyOption.titleElement.innerText = modifyValue;
+
+    renderActionList(updateActionOption);
     modalCancelHandler();
   }
 };
