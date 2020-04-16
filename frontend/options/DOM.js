@@ -5,6 +5,10 @@ const commonDOM = {
   doingTaskList: document.querySelector("#doing .task_list"),
   doneTaskList: document.querySelector("#done .task_list"),
 
+  todoCounter: document.querySelector(".todo_counter"),
+  doingCounter: document.querySelector(".doing_counter"),
+  doneCounter: document.querySelector(".done_counter"),
+
   blind: document.querySelector(".blind_off"),
   modal: document.querySelector(".modify_modal"),
   modal_textarea: document.querySelector(".modify_modal textarea"),
