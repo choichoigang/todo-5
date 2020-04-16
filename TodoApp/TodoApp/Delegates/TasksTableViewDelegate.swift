@@ -24,7 +24,7 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
         }
         
         let edit = UIAction(title: "edit...") { action in
-            self.delegate?.presentNewCardView(contents: dataSource.tasks[indexPath.row], isEdit: true)
+            self.delegate?.presentNewCardView(contents: dataSource.tasks[indexPath.row], isEdit: true, taskId: dataSource.tasks[indexPath.row].id)
         }
         
         let delete = UIAction(title: "delete", attributes: [.destructive]) { action in

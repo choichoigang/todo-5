@@ -91,6 +91,6 @@ class TitleView: UIView {
     }
 
     @objc private func presentNewCardView() {
-        delegate?.presentNewCardView(contents: nil, isEdit: false)
+        delegate?.presentNewCardView(contents: nil, isEdit: false, taskId: nil)
     }
 }

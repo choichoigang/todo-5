@@ -18,6 +18,8 @@ class NewCardView: UIView, UITextViewDelegate {
     private var titleFlag = false
     private var contentsFlag = false
     var newTask: Contents?
+    var isEdit = false
+    var taskID: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -201,9 +203,9 @@ class NewCardView: UIView, UITextViewDelegate {
     }
     
     @objc func addNewCard() {
-        newTask = Contents(id: nil, title: titleView.text, content: contentsView.text, priority: nil, author: "jypthemiracle", categoryTo: nil, categoryNum: categoryNum!, deleted: nil)
+        newTask = Contents(id: taskID, title: titleView.text, content: contentsView.text, priority: nil, author: "jypthemiracle", categoryTo: nil, categoryNum: categoryNum!, deleted: nil)
         guard let newTask = newTask else { return }
-        delegate?.addNewCard(content: newTask)
+        delegate?.addNewCard(content: newTask, isEdit: isEdit)
     }
     
     func configureEditData() {

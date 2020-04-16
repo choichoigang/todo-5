@@ -10,5 +10,5 @@ import Foundation
 
 protocol NewCardViewDelegate {
     func dismissNewCardView()
-    func addNewCard(content: Contents)
+    func addNewCard(content: Contents, isEdit: Bool)
 }

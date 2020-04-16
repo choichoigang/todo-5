@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TitleViewDelegate {
-    func presentNewCardView(contents: Contents?, isEdit: Bool)
+    func presentNewCardView(contents: Contents?, isEdit: Bool, taskId: Int?)
 }

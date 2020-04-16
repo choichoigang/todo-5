@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TasksViewController: UIViewController, TitleViewDelegate, NewCardViewDelegate {
+class TasksViewController: UIViewController, TitleViewDelegate {
     
     let titleView = TitleView()
     let tableView = TasksTableView()
@@ -73,22 +73,17 @@ class TasksViewController: UIViewController, TitleViewDelegate, NewCardViewDeleg
         }
     }
     
-    func presentNewCardView(contents: Contents?, isEdit: Bool) {
+    func presentNewCardView(contents: Contents?, isEdit: Bool, taskId: Int?) {
         let newCardViewController = NewCardViewController()
         newCardViewController.newCardView.categoryNum = self.category?.id
         newCardViewController.newCardView.newTask = contents
-        if isEdit { newCardViewController.newCardView.configureEditData() }
+        if isEdit {
+            newCardViewController.newCardView.configureEditData()
+            newCardViewController.newCardView.isEdit = true
+            newCardViewController.newCardView.taskID = taskId
+        }
         self.present(newCardViewController, animated: true)
     }
-    
-    func dismissNewCardView() {
-        self.dismiss(animated: true)
-    }
-    
-    func addNewCard(content: Contents) {
-        //서버에 새로운 edit 요청 
-        self.dismiss(animated: true)
-    }
-    
+
 }
 
