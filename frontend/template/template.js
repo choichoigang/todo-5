@@ -1,4 +1,6 @@
-export const renderTaskTemplate = (inputValue, id, className) => {
+import { judgeCategoryName } from "../js/render/render.js";
+
+export const makeTaskTemplate = (inputValue, id, className) => {
   return ` <div class="task" draggable="true" data-task-id="${id}">
     <div id="task1" class="${className}_task">
       <div class="title">
@@ -16,7 +18,9 @@ export const renderTaskTemplate = (inputValue, id, className) => {
   </div>`;
 };
 
-export const renderActionAdd = (taskTitle, columnName) => {
+export const makeActionAdd = (taskTitle, categoryTo) => {
+  const categoryToName = judgeCategoryName(categoryTo);
+
   return `<div class="log">
   <div class="profile">
     <img
@@ -27,12 +31,12 @@ export const renderActionAdd = (taskTitle, columnName) => {
     <span class="user_id">@hoi </span>
     <span class="action">added </span>
     <span class="task_title">${taskTitle} </span>
-    <span class="column_name">to ${columnName}</span>
+    <span class="column_name">to ${categoryToName}</span>
   </div>
 </div>`;
 };
 
-export const renderActionDelete = (taskTitle, columnName) => {
+export const makeActionRemove = (taskTitle, categoryTo) => {
   return `<div class="log">
   <div class="profile">
     <img
@@ -43,12 +47,14 @@ export const renderActionDelete = (taskTitle, columnName) => {
     <span class="user_id">@hoi </span>
     <span class="action">delete </span>
     <span class="task_title">${taskTitle} </span>
-    <span class="column_name">${columnName}</span>
+    <span class="column_name">${categoryTo}</span>
   </div>
 </div>`;
 };
 
-export const renderActionEdit = (taskTitle, columnName) => {
+export const makeActionUpdate = (taskTitle, categoryTo) => {
+  const categoryToName = judgeCategoryName(categoryTo);
+
   return `<div class="log">
   <div class="profile">
     <img
@@ -59,12 +65,14 @@ export const renderActionEdit = (taskTitle, columnName) => {
     <span class="user_id">@hoi </span>
     <span class="action">updated </span>
     <span class="task_title">${taskTitle} </span>
-    <span class="column_name">${columnName}</span>
+    <span class="column_name">${categoryToName}</span>
   </div>
 </div>`;
 };
 
-export const renderActionMove = (taskTitle, fromColumnName, toColumnName) => {
+export const makeActionMove = (taskTitle, categoryFrom, categoryTo) => {
+  const categoryToName = judgeCategoryName(categoryTo);
+  const categoryFromName = judgeCategoryName(categoryFrom);
   return `<div class="log">
   <div class="profile">
     <img
@@ -75,8 +83,8 @@ export const renderActionMove = (taskTitle, fromColumnName, toColumnName) => {
     <span class="user_id">@hoi </span>
     <span class="action">moved </span>
     <span class="task_title">${taskTitle} </span>
-    <span class="from_column">from ${fromColumnName} </span>
-    <span class="to_column">to ${toColumnName}</span>
+    <span class="from_column">from ${categoryFromName} </span>
+    <span class="to_column">to ${categoryToName}</span>
   </div>
 </div>`;
 };
