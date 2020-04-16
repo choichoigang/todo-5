@@ -40,8 +40,8 @@ public class Task implements Comparable<Task> {
   @Column("category_to")
   private Long categoryTo;
 
-  @Column("category_from")
-  private int categoryFrom;
+//  @Column("category_from")
+//  private int categoryFrom;
   @Column("category")
   private int categoryNum;
 
