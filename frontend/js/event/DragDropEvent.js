@@ -3,6 +3,8 @@ import { requestBodyMove } from "../../options/requestBody.js";
 import { fetchMove } from "../fetch/httpRequest.js";
 import TODO_URL from "../../constants/url.js";
 import option from "../../options/DragDropOption.js";
+import { renderActionList } from "../render/render.js";
+import { moveActionOption } from "../../options/actionOption.js";
 
 const dragEnterHandler = (event) => {
   const targetTask = event.toElement.closest(".task");
@@ -21,12 +23,16 @@ const dragEnterHandler = (event) => {
 };
 
 const dragStartHandler = (event) => {
-  const targetColumnId = event.toElement.closest(".column").dataset.columnId;
-  const targetTaskId = event.toElement.closest(".task").dataset.taskId;
+  const targetColumn = event.toElement.closest(".column");
+  const targetTask = event.toElement.closest(".task");
+  const targetTitle = targetTask.querySelector(".task_value").innerText;
 
-  requestBodyMove.categoryFrom = targetColumnId;
+  moveActionOption.taskTitle = targetTitle;
+  moveActionOption.categoryFrom = targetColumn.dataset.columnId;
 
-  option.dragTargetId = targetTaskId;
+  requestBodyMove.categoryFrom = targetColumn.dataset.columnId;
+
+  option.dragTargetId = targetTask.dataset.taskId;
   option.dragTargetEl = event.toElement;
   option.dargTargetHeight = event.target.offsetHeight / 2;
 };
@@ -40,6 +46,7 @@ const dragEndHandler = async (event) => {
   const targetColumnTasks = Array.from(targetColumn.querySelectorAll(".task"));
 
   requestBodyMove.categoryTo = targetColumn.dataset.columnId;
+  moveActionOption.categoryTo = targetColumn.dataset.columnId;
 
   await targetColumnTasks.some((elNode, index) => {
     if (elNode.dataset.taskId === option.dragTargetId) {
@@ -47,7 +54,9 @@ const dragEndHandler = async (event) => {
     }
   });
 
-  //await fetchMove(TODO_URL.MOVE(requestBodyMove.priority), requestBodyMove);
+  await fetchMove(TODO_URL.MOVE(option.dragTargetId), requestBodyMove);
+
+  renderActionList(moveActionOption);
 };
 
 const initDragDropEvent = () => {

@@ -71,12 +71,63 @@ i {
 }
 
 .menu_box {
-  display: none;
+  display: flex;
+  visibility: hidden;
   position: absolute;
-  width: 150px;
-  height: 300px;
-  background-color: blue;
+  width: 30%;
+  height: 100%;
+  background-image: url("https://i.pinimg.com/564x/bd/6d/09/bd6d09ee22e7f7b46acea16168c92416.jpg");
+  background-size: 36%;
   right: 0%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+  animation: unfoldOut 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.menu_box_active {
+  display: flex;
+  visibility: visible;
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  background-size: 36%;
+  background-image: url("https://i.pinimg.com/564x/bd/6d/09/bd6d09ee22e7f7b46acea16168c92416.jpg");
+  right: 0%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+  animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes unfoldIn {
+  0% {
+    transform: scaleX(0) scaleY(0.005);
+  }
+  50% {
+    transform: scaleX(1) scaleY(0.005);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scaleX(1) scaleY(0.005);
+  }
+  100% {
+    transform: scaleX(0) scaleY(0.005);
+  }
+}
+
+.menu_tag {
+  cursor: pointer;
 }
 
 .fa-plus {
@@ -116,10 +167,65 @@ i {
 }
 
 .writer :first-child {
-  color: #828282;
+  color: #58836d;
 }
 
 .writer {
   margin-top: 5px;
   font-size: 7px;
+}
+
+.log_list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.log_list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.log_list::-webkit-scrollbar {
+  background: #ddd;
+}
+
+.log_list::-webkit-scrollbar {
+  background: #666;
+}
+
+.log {
+  display: flex;
+  align-items: center;
+  font-size: 9px;
+  width: 90%;
+  background-color: #ffffff;
+  margin: 3px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(30, 30, 30, 0.3);
+  line-height: 12px;
+}
+.log img {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  margin: 3px;
+}
+.user_id {
+  color: #ffbc89;
+  font-weight: bold;
+}
+
+.task_title {
+  color: #ffbc89;
+  font-weight: bold;
+}
+.time {
+  color: #a0a0a0;
+  margin: 3px;
+}
+.task_title {
+  margin-right: 3px;
 }

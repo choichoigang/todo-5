@@ -2,7 +2,7 @@ export const requestBodyAdd = {
   title: "",
   content: "test",
   author: "jypthemiracle",
-  categoryNum: Number,
+  categoryNum: null,
 };
 
 export const requestBodyEdit = {
@@ -11,11 +11,11 @@ export const requestBodyEdit = {
   categoryNum: 0,
   categoryTo: 0,
   content: "",
-  title: String,
+  title: null,
 };
 
 export const requestBodyMove = {
-  priority: Number,
-  categoryFrom: Number,
-  categoryTo: Number,
+  priority: null,
+  categoryFrom: null,
+  categoryTo: null,
 };

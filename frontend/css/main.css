@@ -36,6 +36,15 @@
   background-color: black;
   color: white;
   height: 30px;
+  background: linear-gradient(
+    45deg,
+    #8cd0ad,
+    #91d0d2,
+    #96d5d7,
+    #36e0c6,
+    #31e0c1,
+    #27dbb1
+  );
 }
 .nav span {
   font-size: 10px;

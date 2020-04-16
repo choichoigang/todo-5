@@ -8,6 +8,10 @@ const commonDOM = {
   blind: document.querySelector(".blind_off"),
   modal: document.querySelector(".modify_modal"),
   modal_textarea: document.querySelector(".modify_modal textarea"),
+
+  menu_tab: document.querySelector(".menu_tag"),
+  menu_box: document.querySelector(".menu_box"),
+  action_list: document.querySelector(".log_list"),
 };
 
 const cerateColumnDom = (columnName) => {
