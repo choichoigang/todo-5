@@ -17,11 +17,3 @@ public class TaskModifyRequestDto {
   private Long categoryFrom;
   private Long categoryTo;
 }
-
-
-//{
-//	"title": "THIS IS A TEST",
-//	"content": "THIS IS A CONTENT",
-//	"author": "test",
-//	"categoryNum": 1
-//}
