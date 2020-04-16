@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum Target implements EnumType {
-  TASK("태스크"),
-  CATEGORY("카테고리");
+  TASK("TASK"),
+  CATEGORY("CATEGORY");
 
   private final String action;
 
