@@ -9,4 +9,7 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 
   @Query("SELECT * FROM activity WHERE user = :userId ORDER BY created_date DESC")
   Optional<List<Activity>> findAllActivityByUserId(Long userId);
+
+  @Query("SELECT * FROM activity ORDER BY created_date DESC")
+  Optional<List<Activity>> findAllActivity();
 }

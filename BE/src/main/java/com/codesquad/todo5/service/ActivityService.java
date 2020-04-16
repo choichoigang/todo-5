@@ -4,6 +4,8 @@ import com.codesquad.todo5.domain.activity.Activity;
 import com.codesquad.todo5.domain.activity.ActivityRepository;
 import com.codesquad.todo5.domain.task.TaskRepository;
 import com.codesquad.todo5.domain.user.UserRepository;
+import com.codesquad.todo5.exception.ResourceNotFoundException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,4 +50,7 @@ public class ActivityService {
     activityRepository.save(activity);
   }
 
+  public List<Activity> getAllActivityList() {
+    return activityRepository.findAllActivity().orElseThrow(() -> new ResourceNotFoundException());
+  }
 }
