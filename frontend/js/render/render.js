@@ -1,4 +1,10 @@
-import { renderTaskTemplate } from "../../template/template.js";
+import {
+  makeTaskTemplate,
+  makeActionAdd,
+  makeActionRemove,
+  makeActionUpdate,
+  makeActionMove,
+} from "../../template/template.js";
 import { commonDOM } from "../../options/DOM.js";
 import URL from "../../constants/url.js";
 import { fetchTodoList } from "../fetch/httpRequest.js";
@@ -18,9 +24,50 @@ export const renderList = (columnDom, dataList, className) => {
     if (el.deleted === true) {
       return;
     } else {
-      columnDom.innerHTML += renderTaskTemplate(el.title, el.id, className);
+      columnDom.innerHTML += makeTaskTemplate(el.title, el.id, className);
     }
   });
+};
+
+export const renderActionList = (actionInfo) => {
+  switch (actionInfo.actionName) {
+    case "ADD": {
+      commonDOM.action_list.insertAdjacentHTML(
+        "afterbegin",
+        makeActionAdd(actionInfo.taskTitle, actionInfo.categoryTo)
+      );
+      break;
+    }
+    case "REMOVE": {
+      commonDOM.action_list.insertAdjacentHTML(
+        "afterbegin",
+        makeActionRemove(actionInfo.taskTitle, actionInfo.categoryTo)
+      );
+      break;
+    }
+    case "UPDATE": {
+      makeActionUpdate(actionInfo.taskTitle, actionInfo.categoryTo);
+      break;
+    }
+    case "MOVE": {
+      makeActionMove(
+        actionInfo.taskTitle,
+        actionInfo.categoryFrom,
+        actionInfo.categoryTo
+      );
+      break;
+    }
+  }
+};
+
+export const judgeCategoryName = (categoryNumber) => {
+  if (categoryNumber === 1) {
+    return "todo";
+  } else if (categoryNumber === 2) {
+    return "doing";
+  } else if (categoryNumber === 3) {
+    return "done";
+  }
 };
 
 export const initRenderTodoList = () => {
