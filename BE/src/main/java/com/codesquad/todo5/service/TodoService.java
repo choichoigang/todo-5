@@ -190,7 +190,7 @@ public class TodoService {
     }
 
     @Transactional
-    public Long getTaskCategoryToOfDeletedTask(Long categoryId) {
+    public Long getTaskCategoryToOfTask(Long categoryId) {
         return taskRepository.findCategoryIdByTaskId(categoryId);
     }
 }
