@@ -33,6 +33,7 @@ struct Contents: Codable {
 }
 
 struct DragItem {
+    var taskId: Int
     var dataSource: TasksTableViewDataSource
     var indexPath: IndexPath
     var tableView: TasksTableView

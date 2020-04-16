@@ -10,6 +10,8 @@ import UIKit
 
 class TasksTableViewCell: UITableViewCell {
     
+    var taskId: Int?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "TasksTableViewCell")
         addSubViews()
@@ -91,10 +93,11 @@ class TasksTableViewCell: UITableViewCell {
         
     }
     
-    func configure(title: String, contents: String, author: String) {
+    func configure(title: String, contents: String, author: String, taskId: Int) {
         taskTitle.text = title
         taskContents.text = contents
         authorLabel.text = author
+        self.taskId = taskId
     }
    
 }

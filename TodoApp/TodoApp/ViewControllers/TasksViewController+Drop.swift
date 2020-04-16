@@ -27,12 +27,13 @@ extension TasksViewController: UITableViewDropDelegate {
         
         let index = dragItem.indexPath.row
         self.tasksDataSource.tasks.insert(data.tasks[index], at: destinationIndexPath.row)
-        
+        guard let taskDataSource = tableView.dataSource as? TasksTableViewDataSource else { return }
+
         data.tasks.remove(at: index)
         dragItem.tableView.deleteRows(at: [dragItem.indexPath], with: .automatic)
-        guard let taskDataSource = tableView.dataSource as? TasksTableViewDataSource else { return }
         tableView.insertRows(at: [destinationIndexPath], with: .automatic)
-        NotificationCenter.default.post(name: .move, object: nil, userInfo: ["moveInfo":(categoryFrom: data.categoryID, categoryTo: taskDataSource.categoryID, priority: destinationIndexPath.row + 1)])
+        
+        NotificationCenter.default.post(name: .move, object: nil, userInfo: ["moveInfo":(categoryFrom: data.categoryID, categoryTo: taskDataSource.categoryID, priority: destinationIndexPath.row + 1, taskID: dragItem.taskId )])
         
     }
     

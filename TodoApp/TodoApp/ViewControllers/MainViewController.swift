@@ -110,7 +110,7 @@ class ViewController: UIViewController {
     }
     
     @objc func requestMove(_ notification: Notification) {
-        guard let moveInfo = notification.userInfo?["moveInfo"] as? (categoryFrom: Int, categoryTo: Int, priority: Int) else { return }
+        guard let moveInfo = notification.userInfo?["moveInfo"] as? (categoryFrom: Int, categoryTo: Int, priority: Int, taskID: Int) else { return }
     }
     
     private func setConstraints() {
