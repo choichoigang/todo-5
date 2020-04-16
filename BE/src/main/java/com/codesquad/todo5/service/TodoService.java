@@ -16,14 +16,11 @@ import com.codesquad.todo5.dto.task.TaskMoveRequestDto;
 import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
-import com.codesquad.todo5.exception.RudimentaryException;
 import com.codesquad.todo5.exception.UserNotFoundException;
-import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -137,87 +134,21 @@ public class TodoService {
     }
 
     @Transactional
-    public void sortLogicJunction(Long taskId, TaskMoveRequestDto dto) {
-        if (dto.getCategoryFrom().equals(dto.getCategoryTo())) {
-            sortWithinCategory(taskId, dto);
-        }
-        else if (!dto.getCategoryFrom().equals(dto.getCategoryTo())) {
-            sortBetweenCategories(taskId, dto);
-        } else {
-            throw new RudimentaryException("무언가 이상해요..");
-        }
-    }
-
-    @Transactional
-    public void sortBetweenCategories(Long taskId, TaskMoveRequestDto dto) {
-        Category previousCategory = categoryRepository.findById(dto.getCategoryFrom()).orElseThrow(() -> new ResourceNotFoundException());
-        Category nextCategory = categoryRepository.findById(dto.getCategoryTo()).orElseThrow(() -> new ResourceNotFoundException());
-
-        Task targetTask = taskRepository.findById(taskId).orElseThrow(() -> new ResourceNotFoundException());
-        taskRepository.setPrioritiesByTargetIndexForNextCategory(dto.getPriority(), dto.getCategoryTo());
-        taskRepository.setPrioritiesByTargetIndexForPreviousCategory(targetTask.getPriority(), dto.getCategoryFrom());
-        taskRepository.updateTaskCategoryWithPriorityById(dto.getCategoryTo(), dto.getPriority(), taskId);
-//        nextCategory.addTask(targetTask);
-
-        //컬럼에서 컬럼 이동하는 로직
-//        previousCategory.getTask().remove(moveTask);
-//        taskRepository.updateTaskCategoryWithPriorityById(dto.getCategoryTo(), dto.getPriority(), taskId);
-//        List<Task> previousCategoryAfterRemovedTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
-//        Task moveTask = previousCategoryAfterRemovedTask.stream().filter(task -> task.getId() == targetTask.getId()).findFirst().orElseThrow(ResourceNotFoundException::new);
-//        previousCategoryAfterRemovedTask.remove(moveTask);
-//        previousCategoryAfterRemovedTask.forEach(element -> {
-////            element.setPriority(element.getPriority() - 1);
-//            taskRepository.updateTaskPriorityById(element.getPriority() - 1, element.getId());
-//        });
-//        taskRepository.updateTaskPriorityById(2, 3L);
-//        Task testTask = taskRepository.findTaskById(3L);
-//        logger.error("testTask : {}", testTask);
-//        for (Task task : previousCategoryAfterRemovedTask) {
-//            System.out.println("Before >>>>>>>>>>>>>>>>>>>>>>>>>>> " + task.priority);
-//            int newPriority = task.priority - 1;
-//            task.setPriority(newPriority);
-//            taskRepository.updateTaskPriorityWithoutTargetById(newPriority, task.getId(), targetTask.getId());
-//            System.out.println("After >>>>>>>>>>>>>>>>>>>>>>>>>>> " + taskRepository.findTaskById(task.getId()).priority);
-//        }
-//        categoryRepository.save(previousCategory);
-
-
-//        List<Task> nextCategoryAfterAddTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
-//        nextCategoryAfterAddTask.forEach(element -> {
-////            element.setPriority(element.getPriority() + 1);
-//            taskRepository.updateTaskPriorityById(element.getPriority() + 1, element.getId());
-////            logger.info("element : {}", element.getPriority());
-//        });
-////        categoryRepository.save(nextCategory);
-//        for (Task task : nextCategoryAfterAddTask) {
-//            taskRepository.updateTaskPriorityWithoutTargetById(task.getPriority() + 1, task.getId(), targetTask.getId());
-//        }
-//        categoryRepository.save(nextCategory);
-    }
-
-    @Transactional
-    public void sortWithinCategory(Long taskId, TaskMoveRequestDto dto) {
-        //컬럼 내부에서 이동하는 로직
+    public void sortTasksForCategories(Long taskId, TaskMoveRequestDto dto) {
+        Long categoryFrom = dto.getCategoryFrom();
+        Long categoryTo = dto.getCategoryTo();
         Task targetTask = taskRepository.findTaskById(taskId);
+        int previousPriority = targetTask.getPriority();
+        int newPriority = dto.getPriority();
 
-        if (targetTask.getPriority() == 1) {
-            taskRepository.subtractAfterPrioritiesByTargetIndexForSingleCategory(dto.getPriority(), taskId, dto.getCategoryFrom());
-            taskRepository.setPriorityByTaskIdForSingleCategory(dto.getPriority(), taskId);
+        if (previousPriority == 1) {
+            taskRepository.subtractAfterPrioritiesByTargetIndexForTheFirstTask(newPriority, categoryFrom, taskId);
+            taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
             return;
         }
 
-        if (targetTask.getPriority() != 1) {
-            taskRepository.setPrioritiesByTargetIndexForPreviousCategory(targetTask.getPriority(), dto.getCategoryFrom());
-            taskRepository.setPrioritiesByTargetIndexForNextCategory(dto.getPriority(), dto.getCategoryTo());
-            taskRepository.setPriorityByTaskIdForSingleCategory(dto.getPriority(), taskId);
-        }
-
-//        else if (taskRepository.findTaskById(taskId).getPriority() != 1) {
-//            List<Task> taskList = taskRepository.findTasksByTargetIndexWithoutTheFirst(dto.getPriority(), dto.getCategoryFrom());
-//            taskList.forEach(element -> {
-//                element.setPriority(element.getPriority() - 1);
-//                taskRepository.save(element);
-//            });
-//        }
+        taskRepository.subtractAfterPropertiesByTargetIndexForTheCategory(previousPriority, categoryFrom);
+        taskRepository.plusAfterPrioritiesByTargetIndexForTheCategory(newPriority, categoryTo);
+        taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
     }
 }
