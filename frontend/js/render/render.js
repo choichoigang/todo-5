@@ -66,6 +66,16 @@ export const renderActionList = (actionInfo) => {
   }
 };
 
+export const renderColumnCounter = () => {
+  const todoTasks = commonDOM.todoTaskList.querySelectorAll(".task").length;
+  const doingTasks = commonDOM.doingTaskList.querySelectorAll(".task").length;
+  const doneTasks = commonDOM.doneTaskList.querySelectorAll(".task").length;
+
+  commonDOM.todoCounter.innerText = todoTasks;
+  commonDOM.doingCounter.innerText = doingTasks;
+  commonDOM.doneCounter.innerText = doneTasks;
+};
+
 export const judgeCategoryName = (categoryNumber) => {
   if (categoryNumber === "1") {
     return "todo";
@@ -80,4 +90,5 @@ export const initRenderTodoList = () => {
   registerTodoList("todo");
   registerTodoList("doing");
   registerTodoList("done");
+  renderColumnCounter();
 };
