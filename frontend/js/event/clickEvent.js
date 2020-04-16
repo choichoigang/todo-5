@@ -10,7 +10,6 @@ import {
   addActionOption,
   removeActionOption,
   updateActionOption,
-  moveActionOption,
 } from "../../options/actionOption.js";
 
 //column_click------------------------------------------------------------------------------------
