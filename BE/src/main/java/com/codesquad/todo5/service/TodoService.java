@@ -12,11 +12,11 @@ import com.codesquad.todo5.dto.category.CategoryNameEditRequestDto;
 import com.codesquad.todo5.dto.category.CategoryWithTasksDto;
 import com.codesquad.todo5.dto.task.TaskCreateRequestDto;
 import com.codesquad.todo5.dto.task.TaskModifyRequestDto;
+import com.codesquad.todo5.dto.task.TaskMoveRequestDto;
 import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
 import com.codesquad.todo5.exception.UserNotFoundException;
-import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -115,9 +115,7 @@ public class TodoService {
 
     @Transactional
     public void deleteTask(Long taskId) {
-        Task deletedTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
         taskRepository.deleteTaskById(taskId);
-        // 변경된 값을 더 효율적으로 리턴할 수 있는 방법을 고민 해보겠습니다.
     }
 
     private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {
@@ -131,5 +129,24 @@ public class TodoService {
               element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId, element.isDeleted()))
               .collect(Collectors.toList());
       return new CategoryWithTasksDto(category, dtoList);
+    }
+
+    @Transactional
+    public void sortTasksForCategories(Long taskId, TaskMoveRequestDto dto) {
+        Long categoryFrom = dto.getCategoryFrom();
+        Long categoryTo = dto.getCategoryTo();
+        Task targetTask = taskRepository.findTaskById(taskId);
+        int previousPriority = targetTask.getPriority();
+        int newPriority = dto.getPriority();
+
+        if (previousPriority == 1) {
+            taskRepository.subtractAfterPrioritiesByTargetIndexForTheFirstTask(newPriority, categoryFrom, taskId);
+            taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
+            return;
+        }
+
+        taskRepository.subtractAfterPropertiesByTargetIndexForTheCategory(previousPriority, categoryFrom);
+        taskRepository.plusAfterPrioritiesByTargetIndexForTheCategory(newPriority, categoryTo);
+        taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
     }
 }

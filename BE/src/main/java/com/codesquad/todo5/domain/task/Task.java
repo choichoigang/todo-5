@@ -18,8 +18,8 @@ import org.springframework.util.ObjectUtils;
 @Setter
 @NoArgsConstructor
 @Table("task")
-public class Task {
-
+public class Task implements Comparable<Task> {
+//public class Task {
   @Id
   private Long id;
   private String title;
@@ -28,15 +28,20 @@ public class Task {
   private String content;
   @Column("is_deleted")
   private boolean isDeleted;
+
+  @Column("priority")
   private int priority;
   @Column("author")
   private String author;
 //  @Column("category_from")
 //  private int categoryFrom;
+//  @Column("category_key")
+//  private int categoryKey;
   @Column("category_to")
-  private int categoryTo;
-  @Column("category_from")
-  private int categoryFrom;
+  private Long categoryTo;
+
+//  @Column("category_from")
+//  private int categoryFrom;
   @Column("category")
   private int categoryNum;
 
@@ -50,6 +55,11 @@ public class Task {
 
   public static Task create(String title, String content, int priority, String author) {
     return new Task(title, content, priority, author);
+  }
+
+  @Override
+  public int compareTo(Task task) {
+    return this.priority - task.priority;
   }
 
 //  public void updateCategoryOrder(TaskEditRequestDto dto) {
