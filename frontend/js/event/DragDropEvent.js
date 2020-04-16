@@ -47,7 +47,7 @@ const dragEndHandler = async (event) => {
     }
   });
 
-  //await fetchMove(TODO_URL.MOVE(requestBodyMove.priority), requestBodyMove);
+  await fetchMove(TODO_URL.MOVE(option.dragTargetId), requestBodyMove);
 };
 
 const initDragDropEvent = () => {
