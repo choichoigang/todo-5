@@ -37,6 +37,8 @@ export const makeActionAdd = (taskTitle, categoryTo) => {
 };
 
 export const makeActionRemove = (taskTitle, categoryTo) => {
+  const categoryToName = judgeCategoryName(categoryTo);
+
   return `<div class="log">
   <div class="profile">
     <img
@@ -47,7 +49,7 @@ export const makeActionRemove = (taskTitle, categoryTo) => {
     <span class="user_id">@hoi </span>
     <span class="action">delete </span>
     <span class="task_title">${taskTitle} </span>
-    <span class="column_name">${categoryTo}</span>
+    <span class="column_name">${categoryToName}</span>
   </div>
 </div>`;
 };
@@ -65,7 +67,7 @@ export const makeActionUpdate = (taskTitle, categoryTo) => {
     <span class="user_id">@hoi </span>
     <span class="action">updated </span>
     <span class="task_title">${taskTitle} </span>
-    <span class="column_name">${categoryToName}</span>
+    <span class="column_name">to ${categoryToName}</span>
   </div>
 </div>`;
 };
