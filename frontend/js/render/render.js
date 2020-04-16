@@ -53,10 +53,13 @@ export const renderActionList = (actionInfo) => {
       break;
     }
     case "MOVE": {
-      makeActionMove(
-        actionInfo.taskTitle,
-        actionInfo.categoryFrom,
-        actionInfo.categoryTo
+      commonDOM.action_list.insertAdjacentHTML(
+        "afterbegin",
+        makeActionMove(
+          actionInfo.taskTitle,
+          actionInfo.categoryFrom,
+          actionInfo.categoryTo
+        )
       );
       break;
     }
