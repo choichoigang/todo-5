@@ -13,12 +13,14 @@ class ActivityViewController: UIViewController {
     let tableView = ActivityTableView()
     var activityDataSource = ActivityTableViewDataSource()
     var activityDelegate = ActivityTableViewDelegate()
+    let networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegates()
         configureSubviews()
         configureConstraints()
+        requestActivities()
     }
     
     private func configureDelegates() {
@@ -37,6 +39,10 @@ class ActivityViewController: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        
+    }
+    
+    private func requestActivities() {
+        networkManager.getResource(url: EndPoints.Activities!, methodType: .get, dataType: [Activity].self) { result in
+        }
     }
 }
