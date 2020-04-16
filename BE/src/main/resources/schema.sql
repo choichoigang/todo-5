@@ -22,7 +22,6 @@ CREATE TABLE task (
     content varchar(500) NOT NULL,
     is_deleted boolean NOT NULL DEFAULT FALSE,
     priority int NOT NULL,
-    category_from int DEFAULT 0,
     category_to int DEFAULT 0,
     category int references category(id) ON UPDATE CASCADE,
     category_key int,
