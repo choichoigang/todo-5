@@ -72,6 +72,7 @@ class ViewController: UIViewController {
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(requestOneCategory(_:)), name: .addNewCard, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(requestMove(_:)), name: .move, object: nil)
     }
     
     @objc func requestOneCategory(_ notification: Notification) {
@@ -108,6 +109,10 @@ class ViewController: UIViewController {
         networkManager.getResource(url: url!, methodType: .post, dataType: RequestBody.self) { _ in }
     }
     
+    @objc func requestMove(_ notification: Notification) {
+        guard let moveInfo = notification.userInfo?["moveInfo"] as? (categoryFrom: Int, categoryTo: Int, priority: Int) else { return }
+    }
+    
     private func setConstraints() {
         firstView?.translatesAutoresizingMaskIntoConstraints = false
         firstView?.topAnchor.constraint(equalTo: navigationBar.bottomAnchor, constant: 0).isActive = true
@@ -131,6 +136,7 @@ class ViewController: UIViewController {
 }
 
 extension Notification.Name {
-    static let updateCount = Notification.Name(rawValue: "updateTitle")
+    static let updateCount = Notification.Name("updateTitle")
     static let addNewCard = Notification.Name("addNewCard")
+    static let move = Notification.Name("move")
 }
