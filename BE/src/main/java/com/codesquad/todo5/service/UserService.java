@@ -21,20 +21,10 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-//  @Transactional(readOnly = true)
-//  public User getUserByName(String name) {
-//    return userRepository.findByName(name).orElseThrow(ResourceNotFoundException::new);
-//  }
-
   @Transactional(readOnly = true)
   public User getUserById(Long userId) {
     return userRepository.findById(userId).orElseThrow(ResourceNotFoundException::new);
   }
-
-//  @Transactional(readOnly = true)
-//  public User getUserNameofTask(String name) {
-//    return userRepository.findTaskUserName(name);
-//  }
 
   @Transactional(readOnly = true)
   public List<Activity> getUserActivityList(Long userId) {

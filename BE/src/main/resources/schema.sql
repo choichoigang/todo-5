@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS activity;
 
 CREATE TABLE category (
 	id int auto_increment primary key NOT NULL,
-    name varchar(10) NOT NULL,
+    name varchar(45) NOT NULL,
     is_deleted boolean NOT NULL DEFAULT FALSE,
     created_date_time datetime NOT NULL DEFAULT current_timestamp
 );
@@ -32,10 +32,13 @@ CREATE TABLE task (
 
 CREATE TABLE activity (
 	id int auto_increment primary key NOT NULL,
-    created_date datetime NOT NULL DEFAULT current_timestamp,
-    action varchar(45) NOT NULL,
+    created_date varchar(45),
+    action varchar(45),
+    target varchar(45),
+    user_name varchar(45),
     category_from int,
     category_to int,
+    target_title varchar(45),
     user int NOT NULL references user(id) ON UPDATE CASCADE,
-    user_key int NOT NULL
+    user_key int
 );
