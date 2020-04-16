@@ -60,6 +60,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Transactional
     @Query("UPDATE task SET priority = priority - 1 WHERE id IN (SELECT id FROM (SELECT id FROM task WHERE priority >= :targetIndex AND category = :categoryId)at)")
     void subtractAfterPropertiesByTargetIndexForTheCategory(int targetIndex, Long categoryId);
+    // UPDATE task SET priority = priority - 1 WHERE priority >= :targetIndex AND category = :categoryId
 
     @Modifying
     @Transactional
