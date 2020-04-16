@@ -3,6 +3,8 @@ import { requestBodyMove } from "../../options/requestBody.js";
 import { fetchMove } from "../fetch/httpRequest.js";
 import TODO_URL from "../../constants/url.js";
 import option from "../../options/DragDropOption.js";
+import { renderActionList } from "../render/render.js";
+import { moveActionOption } from "../../options/actionOption.js";
 
 const dragEnterHandler = (event) => {
   const targetTask = event.toElement.closest(".task");
@@ -21,10 +23,10 @@ const dragEnterHandler = (event) => {
 };
 
 const dragStartHandler = (event) => {
-  const targetColumnId = event.toElement.closest(".column").dataset.columnId;
+  const targetColumn = event.toElement.closest(".column");
   const targetTaskId = event.toElement.closest(".task").dataset.taskId;
 
-  requestBodyMove.categoryFrom = targetColumnId;
+  requestBodyMove.categoryFrom = targetColumnId.dataset.columnId;
 
   option.dragTargetId = targetTaskId;
   option.dragTargetEl = event.toElement;
