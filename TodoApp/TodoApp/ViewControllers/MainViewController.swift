@@ -110,7 +110,21 @@ class ViewController: UIViewController {
     }
     
     @objc func requestMove(_ notification: Notification) {
-        guard let moveInfo = notification.userInfo?["moveInfo"] as? (categoryFrom: Int, categoryTo: Int, priority: Int, taskID: Int) else { return }
+        guard let moveItemId = notification.userInfo?["moveItemId"] as? Int else { return }
+        guard let moveItem = notification.object as? MoveItem else { return }
+        
+        let urlString = EndPoints.API!.absoluteString + "/task/\(moveItemId)/move"
+        guard let url = URL(string: urlString) else { return }
+        
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(moveItem)
+            networkManager.getResource(url: url, methodType: .post, dataType: RequestBody.self, body: data) { result in
+            }
+        } catch {
+            
+        }
+        
     }
     
     private func setConstraints() {

@@ -44,7 +44,7 @@ struct RequestBody: Codable {
     var data: Int?
 }
 
-struct MoveRequest {
+struct MoveItem: Codable {
     var categoryFrom: Int
     var categoryTo: Int
     var priority: Int
