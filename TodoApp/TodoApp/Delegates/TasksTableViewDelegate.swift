@@ -20,7 +20,9 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
         let dataSource = tableView.dataSource as! TasksTableViewDataSource
 
         let move = UIAction(title: "move to done") { _ in
-            // done으로 이동
+            let moveItem = MoveItem(categoryFrom: dataSource.categoryID, categoryTo: 3, priority: dataSource.tasks.count + 1)
+            let moveItemId = dataSource.tasks[indexPath.row].id
+            NotificationCenter.default.post(name: .move, object: moveItem, userInfo: ["moveInfo" : (moveItemId: moveItemId, isMoveToDone: true)])
         }
         
         let edit = UIAction(title: "edit...") { action in
