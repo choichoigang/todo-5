@@ -112,21 +112,26 @@ class ViewController: UIViewController {
     }
     
     @objc func requestMove(_ notification: Notification) {
-        guard let moveItemId = notification.userInfo?["moveItemId"] as? Int else { return }
+        guard let moveInfo = notification.userInfo?["moveInfo"] as? (moveItemId: Int, isMoveToDone: Bool) else { return }
         guard let moveItem = notification.object as? MoveItem else { return }
         
-        let urlString = EndPoints.API!.absoluteString + "/task/\(moveItemId)/move"
+        let urlString = EndPoints.API!.absoluteString + "/task/\(moveInfo.moveItemId)/move"
         guard let url = URL(string: urlString) else { return }
-        
+        let data = encode(moveItem: moveItem)
+        networkManager.getResource(url: url, methodType: .post, dataType: RequestBody.self, body: data) { _ in
+            if moveInfo.isMoveToDone { self.requestAllData() }
+        }
+    }
+    
+    private func encode(moveItem: MoveItem) -> Data? {
         let encoder = JSONEncoder()
+        var data: Data?
         do {
-            let data = try encoder.encode(moveItem)
-            networkManager.getResource(url: url, methodType: .post, dataType: RequestBody.self, body: data) { result in
-            }
+            data = try encoder.encode(moveItem)
         } catch {
             
         }
-        
+        return data
     }
     
     private func setConstraints() {
@@ -148,7 +153,7 @@ class ViewController: UIViewController {
         thirdView?.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         thirdView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
     }
-
+    
 }
 
 extension Notification.Name {

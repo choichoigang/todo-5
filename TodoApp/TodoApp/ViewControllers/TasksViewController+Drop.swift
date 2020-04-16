@@ -36,7 +36,7 @@ extension TasksViewController: UITableViewDropDelegate {
         dragItem.tableView.deleteRows(at: [dragItem.indexPath], with: .automatic)
         tableView.insertRows(at: [destinationIndexPath], with: .automatic)
         let moveItem = MoveItem(categoryFrom: data.categoryID, categoryTo: taskDataSource.categoryID, priority: destinationIndexPath.row + 1)
-        NotificationCenter.default.post(name: .move, object: moveItem, userInfo: ["moveItemId": dragItem.taskId])
+        NotificationCenter.default.post(name: .move, object: moveItem, userInfo: ["moveInfo": (moveItemId: dragItem.taskId, isMoveToDone: false)])
         
     }
     

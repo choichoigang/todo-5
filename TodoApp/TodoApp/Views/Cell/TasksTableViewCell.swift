@@ -56,7 +56,7 @@ class TasksTableViewCell: UITableViewCell {
     
     private var authorLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .gray
+        label.textColor = #colorLiteral(red: 0.3461751512, green: 0.5155327193, blue: 0.4270181084, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
         return label
