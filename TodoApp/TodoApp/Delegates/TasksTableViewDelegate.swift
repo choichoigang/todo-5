@@ -10,21 +10,24 @@ import UIKit
 
 class TasksTableViewDelegate: NSObject, UITableViewDelegate {
     
+    var delegate: TitleViewDelegate?
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let dataSource = tableView.dataSource as! TasksTableViewDataSource
+
         let move = UIAction(title: "move to done") { _ in
             // done으로 이동
         }
         
         let edit = UIAction(title: "edit...") { action in
-            // edit 카드 띄움
+            self.delegate?.presentNewCardView(contents: dataSource.tasks[indexPath.row], isEdit: true, taskId: dataSource.tasks[indexPath.row].id)
         }
         
         let delete = UIAction(title: "delete", attributes: [.destructive]) { action in
-            let dataSource = tableView.dataSource as! TasksTableViewDataSource
             let delay = 0.4
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 dataSource.taskID = dataSource.tasks[indexPath.row].id
