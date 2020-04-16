@@ -72,6 +72,7 @@ class ViewController: UIViewController {
     private func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(requestOneCategory(_:)), name: .addNewCard, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(requestMove(_:)), name: .move, object: nil)
     }
     
     @objc func requestOneCategory(_ notification: Notification) {
@@ -91,12 +92,14 @@ class ViewController: UIViewController {
     }
     
     @objc func updateData(_ notification: Notification) {
-        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, categoryID: Int, taskID: Int) else { return }
-        requestDelete(taskID: updateInfo.taskID)
+        guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, categoryID: Int, taskID: Int?) else { return }
+        if let taskID = updateInfo.taskID {
+            requestDelete(taskID: taskID)
+        }
         updateTasksCount(updateInfo: updateInfo)
     }
     
-    private func updateTasksCount(updateInfo: (count: Int, categoryID: Int, taskID: Int)) {
+    private func updateTasksCount(updateInfo: (count: Int, categoryID: Int, taskID: Int?)) {
         let targetController = controllers.filter { $0.category?.id == updateInfo.categoryID }.first
         guard let controller = targetController else { return }
         controller.titleView.setTasksCount(count: updateInfo.count)
@@ -106,6 +109,24 @@ class ViewController: UIViewController {
         let urlString = EndPoints.API!.absoluteString + "/task/\(taskID)/delete"
         let url = URL(string: urlString)
         networkManager.getResource(url: url!, methodType: .post, dataType: RequestBody.self) { _ in }
+    }
+    
+    @objc func requestMove(_ notification: Notification) {
+        guard let moveItemId = notification.userInfo?["moveItemId"] as? Int else { return }
+        guard let moveItem = notification.object as? MoveItem else { return }
+        
+        let urlString = EndPoints.API!.absoluteString + "/task/\(moveItemId)/move"
+        guard let url = URL(string: urlString) else { return }
+        
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(moveItem)
+            networkManager.getResource(url: url, methodType: .post, dataType: RequestBody.self, body: data) { result in
+            }
+        } catch {
+            
+        }
+        
     }
     
     private func setConstraints() {
@@ -131,6 +152,7 @@ class ViewController: UIViewController {
 }
 
 extension Notification.Name {
-    static let updateCount = Notification.Name(rawValue: "updateTitle")
+    static let updateCount = Notification.Name("updateTitle")
     static let addNewCard = Notification.Name("addNewCard")
+    static let move = Notification.Name("move")
 }

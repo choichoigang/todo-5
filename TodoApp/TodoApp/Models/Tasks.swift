@@ -33,6 +33,7 @@ struct Contents: Codable {
 }
 
 struct DragItem {
+    var taskId: Int
     var dataSource: TasksTableViewDataSource
     var indexPath: IndexPath
     var tableView: TasksTableView
@@ -41,4 +42,10 @@ struct DragItem {
 struct RequestBody: Codable {
     var status: Bool
     var data: Int?
+}
+
+struct MoveItem: Codable {
+    var categoryFrom: Int
+    var categoryTo: Int
+    var priority: Int
 }

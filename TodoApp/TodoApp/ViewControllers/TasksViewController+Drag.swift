@@ -11,9 +11,9 @@ import UIKit
 extension TasksViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         let itemProvider = NSItemProvider()
-        
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = DragItem(dataSource: tasksDataSource, indexPath: indexPath, tableView: tableView as! TasksTableView)
+        let cell = tableView.cellForRow(at: indexPath) as? TasksTableViewCell
+        dragItem.localObject = DragItem(taskId: cell!.taskId!, dataSource: tasksDataSource, indexPath: indexPath, tableView: tableView as! TasksTableView)
         
         return [dragItem]
     }
