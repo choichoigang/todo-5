@@ -149,7 +149,8 @@ public class ActivityLoggingInterceptor extends HandlerInterceptorAdapter {
       JsonUtils jsonUtils = new JsonUtils();
       JSONObject jObj = jsonUtils
           .readJSONStringFromRequestBody(request);
-      JsonElement element = JsonParser.parseString(String.valueOf(jObj));
+      JsonParser parser = new JsonParser();
+      JsonElement element = parser.parse(String.valueOf(jObj));
       String categoryFromIdString = element.getAsJsonObject().get("categoryFrom").getAsString();
       Long categoryFromId = Long.parseLong(categoryFromIdString);
       String categoryToIdString = element.getAsJsonObject().get("categoryTo").getAsString();
