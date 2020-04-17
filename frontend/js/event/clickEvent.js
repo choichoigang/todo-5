@@ -5,7 +5,7 @@ import modifyOption from "../../options/modifyOption.js";
 import { requestBodyAdd, requestBodyEdit } from "../../options/requestBody.js";
 import { fetchAdd, fetchDelete, fetchEdit } from "../fetch/httpRequest.js";
 import TODO_URL from "../../constants/url.js";
-import { renderActionList } from "../render/render.js";
+import { renderActionList, renderColumnCounter } from "../render/render.js";
 import {
   addActionOption,
   removeActionOption,
@@ -19,7 +19,7 @@ const columnClickEventHandler = async (event, className, DOM) => {
   if (targetClassName === className.plusButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === className.addButton) {
-    await addBtnHandler(DOM.textArea, DOM.columnName);
+    await addBtnHandler(DOM.textArea, DOM.columnName, DOM.addButton);
     await renderActionList(addActionOption);
     await fetchAdd(TODO_URL.ADD, requestBodyAdd).then((resBody) => {
       DOM.task_list.innerHTML += makeTaskTemplate(
@@ -28,12 +28,14 @@ const columnClickEventHandler = async (event, className, DOM) => {
         DOM.columnName
       );
     });
+    renderColumnCounter();
   } else if (targetClassName === className.cancelButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === "deletion") {
     const handler = await deletionBtnHandler(event);
     await fetchDelete(TODO_URL.DELETE(handler));
     renderActionList(removeActionOption);
+    renderColumnCounter();
   } else if (targetClassName === "modify") {
     modifyModalHandler(event);
   }
@@ -59,29 +61,30 @@ const activatingHandler = (addBoxDom) => {
   }
 };
 
-const addBtnHandler = (textareaDom, className) => {
+const addBtnHandler = (textareaDom, className, addBtnDom) => {
   const inputValue = textareaDom.value;
 
   textareaDom.value = "";
+  addBtnDom.disabled = true;
 
   if (className === "todo") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 1;
 
-    addActionOption.taskTitle = inputValue;
-    addActionOption.categoryTo = "1";
+    addActionOption.targetTitle = inputValue;
+    addActionOption.categoryTo = 1;
   } else if (className === "doing") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 2;
 
-    addActionOption.taskTitle = inputValue;
-    addActionOption.categoryTo = "2";
+    addActionOption.targetTitle = inputValue;
+    addActionOption.categoryTo = 2;
   } else if (className === "done") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 3;
 
-    addActionOption.taskTitle = inputValue;
-    addActionOption.categoryTo = "3";
+    addActionOption.targetTitle = inputValue;
+    addActionOption.categoryTo = 3;
   }
 };
 
@@ -91,8 +94,8 @@ const deletionBtnHandler = (event) => {
   const columnId = event.target.closest(".column").dataset.columnId;
   const taskId = taskElement.dataset.taskId;
 
-  removeActionOption.taskTitle = taskTitle;
-  removeActionOption.categoryTo = columnId;
+  removeActionOption.targetTitle = taskTitle;
+  removeActionOption.categoryTo = Number(columnId);
 
   taskElement.remove();
 
@@ -108,8 +111,8 @@ const modifyModalHandler = (event) => {
   );
   modifyOption.targetId = event.target.closest(".task").dataset.taskId;
 
-  updateActionOption.taskTitle = modifyOption.titleElement.innerText;
-  updateActionOption.categoryTo = columnId;
+  updateActionOption.targetTitle = modifyOption.titleElement.innerText;
+  updateActionOption.categoryTo = Number(columnId);
 
   commonDOM.blind.className = "blind_on";
   commonDOM.modal.style.visibility = "visible";
