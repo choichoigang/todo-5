@@ -1,7 +1,7 @@
 package com.codesquad.todo5.config;
 
 import com.codesquad.todo5.service.JwtService;
-import com.codesquad.todo5.utils.HttpInterceptor;
+import com.codesquad.todo5.interceptor.HttpInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -29,6 +29,7 @@ public class WebMvcConfigurerImpl implements WebMvcConfigurer {
             .addPathPatterns("/api/task/**")
             .addPathPatterns("/api/category/**")
             .addPathPatterns("/api/user/**")
+            .addPathPatterns("/api/activity/**")
             .excludePathPatterns("/api/user/auth");
   }
 }

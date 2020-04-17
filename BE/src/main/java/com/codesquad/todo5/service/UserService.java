@@ -43,12 +43,12 @@ public class UserService {
     String password = dto.getPassword();
     User user = userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
 
-    if (isDiffrentPassword(user, password)) {
+    if (isDifferentPassword(user, password)) {
       throw new InvalidInputException();
     }
   }
 
-  private boolean isDiffrentPassword(User user, String password) {
+  private boolean isDifferentPassword(User user, String password) {
     return !user.getPassword().equals(password);
   }
 }

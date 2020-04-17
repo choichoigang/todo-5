@@ -1,4 +1,4 @@
-package com.codesquad.todo5.utils;
+package com.codesquad.todo5.interceptor;
 
 import com.codesquad.todo5.service.JwtService;
 import org.slf4j.Logger;
