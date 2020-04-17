@@ -71,4 +71,9 @@ class ActivityTableViewCell: UITableViewCell {
         timeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8).isActive = true
         timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 8).isActive = true
     }
+    
+    func configureData(activitySentence: String, time: String) {
+        activityLabel.text = activitySentence
+        timeLabel.text = time
+    }
 }

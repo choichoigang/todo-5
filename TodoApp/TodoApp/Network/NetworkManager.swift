@@ -25,7 +25,7 @@ enum EndPoints {
     static let API = URL(string: "http://13.209.180.92:8080/api")
     static let AllCategories = URL(string: "http://13.209.180.92:8080/api/category/all")
     static let AddOneTask = URL(string: "http://13.209.180.92:8080/api/task/add")
-    static let Activities = URL(string: "http://13.209.180.92:8080/api/user/1/activity")
+    static let Activities = URL(string: "http://13.209.180.92:8080/api/activity/all")
 }
 
 struct NetworkManager {

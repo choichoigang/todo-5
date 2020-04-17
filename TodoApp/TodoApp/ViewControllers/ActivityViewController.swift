@@ -11,7 +11,7 @@ import UIKit
 class ActivityViewController: UIViewController {
 
     let tableView = ActivityTableView()
-    var activityDataSource = ActivityTableViewDataSource()
+    var activityDataSource: ActivityTableViewDataSource?
     var activityDelegate = ActivityTableViewDelegate()
     let networkManager = NetworkManager()
     
@@ -25,7 +25,6 @@ class ActivityViewController: UIViewController {
     
     private func configureDelegates() {
         tableView.delegate = activityDelegate
-        tableView.dataSource = activityDataSource
     }
     
     private func configureSubviews() {
@@ -43,6 +42,18 @@ class ActivityViewController: UIViewController {
     
     private func requestActivities() {
         networkManager.getResource(url: EndPoints.Activities!, methodType: .get, dataType: [Activity].self) { result in
+            switch result {
+            case .success(let anyData):
+                let activities = anyData as! [Activity]
+                self.activityDataSource = ActivityTableViewDataSource(activities: activities)
+                DispatchQueue.main.async {
+                    self.tableView.dataSource = self.activityDataSource
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                //네트워크 에러 알럿 띄우기
+                print(error.localizedDescription)
+            }
         }
     }
 }

@@ -12,8 +12,8 @@ struct Activity: Codable {
     var userName: String
     var target: String
     var action: String
-    var categoryFrom: String?
-    var categoryTo: String?
+    var categoryFrom: Int?
+    var categoryTo: Int?
     var createdTime: String
     var targetTitle: String
 }
