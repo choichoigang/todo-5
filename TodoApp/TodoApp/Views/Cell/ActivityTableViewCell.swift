@@ -24,8 +24,8 @@ class ActivityTableViewCell: UITableViewCell {
     
     private var profileImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "profile.jpeg")
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = #imageLiteral(resourceName: "profile")
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -55,21 +55,22 @@ class ActivityTableViewCell: UITableViewCell {
     
     private func configureConstraints() {
         profileImage.translatesAutoresizingMaskIntoConstraints = false
-        profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
-        profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
-        profileImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
+        profileImage.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
+        profileImage.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8).isActive = true
+        profileImage.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
+        profileImage.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.2).isActive = true
         profileImage.heightAnchor.constraint(equalTo: self.profileImage.widthAnchor, constant: 0).isActive = true
         
         activityLabel.translatesAutoresizingMaskIntoConstraints = false
-        activityLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
+        activityLabel.topAnchor.constraint(equalTo: profileImage.topAnchor, constant: 0).isActive = true
         activityLabel.leadingAnchor.constraint(equalTo: self.profileImage.trailingAnchor, constant: 8).isActive = true
-        activityLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8).isActive = true
+        activityLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8).isActive = true
         
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.topAnchor.constraint(equalTo: activityLabel.bottomAnchor, constant: 8).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: activityLabel.leadingAnchor, constant: 0).isActive = true
-        timeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8).isActive = true
-        timeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 8).isActive = true
+        timeLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8).isActive = true
+        timeLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
     }
     
     func configureData(activitySentence: String, time: String) {
