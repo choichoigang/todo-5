@@ -56,6 +56,7 @@ public class ActivityLoggingInterceptor extends HandlerInterceptorAdapter {
     if (request.getRequestURL().toString().contains("/task")) {
       Activity activity = Activity.create(userName, Action.ADD, Target.TASK);
       activity.setTargetTitle(todoService.getTaskTitleOfRecentlyAdded());
+      activity.setCategoryTo((long) todoService.getTaskCategoryToOfRecentlyAdded());
       activityService.saveActivityLog(activity, userName, userId);
       return true;
     }
@@ -98,6 +99,7 @@ public class ActivityLoggingInterceptor extends HandlerInterceptorAdapter {
       String editedTaskIdString = (String) pathVariables.get("id");
       Long editedTaskId = Long.parseLong(editedTaskIdString);
       String editedTaskName = todoService.getTaskNameById(editedTaskId);
+      activity.setCategoryTo(todoService.getTaskCategoryToOfTask(editedTaskId));
       activity.setTargetTitle(editedTaskName);
       return saveActivityLog(request, userId, userName, activity);
     }
@@ -127,7 +129,9 @@ public class ActivityLoggingInterceptor extends HandlerInterceptorAdapter {
     String deletedTaskIdString = (String) pathVariables.get("id");
     Long deletedTaskId = Long.parseLong(deletedTaskIdString);
     String deletedTaskTitle = todoService.getTaskNameById(deletedTaskId);
+    Long categoryTo = todoService.getTaskCategoryToOfTask(deletedTaskId);
     activity.setTargetTitle(deletedTaskTitle);
+    activity.setCategoryTo(categoryTo);
     activityService.saveActivityLog(activity, userName, userId);
     return true;
   }
