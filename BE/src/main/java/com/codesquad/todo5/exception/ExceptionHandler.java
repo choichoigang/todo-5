@@ -25,4 +25,9 @@ public class ExceptionHandler {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ResponseBody
   public ApiResponse handleInvalidModificationError(InvalidModificationException exception) { return exception.returnErrorMessage(); }
+
+  @org.springframework.web.bind.annotation.ExceptionHandler(InvalidInputException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ResponseBody
+  public ApiResponse handleInvalidInputException(InvalidInputException exception) { return exception.returnErrorMessage(); }
 }

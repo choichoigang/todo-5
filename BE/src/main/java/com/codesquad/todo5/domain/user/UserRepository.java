@@ -22,4 +22,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
   @Query("SELECT id FROM user WHERE name = :name")
   Long findIdByUserName(String name);
+
+  @Query("SELECT * FROM user WHERE name = :userName")
+    Optional<User> findByUserName(String userName);
 }
