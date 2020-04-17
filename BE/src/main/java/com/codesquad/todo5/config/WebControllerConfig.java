@@ -43,6 +43,7 @@ public class WebControllerConfig implements WebMvcConfigurer {
         .addPathPatterns("/api/task/add")
         .addPathPatterns("/api/category/*/edit")
         .addPathPatterns("/api/task/*/edit")
-        .addPathPatterns("/api/task/*/move");
+        .addPathPatterns("/api/task/*/move")
+        .addPathPatterns("/api/task/*/delete");
   }
 }

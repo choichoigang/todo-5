@@ -13,6 +13,9 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Query("SELECT id, title, content, IF(is_deleted, 'true', 'false') as is_deleted, priority, category_to, category, category_key, user, user_key, author FROM task WHERE id = :id AND is_deleted = FALSE")
     Task findTaskById(Long id);
 
+    @Query("SELECT id, title, content, IF(is_deleted, 'true', 'false') as is_deleted, priority, category_to, category, category_key, user, user_key, author FROM task WHERE id = :id")
+    Task findTaskByIdIncludingDeleted(Long id);
+
     @Modifying
     @Transactional
     @Query("UPDATE task t SET t.title = :title, t.content = :content WHERE t.id = :id")
