@@ -31,28 +31,28 @@ export const renderList = (columnDom, dataList, className) => {
 
 export const renderActionList = (actionInfo) => {
   switch (actionInfo.actionName) {
-    case "ADD": {
+    case "추가": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
         makeActionAdd(actionInfo.taskTitle, actionInfo.categoryTo)
       );
       break;
     }
-    case "REMOVE": {
+    case "제거": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
         makeActionRemove(actionInfo.taskTitle, actionInfo.categoryTo)
       );
       break;
     }
-    case "UPDATE": {
+    case "수정": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
         makeActionUpdate(actionInfo.taskTitle, actionInfo.categoryTo)
       );
       break;
     }
-    case "MOVE": {
+    case "이동": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
         makeActionMove(

@@ -1,23 +1,23 @@
 const addActionOption = {
-  actionName: "ADD",
+  actionName: "추가",
   taskTitle: null,
   categoryTo: null,
 };
 
 const removeActionOption = {
-  actionName: "REMOVE",
+  actionName: "삭제",
   taskTitle: null,
   categoryTo: null,
 };
 
 const updateActionOption = {
-  actionName: "UPDATE",
+  actionName: "수정",
   taskTitle: null,
   categoryTo: null,
 };
 
 const moveActionOption = {
-  actionName: "MOVE",
+  actionName: "이동",
   taskTitle: null,
   categoryTo: null,
   categoryFrom: null,
