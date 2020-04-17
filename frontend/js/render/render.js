@@ -90,5 +90,4 @@ export const initRenderTodoList = () => {
   registerTodoList("todo");
   registerTodoList("doing");
   registerTodoList("done");
-  renderColumnCounter();
 };
