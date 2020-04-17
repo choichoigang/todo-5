@@ -73,6 +73,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(requestOneCategory(_:)), name: .addNewCard, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateData(_:)), name: .updateCount, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(requestMove(_:)), name: .move, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(requestDelete(_:)), name: .delete, object: nil)
     }
     
     @objc func requestOneCategory(_ notification: Notification) {
@@ -93,9 +94,6 @@ class ViewController: UIViewController {
     
     @objc func updateData(_ notification: Notification) {
         guard let updateInfo = notification.userInfo?["updateInfo"] as? (count: Int, categoryID: Int, taskID: Int?) else { return }
-        if let taskID = updateInfo.taskID {
-            requestDelete(taskID: taskID)
-        }
         updateTasksCount(updateInfo: updateInfo)
     }
     
@@ -105,8 +103,9 @@ class ViewController: UIViewController {
         controller.titleView.setTasksCount(count: updateInfo.count)
     }
     
-    private func requestDelete(taskID: Int) {
-        let urlString = EndPoints.API!.absoluteString + "/task/\(taskID)/delete"
+    @objc func requestDelete(_ notification: Notification) {
+        guard let deleteTaskId = notification.userInfo?["deleteTaskId"] as? Int else { return }
+        let urlString = EndPoints.API!.absoluteString + "/task/\(deleteTaskId)/delete"
         let url = URL(string: urlString)
         networkManager.getResource(url: url!, methodType: .post, dataType: RequestBody.self) { _ in }
     }
@@ -160,4 +159,5 @@ extension Notification.Name {
     static let updateCount = Notification.Name("updateTitle")
     static let addNewCard = Notification.Name("addNewCard")
     static let move = Notification.Name("move")
+    static let delete = Notification.Name("delete")
 }

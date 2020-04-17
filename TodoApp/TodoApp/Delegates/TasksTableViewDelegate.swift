@@ -36,6 +36,7 @@ class TasksTableViewDelegate: NSObject, UITableViewDelegate {
                 dataSource.tasks.remove(at: indexPath.row)
                 tableView.reloadData()
             }
+            NotificationCenter.default.post(name: .delete, object: nil, userInfo: ["deleteTaskId" : dataSource.taskID])
         }
         
         return UIContextMenuConfiguration(identifier: indexPath as NSCopying,
