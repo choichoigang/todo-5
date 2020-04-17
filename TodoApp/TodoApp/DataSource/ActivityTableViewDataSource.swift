@@ -32,7 +32,7 @@ class ActivityTableViewDataSource: NSObject, UITableViewDataSource {
         let activity = activities[indexPath.row]
         var activitySentence = "@\(activity.userName)이(가) \"\(activity.targetTitle)\" 을(를) "
         if let categoryFrom = activity.categoryFrom, let categoryTo = activity.categoryTo {
-            activitySentence += "\(categoryFrom)에서 \(categoryTo)로 이동하였습니다."
+            activitySentence += "\(categoryFrom)번 카테고리에서 \(categoryTo)번 카테고리로 이동하였습니다."
         }else {
             activitySentence += " \(activity.action) 하였습니다. "
         }

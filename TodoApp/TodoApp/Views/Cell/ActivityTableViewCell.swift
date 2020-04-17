@@ -41,7 +41,7 @@ class ActivityTableViewCell: UITableViewCell {
     
     private var timeLabel: UILabel = {
         let label = UILabel()
-        label.textColor = #colorLiteral(red: 0.8472001904, green: 0.6247957149, blue: 0.4608203123, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.7300325191, green: 0.5339502537, blue: 0.4001027512, alpha: 1)
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
         return label
