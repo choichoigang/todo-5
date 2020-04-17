@@ -19,7 +19,7 @@ const columnClickEventHandler = async (event, className, DOM) => {
   if (targetClassName === className.plusButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === className.addButton) {
-    await addBtnHandler(DOM.textArea, DOM.columnName);
+    await addBtnHandler(DOM.textArea, DOM.columnName, DOM.addButton);
     await renderActionList(addActionOption);
     await fetchAdd(TODO_URL.ADD, requestBodyAdd).then((resBody) => {
       DOM.task_list.innerHTML += makeTaskTemplate(
@@ -61,10 +61,11 @@ const activatingHandler = (addBoxDom) => {
   }
 };
 
-const addBtnHandler = (textareaDom, className) => {
+const addBtnHandler = (textareaDom, className, addBtnDom) => {
   const inputValue = textareaDom.value;
 
   textareaDom.value = "";
+  addBtnDom.disabled = true;
 
   if (className === "todo") {
     requestBodyAdd.title = inputValue;
