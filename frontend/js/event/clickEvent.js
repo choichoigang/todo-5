@@ -5,7 +5,7 @@ import modifyOption from "../../options/modifyOption.js";
 import { requestBodyAdd, requestBodyEdit } from "../../options/requestBody.js";
 import { fetchAdd, fetchDelete, fetchEdit } from "../fetch/httpRequest.js";
 import TODO_URL from "../../constants/url.js";
-import { renderActionList } from "../render/render.js";
+import { renderActionList, renderColumnCounter } from "../render/render.js";
 import {
   addActionOption,
   removeActionOption,
@@ -28,12 +28,14 @@ const columnClickEventHandler = async (event, className, DOM) => {
         DOM.columnName
       );
     });
+    renderColumnCounter();
   } else if (targetClassName === className.cancelButton) {
     activatingHandler(DOM.addBox);
   } else if (targetClassName === "deletion") {
     const handler = await deletionBtnHandler(event);
     await fetchDelete(TODO_URL.DELETE(handler));
     renderActionList(removeActionOption);
+    renderColumnCounter();
   } else if (targetClassName === "modify") {
     modifyModalHandler(event);
   }
