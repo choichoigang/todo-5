@@ -34,6 +34,7 @@ const columnClickEventHandler = async (event, className, DOM) => {
   } else if (targetClassName === "deletion") {
     const handler = await deletionBtnHandler(event);
     await fetchDelete(TODO_URL.DELETE(handler));
+
     renderActionList(removeActionOption);
     renderColumnCounter();
   } else if (targetClassName === "modify") {

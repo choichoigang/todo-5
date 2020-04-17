@@ -38,7 +38,7 @@ export const renderActionList = (actionInfo) => {
       );
       break;
     }
-    case "제거": {
+    case "삭제": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
         makeActionRemove(actionInfo.targetTitle, actionInfo.categoryTo)
