@@ -5,6 +5,7 @@ import com.codesquad.todo5.domain.activity.ActivityRepository;
 import com.codesquad.todo5.domain.user.User;
 import com.codesquad.todo5.domain.user.UserRepository;
 import com.codesquad.todo5.dto.user.LoginDto;
+import com.codesquad.todo5.exception.InvalidInputException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +54,7 @@ public class UserService {
     User user = userRepository.findByUserName(userName).orElseThrow(UserNotFoundException::new);
 
     if (isDiffrentPassword(user, password)) {
-      throw new RudimentaryException("비밀번호가 다릅니다.");
+      throw new InvalidInputException();
     }
   }
 

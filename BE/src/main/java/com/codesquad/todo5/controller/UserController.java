@@ -45,9 +45,9 @@ public class UserController {
   }
 
   @GetMapping("/user/auth")
-  public ResponseEntity<ApiResponse> login(HttpServletRequest req, HttpServletResponse res, LoginDto dto) {
+  public ResponseEntity<ApiResponse> login(HttpServletRequest req, HttpServletResponse res, @RequestBody LoginDto dto) {
     //TODO 원래 로그인 기능이 구현 되어 있다면 입력된 정보가 유저의 정보와 일치하는지 확인하는 절차가 필요하다. 성공 했을 때 다음 절차들을 진행하는 것이 원래 구현해야 하는 로직
-//    userService.checkValidUser(dto);
+    userService.checkValidUser(dto);
     String jwtToken = jwtService.makeJwt(req);
     Cookie cookie = new Cookie("jwtToken", jwtToken);
     res.addCookie(cookie);
