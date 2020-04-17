@@ -44,7 +44,7 @@ class NewCardView: UIView, UITextViewDelegate {
         button.setImage(UIImage(systemName: "x.circle.fill"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         button.imageEdgeInsets = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        button.tintColor = #colorLiteral(red: 1, green: 0.4334390675, blue: 0.4346824666, alpha: 1)
+        button.tintColor = #colorLiteral(red: 0.8472001904, green: 0.6247957149, blue: 0.4608203123, alpha: 1)
         button.addTarget(self, action: #selector(dismissNewCardView), for: .touchUpInside)
         return button
     }()
@@ -154,7 +154,7 @@ class NewCardView: UIView, UITextViewDelegate {
     
     private func judgeValuesConfigured() {
         if titleFlag, contentsFlag {
-            sendButton.tintColor = #colorLiteral(red: 0.2161633072, green: 0.4459061551, blue: 1, alpha: 1)
+            sendButton.tintColor = #colorLiteral(red: 0.5487859114, green: 0.817265746, blue: 0.6769449538, alpha: 1)
             sendButton.isEnabled = true
         }else {
             sendButton.tintColor = .lightGray

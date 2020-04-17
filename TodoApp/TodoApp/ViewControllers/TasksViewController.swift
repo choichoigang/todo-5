@@ -28,12 +28,6 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         configureConstraints()
     }
     
-    private func configureSubviews() {
-        self.view.addSubview(titleView)
-        self.view.addSubview(tableView)
-        self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
-    }
-    
     private func configureDelegates() {
         tasksDelegate.delegate = self
         titleView.delegate = self
@@ -41,6 +35,12 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self as? UITableViewDragDelegate
         tableView.dropDelegate = self as? UITableViewDropDelegate
+    }
+    
+    private func configureSubviews() {
+        self.view.addSubview(titleView)
+        self.view.addSubview(tableView)
+        self.tableView.register(TasksTableViewCell.self, forCellReuseIdentifier: "tasksCell")
     }
     
     private func configureConstraints() {
@@ -84,6 +84,6 @@ class TasksViewController: UIViewController, TitleViewDelegate {
         }
         self.present(newCardViewController, animated: true)
     }
-
+    
 }
 

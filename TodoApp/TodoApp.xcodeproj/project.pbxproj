@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		301DACFA24433ADF00D760F0 /* TasksViewController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301DACF924433ADF00D760F0 /* TasksViewController+Drag.swift */; };
 		301DACFC24433CDD00D760F0 /* TasksViewController+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301DACFB24433CDD00D760F0 /* TasksViewController+Drop.swift */; };
+		3044678824487FC900CA95AD /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3044678724487FC900CA95AD /* ActivityTableViewCell.swift */; };
+		3044678A2448867800CA95AD /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304467892448867800CA95AD /* ActivityViewController.swift */; };
+		3044678C244886B800CA95AD /* ActivityTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3044678B244886B800CA95AD /* ActivityTableView.swift */; };
+		3044678E244886E200CA95AD /* ActivityTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3044678D244886E200CA95AD /* ActivityTableViewDelegate.swift */; };
+		304467902448875800CA95AD /* ActivityTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3044678F2448875800CA95AD /* ActivityTableViewDataSource.swift */; };
+		304467922448903B00CA95AD /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304467912448903B00CA95AD /* Activity.swift */; };
 		3047A5C22440133F00ABF88C /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3047A5C12440133F00ABF88C /* Tasks.swift */; };
 		3047A5C42440281300ABF88C /* DecodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3047A5C32440281300ABF88C /* DecodeManager.swift */; };
 		306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306240DD243AD5D100491A44 /* AppDelegate.swift */; };
@@ -33,6 +39,12 @@
 /* Begin PBXFileReference section */
 		301DACF924433ADF00D760F0 /* TasksViewController+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TasksViewController+Drag.swift"; sourceTree = "<group>"; };
 		301DACFB24433CDD00D760F0 /* TasksViewController+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TasksViewController+Drop.swift"; sourceTree = "<group>"; };
+		3044678724487FC900CA95AD /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		304467892448867800CA95AD /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		3044678B244886B800CA95AD /* ActivityTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableView.swift; sourceTree = "<group>"; };
+		3044678D244886E200CA95AD /* ActivityTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewDelegate.swift; sourceTree = "<group>"; };
+		3044678F2448875800CA95AD /* ActivityTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewDataSource.swift; sourceTree = "<group>"; };
+		304467912448903B00CA95AD /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		3047A5C12440133F00ABF88C /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
 		3047A5C32440281300ABF88C /* DecodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeManager.swift; sourceTree = "<group>"; };
 		306240DA243AD5D100491A44 /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				306240FE243B466F00491A44 /* TasksTableViewCell.swift */,
+				3044678724487FC900CA95AD /* ActivityTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -122,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				306240FB243B45DA00491A44 /* TasksTableView.swift */,
+				3044678B244886B800CA95AD /* ActivityTableView.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -134,6 +148,7 @@
 				306240F7243B455C00491A44 /* TasksViewController.swift */,
 				301DACFB24433CDD00D760F0 /* TasksViewController+Drop.swift */,
 				30AA420E243D6B8D008CAA86 /* NewCardViewController.swift */,
+				304467892448867800CA95AD /* ActivityViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -146,6 +161,7 @@
 				306240DD243AD5D100491A44 /* AppDelegate.swift */,
 				30D53E38243D9C4800325035 /* TitleViewDelegate.swift */,
 				30D53E3A243DFBB800325035 /* NewCardViewDelegate.swift */,
+				3044678D244886E200CA95AD /* ActivityTableViewDelegate.swift */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -154,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				30624102243B66A300491A44 /* TasksTableViewDataSource.swift */,
+				3044678F2448875800CA95AD /* ActivityTableViewDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -180,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				3047A5C12440133F00ABF88C /* Tasks.swift */,
+				304467912448903B00CA95AD /* Activity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -258,12 +276,17 @@
 				306240FC243B45DA00491A44 /* TasksTableView.swift in Sources */,
 				30AA420F243D6B8D008CAA86 /* NewCardViewController.swift in Sources */,
 				306240E2243AD5D100491A44 /* MainViewController.swift in Sources */,
+				3044678E244886E200CA95AD /* ActivityTableViewDelegate.swift in Sources */,
+				3044678A2448867800CA95AD /* ActivityViewController.swift in Sources */,
 				30AA4211243D6C87008CAA86 /* NewCardView.swift in Sources */,
+				304467922448903B00CA95AD /* Activity.swift in Sources */,
+				304467902448875800CA95AD /* ActivityTableViewDataSource.swift in Sources */,
 				306240F8243B455C00491A44 /* TasksViewController.swift in Sources */,
 				30624101243B65C100491A44 /* TasksTableViewDelegate.swift in Sources */,
 				30D53E39243D9C4800325035 /* TitleViewDelegate.swift in Sources */,
 				30624103243B66A300491A44 /* TasksTableViewDataSource.swift in Sources */,
 				30D53E3B243DFBB900325035 /* NewCardViewDelegate.swift in Sources */,
+				3044678C244886B800CA95AD /* ActivityTableView.swift in Sources */,
 				306240DE243AD5D100491A44 /* AppDelegate.swift in Sources */,
 				306240E0243AD5D100491A44 /* SceneDelegate.swift in Sources */,
 				3047A5C22440133F00ABF88C /* Tasks.swift in Sources */,
@@ -271,6 +294,7 @@
 				301DACFC24433CDD00D760F0 /* TasksViewController+Drop.swift in Sources */,
 				301DACFA24433ADF00D760F0 /* TasksViewController+Drag.swift in Sources */,
 				3072CD35243EB7050045D048 /* NetworkManager.swift in Sources */,
+				3044678824487FC900CA95AD /* ActivityTableViewCell.swift in Sources */,
 				306240FA243B45B500491A44 /* TitleView.swift in Sources */,
 				306240FF243B466F00491A44 /* TasksTableViewCell.swift in Sources */,
 			);

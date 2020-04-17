@@ -47,6 +47,7 @@ class TasksTableViewDataSource: NSObject, UITableViewDataSource {
             tasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
+            NotificationCenter.default.post(name: .delete, object: nil, userInfo: ["deleteTaskId" : taskID])
         }
     }
    

@@ -75,7 +75,7 @@ class TitleView: UIView {
     }
     
     private func configure() {
-        self.backgroundColor = #colorLiteral(red: 0.5487859114, green: 0.817265746, blue: 0.6769449538, alpha: 1)
+        self.backgroundColor = #colorLiteral(red: 0.5490196078, green: 0.8156862745, blue: 0.6784313725, alpha: 1)
     }
     
     func setTasksCount(count: Int) {
