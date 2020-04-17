@@ -71,20 +71,20 @@ const addBtnHandler = (textareaDom, className, addBtnDom) => {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 1;
 
-    addActionOption.taskTitle = inputValue;
-    addActionOption.categoryTo = "1";
+    addActionOption.targetTitle = inputValue;
+    addActionOption.categoryTo = 1;
   } else if (className === "doing") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 2;
 
-    addActionOption.taskTitle = inputValue;
-    addActionOption.categoryTo = "2";
+    addActionOption.targetTitle = inputValue;
+    addActionOption.categoryTo = 2;
   } else if (className === "done") {
     requestBodyAdd.title = inputValue;
     requestBodyAdd.categoryNum = 3;
 
-    addActionOption.taskTitle = inputValue;
-    addActionOption.categoryTo = "3";
+    addActionOption.targetTitle = inputValue;
+    addActionOption.categoryTo = 3;
   }
 };
 
@@ -94,8 +94,8 @@ const deletionBtnHandler = (event) => {
   const columnId = event.target.closest(".column").dataset.columnId;
   const taskId = taskElement.dataset.taskId;
 
-  removeActionOption.taskTitle = taskTitle;
-  removeActionOption.categoryTo = columnId;
+  removeActionOption.targetTitle = taskTitle;
+  removeActionOption.categoryTo = Number(columnId);
 
   taskElement.remove();
 
@@ -111,8 +111,8 @@ const modifyModalHandler = (event) => {
   );
   modifyOption.targetId = event.target.closest(".task").dataset.taskId;
 
-  updateActionOption.taskTitle = modifyOption.titleElement.innerText;
-  updateActionOption.categoryTo = columnId;
+  updateActionOption.targetTitle = modifyOption.titleElement.innerText;
+  updateActionOption.categoryTo = Number(columnId);
 
   commonDOM.blind.className = "blind_on";
   commonDOM.modal.style.visibility = "visible";

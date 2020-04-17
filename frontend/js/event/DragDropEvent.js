@@ -27,8 +27,8 @@ const dragStartHandler = (event) => {
   const targetTask = event.toElement.closest(".task");
   const targetTitle = targetTask.querySelector(".task_value").innerText;
 
-  moveActionOption.taskTitle = targetTitle;
-  moveActionOption.categoryFrom = targetColumn.dataset.columnId;
+  moveActionOption.targetTitle = targetTitle;
+  moveActionOption.categoryFrom = Number(targetColumn.dataset.columnId);
 
   requestBodyMove.categoryFrom = targetColumn.dataset.columnId;
 
@@ -46,8 +46,7 @@ const dragEndHandler = async (event) => {
   const targetColumnTasks = Array.from(targetColumn.querySelectorAll(".task"));
 
   requestBodyMove.categoryTo = targetColumn.dataset.columnId;
-  moveActionOption.categoryTo = targetColumn.dataset.columnId;
-
+  moveActionOption.categoryTo = Number(targetColumn.dataset.columnId);
   await targetColumnTasks.some((elNode, index) => {
     if (elNode.dataset.taskId === option.dragTargetId) {
       requestBodyMove.priority = index + 1;

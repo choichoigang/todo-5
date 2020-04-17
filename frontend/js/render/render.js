@@ -7,7 +7,7 @@ import {
 } from "../../template/template.js";
 import { commonDOM } from "../../options/DOM.js";
 import URL from "../../constants/url.js";
-import { fetchTodoList } from "../fetch/httpRequest.js";
+import { fetchTodoList, fetchActionList } from "../fetch/httpRequest.js";
 
 const registerTodoList = (className) => {
   if (className === "todo") {
@@ -30,25 +30,25 @@ export const renderList = (columnDom, dataList, className) => {
 };
 
 export const renderActionList = (actionInfo) => {
-  switch (actionInfo.actionName) {
+  switch (actionInfo.action) {
     case "추가": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
-        makeActionAdd(actionInfo.taskTitle, actionInfo.categoryTo)
+        makeActionAdd(actionInfo.targetTitle, actionInfo.categoryTo)
       );
       break;
     }
     case "제거": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
-        makeActionRemove(actionInfo.taskTitle, actionInfo.categoryTo)
+        makeActionRemove(actionInfo.targetTitle, actionInfo.categoryTo)
       );
       break;
     }
     case "수정": {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
-        makeActionUpdate(actionInfo.taskTitle, actionInfo.categoryTo)
+        makeActionUpdate(actionInfo.targetTitle, actionInfo.categoryTo)
       );
       break;
     }
@@ -56,7 +56,7 @@ export const renderActionList = (actionInfo) => {
       commonDOM.action_list.insertAdjacentHTML(
         "afterbegin",
         makeActionMove(
-          actionInfo.taskTitle,
+          actionInfo.targetTitle,
           actionInfo.categoryFrom,
           actionInfo.categoryTo
         )
@@ -64,6 +64,14 @@ export const renderActionList = (actionInfo) => {
       break;
     }
   }
+};
+
+const registerActionList = () => {
+  fetchActionList(URL.ACTIVITY).then((data) =>
+    data.forEach((task) => {
+      return renderActionList(task);
+    })
+  );
 };
 
 export const renderColumnCounter = () => {
@@ -77,11 +85,11 @@ export const renderColumnCounter = () => {
 };
 
 export const judgeCategoryName = (categoryNumber) => {
-  if (categoryNumber === "1") {
+  if (categoryNumber === 1) {
     return "todo";
-  } else if (categoryNumber === "2") {
+  } else if (categoryNumber === 2) {
     return "doing";
-  } else if (categoryNumber === "3") {
+  } else if (categoryNumber === 3) {
     return "done";
   }
 };
@@ -90,4 +98,5 @@ export const initRenderTodoList = () => {
   registerTodoList("todo");
   registerTodoList("doing");
   registerTodoList("done");
+  registerActionList();
 };
