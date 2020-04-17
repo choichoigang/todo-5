@@ -3,12 +3,12 @@ import { requestBodyMove } from "../../options/requestBody.js";
 import { fetchMove } from "../fetch/httpRequest.js";
 import TODO_URL from "../../constants/url.js";
 import option from "../../options/DragDropOption.js";
-import { renderActionList } from "../render/render.js";
+import { renderActionList, renderColumnCounter } from "../render/render.js";
 import { moveActionOption } from "../../options/actionOption.js";
 
 const dragEnterHandler = (event) => {
   const targetTask = event.toElement.closest(".task");
-  const targetColumn = event.toElement.closest(".column");
+  const targetColumn = event.toElement.closest(".task_list");
 
   option.toTarget = targetTask;
   option.toTargetWrapper = targetColumn;
@@ -54,6 +54,7 @@ const dragEndHandler = async (event) => {
     }
   });
 
+  renderColumnCounter();
   await fetchMove(TODO_URL.MOVE(option.dragTargetId), requestBodyMove);
 
   renderActionList(moveActionOption);
