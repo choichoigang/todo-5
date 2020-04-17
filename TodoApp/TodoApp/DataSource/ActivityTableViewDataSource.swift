@@ -30,7 +30,7 @@ class ActivityTableViewDataSource: NSObject, UITableViewDataSource {
     
     func makeActivitySentence(indexPath: IndexPath) -> String {
         let activity = activities[indexPath.row]
-        var activitySentence = "@\(activity.userName)이(가) \(activity.targetTitle)을(를)"
+        var activitySentence = "@\(activity.userName)이(가) \"\(activity.targetTitle)\" 을(를) "
         if let categoryFrom = activity.categoryFrom, let categoryTo = activity.categoryTo {
             activitySentence += "\(categoryFrom)에서 \(categoryTo)로 이동하였습니다."
         }else {
@@ -55,24 +55,25 @@ class ActivityTableViewDataSource: NSObject, UITableViewDataSource {
     
     func compare(activityDate: Date) -> String {
         var activitySentence = ""
+        let serverDate = activityDate + 32400
         let calendar = NSCalendar.current
-        let writtenDate = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: activityDate)
+        let writtenDate = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: serverDate)
         let now = Date()
         let nowDate = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: now)
         
-        let minuteCompare = (60 - writtenDate.minute! + nowDate.minute!).magnitude
-        let hourCompare = (24 - writtenDate.hour! + nowDate.hour!).magnitude
+        let minuteCompare = (nowDate.minute! - writtenDate.minute!).magnitude
+        let hourCompare = (nowDate.hour! - writtenDate.hour!).magnitude
         let dayCompare = (nowDate.day! - writtenDate.day!)
         
         if writtenDate.year! == nowDate.year!, writtenDate.month! == nowDate.month!, writtenDate.day! + 3 < nowDate.day! {
-            activitySentence = "\(activityDate)"
+            activitySentence = "\(serverDate)"
         }else if writtenDate.year! == nowDate.year!, writtenDate.month! == nowDate.month!, dayCompare < 3, dayCompare > 0 {
             activitySentence = "\(dayCompare)일 전"
         }else if writtenDate.day! == nowDate.day!, writtenDate.hour! == nowDate.hour!, writtenDate.minute! == nowDate.minute! {
             activitySentence = "1분 미만 전"
         }else if writtenDate.day! == nowDate.day!, minuteCompare < 60 {
             activitySentence = "\(minuteCompare) 분 전"
-        }else if writtenDate.day! == nowDate.day!, minuteCompare > 60 {
+        }else if writtenDate.day! == nowDate.day!, writtenDate.hour! == nowDate.hour!, minuteCompare > 60 {
             activitySentence = "\(hourCompare) 시간 전"
         }
         
