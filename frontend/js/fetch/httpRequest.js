@@ -53,3 +53,17 @@ export async function fetchMove(url, data) {
 
   const response = await fetch(url, fetchOption);
 }
+
+export async function fetchActionList(url) {
+  const response = await fetch(url);
+  const responseJSON = await response.json();
+
+  return responseJSON;
+}
+
+export async function fetchLogIn(url) {
+  const response = await fetch(url);
+  const responseJSON = await response.json();
+
+  return responseJSON;
+}
