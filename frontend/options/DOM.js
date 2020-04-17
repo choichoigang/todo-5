@@ -16,6 +16,9 @@ const commonDOM = {
   menu_tab: document.querySelector(".menu_tag"),
   menu_box: document.querySelector(".menu_box"),
   action_list: document.querySelector(".log_list"),
+
+  log_in_box: document.querySelector(".log_in_activation"),
+  log_in_button: document.querySelector(".log_in_button"),
 };
 
 const cerateColumnDom = (columnName) => {
