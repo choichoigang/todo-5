@@ -1,10 +1,11 @@
-import { renderList } from "../render/render.js";
+import { renderList, renderColumnCounter } from "../render/render.js";
 
 export async function fetchTodoList(url, columnDom, className) {
   const response = await fetch(url);
   const responseJSON = await response.json();
 
   await renderList(columnDom, responseJSON.task, className);
+  await renderColumnCounter();
 }
 
 export async function fetchAdd(url, data) {
