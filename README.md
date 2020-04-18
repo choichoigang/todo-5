@@ -44,3 +44,10 @@
 
 ## 기능별 요구사항 분석
 * [구글 스프레드시트 링크](https://docs.google.com/spreadsheets/d/1KZeeN41VIgMc5-cskkJyRr3-WomQLL1BrN4iYeQ231k/edit?usp=sharing)
+
+
+
+### 📱iOS 기능 구현 데모 영상
+
+[Wiki](https://github.com/codesquad-member-2020/todo-5/wiki/TodoApp---iOS-기능-구현-사항)
+

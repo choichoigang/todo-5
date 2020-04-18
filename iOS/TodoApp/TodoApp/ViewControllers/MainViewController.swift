@@ -153,6 +153,13 @@ class ViewController: UIViewController {
         thirdView?.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.33, constant: 0).isActive = true
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .updateCount, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .addNewCard, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .move, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .delete, object: nil)
+    }
+    
 }
 
 extension Notification.Name {
