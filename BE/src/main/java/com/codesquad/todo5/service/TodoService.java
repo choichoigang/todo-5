@@ -16,14 +16,11 @@ import com.codesquad.todo5.dto.task.TaskMoveRequestDto;
 import com.codesquad.todo5.dto.task.TaskShowResponseDto;
 import com.codesquad.todo5.exception.InvalidModificationException;
 import com.codesquad.todo5.exception.ResourceNotFoundException;
-import com.codesquad.todo5.exception.RudimentaryException;
 import com.codesquad.todo5.exception.UserNotFoundException;
-import com.codesquad.todo5.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -81,11 +78,11 @@ public class TodoService {
     @Transactional
     public Long addTask(TaskCreateRequestDto dto) {
         Category category = categoryRepository.findById(dto.getCategoryNum()).orElseThrow(ResourceNotFoundException::new);
-        User user = userRepository.findByName(dto.getUserName()).orElseThrow(UserNotFoundException::new);
-        Long userId = userRepository.findIdByUserName(dto.getUserName());
+        User user = userRepository.findByName(dto.getAuthor()).orElseThrow(UserNotFoundException::new);
+        Long userId = userRepository.findIdByUserName(dto.getAuthor());
         logger.debug("User : {}", user);
 
-        taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getUserName(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
+        taskRepository.addTaskByUserAndCategoryId(dto.getTitle(), dto.getContent(), dto.getAuthor(), userId, user.getTask().size(), dto.getCategoryNum(), category.getTask().size(), category.getTask().size() + 1);
         Long lastInsertId = taskRepository.lastInsertId();
         return lastInsertId;
     }
@@ -97,14 +94,14 @@ public class TodoService {
         Long categoryId = taskRepository.findCategoryIdByTaskId(taskId);
         logger.debug("userName : {}", userName);
 
-        return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId);
+        return new TaskShowResponseDto(taskId, task.getTitle(), task.getContent(), userName, task.getPriority(), categoryId, task.isDeleted());
 
     }
 
     @Transactional
     public Optional<Task> editTask(Long taskId, TaskModifyRequestDto dto) {
-        String modifiedTitle = dto.getModifiedTitle();
-        String modifiedContent = dto.getModifiedContent();
+        String modifiedTitle = dto.getTitle();
+        String modifiedContent = dto.getContent();
         Task targetTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
 
         if (isInvalidModification(targetTask, modifiedTitle, modifiedContent)) {
@@ -118,9 +115,7 @@ public class TodoService {
 
     @Transactional
     public void deleteTask(Long taskId) {
-        Task deletedTask = taskRepository.findById(taskId).orElseThrow(ResourceNotFoundException::new);
         taskRepository.deleteTaskById(taskId);
-        // 변경된 값을 더 효율적으로 리턴할 수 있는 방법을 고민 해보겠습니다.
     }
 
     private boolean isInvalidModification(Task task, String modifiedTitle, String modifiedContent) {
@@ -131,73 +126,71 @@ public class TodoService {
     public CategoryWithTasksDto findCategory(Long categoryId) {
       Category category = categoryRepository.findById(categoryId).orElseThrow(ResourceNotFoundException::new);
       List<TaskShowResponseDto> dtoList = category.getTask().stream().map(element -> new TaskShowResponseDto(element.getId(),
-              element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId))
+              element.getTitle(), element.getContent(), userRepository.findUserByTaskId(element.getId()), element.getPriority(), categoryId, element.isDeleted()))
               .collect(Collectors.toList());
       return new CategoryWithTasksDto(category, dtoList);
     }
 
-    public void sortLogicJunction(Long taskId, TaskMoveRequestDto dto) {
-//                    sortWithinCategory(taskId, dto);
+    @Transactional
+    public void sortTasksForCategories(Long taskId, TaskMoveRequestDto dto) {
+        Long categoryFrom = dto.getCategoryFrom();
+        Long categoryTo = dto.getCategoryTo();
+        Task targetTask = taskRepository.findTaskById(taskId);
+        int previousPriority = targetTask.getPriority();
+        int newPriority = dto.getPriority();
 
-//        if (dto.getCategoryFrom().equals(dto.getCategoryTo())) {
-//            sortWithinCategory(taskId, dto);
-//        }
-//        else if (!dto.getCategoryFrom().equals(dto.getCategoryTo())) {
-            sortBetweenCategories(taskId, dto);
-//        } else {
-//            throw new RudimentaryException("무언가 이상해요..");
-//        }
+        if (previousPriority == 1) {
+            taskRepository.subtractAfterPrioritiesByTargetIndexForTheFirstTask(newPriority, categoryFrom, taskId);
+            taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
+            return;
+        }
+
+        taskRepository.subtractAfterPropertiesByTargetIndexForTheCategory(previousPriority, categoryFrom);
+        taskRepository.plusAfterPrioritiesByTargetIndexForTheCategory(newPriority, categoryTo);
+        taskRepository.setNewCategoryAndPriorityByTaskId(categoryTo, newPriority, taskId);
     }
 
     @Transactional
-    public void sortBetweenCategories(Long taskId, TaskMoveRequestDto dto) {
-        Category previousCategory = categoryRepository.findById(dto.getCategoryFrom()).orElseThrow(() -> new ResourceNotFoundException());
-        Category nextCategory = categoryRepository.findById(dto.getCategoryTo()).orElseThrow(() -> new ResourceNotFoundException());
-
-        Task moveTask = taskRepository.findById(taskId).orElseThrow(() -> new ResourceNotFoundException());
-
-        //컬럼에서 컬럼 이동하는 로직
-        List<Task> previousCategoryAfterRemovedTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
-        previousCategory.getTask().remove(moveTask);
-//        previousCategoryAfterRemovedTask.forEach(element -> {
-////            element.setPriority(element.getPriority() - 1);
-//            taskRepository.updateTaskPriorityById(element.getPriority() - 1, element.getId());
-//        });
-        for (Task task : previousCategoryAfterRemovedTask) {
-            taskRepository.updateTaskPriorityById(task.getPriority() - 1, task.getId());
-        }
-//        categoryRepository.save(previousCategory);
-
-
-        List<Task> nextCategoryAfterAddTask = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
-//        nextCategoryAfterAddTask.forEach(element -> {
-////            element.setPriority(element.getPriority() + 1);
-//            taskRepository.updateTaskPriorityById(element.getPriority() + 1, element.getId());
-////            logger.info("element : {}", element.getPriority());
-//        });
-////        categoryRepository.save(nextCategory);
-        for (Task task : previousCategoryAfterRemovedTask) {
-            taskRepository.updateTaskPriorityById(task.getPriority() + 1, task.getId());
-        }
-        taskRepository.updateTaskCategoryById(dto.getCategoryTo(), dto.getPriority(), taskId);
+    public String getTaskNameById(Long taskId) {
+        Task specifiedTask = taskRepository.findTaskByIdIncludingDeleted(taskId);
+        return specifiedTask.getTitle();
     }
 
     @Transactional
-    public void sortWithinCategory(Long taskId, TaskMoveRequestDto dto) {
-        //컬럼 내부에서 이동하는 로직
-        if (taskRepository.findTaskById(taskId).getPriority() == 1) {
-            List<Task> taskList = taskRepository.findTasksByTargetIndex(dto.getPriority(), dto.getCategoryFrom());
-            taskList.forEach(element -> {
-                element.setPriority(element.getPriority() - 1);
-                taskRepository.save(element);
-            });
-        }
-        if (taskRepository.findTaskById(taskId).getPriority() != 1) {
-            List<Task> taskList = taskRepository.findTasksByTargetIndexWithoutTheFirst(dto.getPriority(), dto.getCategoryFrom());
-            taskList.forEach(element -> {
-                element.setPriority(element.getPriority() - 1);
-                taskRepository.save(element);
-            });
-        }
+    public String getTaskContentById(Long taskId) {
+        Task specifiedTask = taskRepository.findTaskById(taskId);
+        return specifiedTask.getContent();
+    }
+
+    @Transactional
+    public String getCategoryTitleById(Long categoryId) {
+        Category specifiedCategory = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException());
+        return specifiedCategory.getName();
+    }
+
+    @Transactional
+    public String getCategoryTitleOfRecentlyAdded() {
+        Long lastInsertId = categoryRepository.lastInsertId();
+        Category lastInsertCategory = categoryRepository.findById(lastInsertId).orElseThrow(() -> new ResourceNotFoundException());
+        return lastInsertCategory.getName();
+    }
+
+    @Transactional
+    public String getTaskTitleOfRecentlyAdded() {
+        Long lastInsertId = taskRepository.lastInsertId();
+        Task lastInsertTask = taskRepository.findTaskById(lastInsertId);
+        return lastInsertTask.getTitle();
+    }
+
+    @Transactional
+    public int getTaskCategoryToOfRecentlyAdded() {
+        Long lastInsertId = taskRepository.lastInsertId();
+        Task lastInsertTask = taskRepository.findTaskById(lastInsertId);
+        return lastInsertTask.getCategoryNum();
+    }
+
+    @Transactional
+    public Long getTaskCategoryToOfTask(Long categoryId) {
+        return taskRepository.findCategoryIdByTaskId(categoryId);
     }
 }

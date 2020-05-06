@@ -6,10 +6,10 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum Action implements EnumType {
-  ADD("ADD"),
-  REMOVE("REMOVE"),
-  UPDATE("UPDATE"),
-  MOVE("MOVE");
+  ADD("추가"),
+  REMOVE("삭제"),
+  UPDATE("수정"),
+  MOVE("이동");
 
   private final String action;
 

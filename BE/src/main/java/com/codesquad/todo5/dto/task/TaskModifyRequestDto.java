@@ -10,6 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskModifyRequestDto {
-  private String modifiedTitle;
-  private String modifiedContent;
+  private String title;
+  private String content;
+  private String author;
+  private Long categoryNum;
+  private Long categoryFrom;
+  private Long categoryTo;
 }

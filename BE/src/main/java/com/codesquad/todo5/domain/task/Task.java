@@ -19,21 +19,24 @@ import org.springframework.util.ObjectUtils;
 @NoArgsConstructor
 @Table("task")
 public class Task implements Comparable<Task> {
-//public class Task {
+
   @Id
   private Long id;
   private String title;
 
-  @Length(max=500)
+  @Length(max = 500)
   private String content;
+  @Column("is_deleted")
   private boolean isDeleted;
+
+  @Column("priority")
   private int priority;
   @Column("author")
   private String author;
-//  @Column("category_from")
-//  private int categoryFrom;
   @Column("category_to")
-  private int categoryTo;
+  private Long categoryTo;
+  @Column("category")
+  private int categoryNum;
 
   public Task(String title, String content, int priority, String author) {
     this.title = title;
@@ -51,15 +54,4 @@ public class Task implements Comparable<Task> {
   public int compareTo(Task task) {
     return this.priority - task.priority;
   }
-
-//  public void updateCategoryOrder(TaskEditRequestDto dto) {
-//    if (ObjectUtils.isEmpty(dto.getCategoryFrom()) || ObjectUtils.isEmpty(dto.getCategoryTo())) {
-//      throw new RudimentaryException("무엇인가가 잘못되었습니다.");
-//    }
-//    if (this.getCategoryFrom() == dto.getCategoryFrom() || this.getCategoryTo() == dto.getCategoryTo()) {
-//      throw new RudimentaryException("무엇인가가 잘못되었습니다.");
-//    }
-//    this.categoryFrom = dto.getCategoryFrom();
-//    this.categoryTo = dto.getCategoryTo();
-//  }
 }
